@@ -1,6 +1,14 @@
 # startup
 CS260 startup project and notes
 
+Notes on AWS EC2 set up:
+
+command for ssh:
+➜  ssh -i ~/frogsong.pem ubuntu@18.117.47.246
+
+REMEMBER
+After this semester, terminate service AND release elastic IP. Don't be afraid to reevaluate if I need a faster service or if I need a cheaper service.
+
 ---
 Start Up Specification
 
