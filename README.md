@@ -1,6 +1,9 @@
 # startup
 CS260 startup project and notes
 
+Notes on Caddy set up:
+VI is interesting to use. Remember to press i to go into insert mode and ESC to go back into command mode. In command mode, use :w to save and :q to quit. Or combine them and use :wq to save and quit. Caddy is free to use and comes installed, which is pretty useful.
+
 Notes on AWS EC2 set up:
 
 command for ssh:
