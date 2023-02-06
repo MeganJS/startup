@@ -1,5 +1,9 @@
 # startup
-CS260 startup project and notes
+CS260 startup project and note:
+
+Going to try to figure out how to set up links to open in new tab on click.
+[frogs are cute](https://en.wikipedia.org/wiki/Frog){target="_blank"}
+
 
 Notes on Caddy set up:
 VI is interesting to use. Remember to press i to go into insert mode and ESC to go back into command mode. In command mode, use :w to save and :q to quit. Or combine them and use :wq to save and quit. Caddy is free to use and comes installed, which is pretty useful.
