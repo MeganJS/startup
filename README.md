@@ -2,7 +2,8 @@
 CS260 startup project and note:
 
 Going to try to figure out how to set up links to open in new tab on click.
-[frogs are cute](https://en.wikipedia.org/wiki/Frog){:target="_blank"}
+[frogs are cute](https://en.wikipedia.org/wiki/Frog)
+<a href="https://en.wikipedia.org/wiki/Frog" target="_blank">frogs are cute</a>
 
 
 Notes on Caddy set up:
