@@ -62,3 +62,8 @@ Also, in order to commit in VS code you need to have a comment, and after leavin
 IDEA:
 Links to character profiles and worldbuilding objects can be embedded in this outline and elsewhere to create a more cohesive concept.
 Collaboration on projects.
+
+
+Putting this here for use somewhere else:
+![lowerFalls](https://user-images.githubusercontent.com/105321453/217152680-a6177c8f-946d-4dc0-a944-82b144769e3e.jpg)
+
