@@ -16,7 +16,7 @@ VI is interesting to use. Remember to press i to go into insert mode and ESC to 
 Notes on AWS EC2 set up:
 
 command for ssh:
-➜  ssh -i ~/frogsong.pem ubuntu@18.117.47.246
+➜  ssh -i ~/CS260code/frogsong.pem ubuntu@18.117.47.246
 
 REMEMBER
 After this semester, terminate service AND release elastic IP. Don't be afraid to reevaluate if I need a faster service or if I need a cheaper service.
