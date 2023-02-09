@@ -1,5 +1,11 @@
 # startup
-CS260 startup project and note:
+CS260 startup project and notes:
+
+
+Simon-html Assignment notes: 
+I think it's neat how, when creating hyperlinks between pages, as long as the html file is part of the same folder you can just put "fileName.html" in the html code. 
+Right now it looks very basic and is not functional. However, I was able to get a lot of the structure and links in place. An interesting project. Make sure to commit and push early and often!
+
 
 Going to try to figure out how to set up links to open in new tab on click.
 [frogs are cute](https://en.wikipedia.org/wiki/Frog)
