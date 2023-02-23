@@ -1,6 +1,8 @@
 # startup
 CS260 startup project and notes:
 
+Simon-CSS notes:
+Choose simple over nice to do things quickly. I want to use Bootstrap more; I spent a lot of time wrestling with flex trying to figure out how to make things line up how I wanted in CSS and there was probably tools in Bootstrap I could have used to help me. On the upside, you can totally use images you upload as the background of buttons, which I think is fun.
 
 Simon-html Assignment notes: 
 I think it's neat how, when creating hyperlinks between pages, as long as the html file is part of the same folder you can just put "fileName.html" in the html code. 
