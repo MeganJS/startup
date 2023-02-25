@@ -16,7 +16,34 @@
         />
     </head>
     <body>
-
-
+        <header class="d-flex align-items-center">
+            <p class="h2 fw-bold p-3">writ360 + Login</p>
+        </header>
+        <main class="d-flex align-items-center justify-content-center">
+            <div class="col-3 p-3 text-center">
+                <h1 class="display-2">Hi!</h1>
+                <div class="h4">Welcome to writ360, an organizational tool for story creators.</div>
+            </div>
+            <div class="col-3 p-3 text-center">
+                <h2 class="h2">Login</h2>
+                <div class="form-floating mb-3" id="inputField">
+                    <input type="text" class="form-control" id="floatingName" placeholder="username" aria-label="username">
+                    <label for="floatingName" class="bg-transparent">username</label>
+                </div>
+                <div class="form-floating mb-3" id="inputField">
+                    <input type="text" class="form-control" id="floatingPassword" placeholder="password" aria-label="password">
+                    <label for="floatingPassword" class="bg-transparent">password</label>
+                </div>
+                <!--submit button will be (for now) a link to homepage-->
+                <a class="btn btn-primary" href="home.html" role="button">Submit</a>
+                <!--sign up button will do nothing for now-->
+                <input class="btn btn-secondary" type="button" value="Sign Up">
+            </div>
+        </main>
+        <footer class="position-absolute bottom-0">
+            <div class="container-fluid">
+                Made by Megan S.
+            </div>
+        </footer>
     </body>
 </html>
