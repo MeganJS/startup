@@ -25,4 +25,11 @@ footer {
     flex: 0 30px;
 }
 
+/*might need to go one step further into container*/
+.nav-item:hover {
+    text-decoration: underline;
+}
+.navbar {
+    font-weight: bold;
+}
 
