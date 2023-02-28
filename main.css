@@ -33,3 +33,19 @@ footer {
     font-weight: bold;
 }
 
+.goalsLayout{
+    display:flex;
+    flex-direction: row;
+}
+
+@media (max-height:600px){
+    footer{
+        display: none;
+    }
+}
+
+@media (max-width:600px) {
+    .goalsLayout{
+        flex-direction:column;
+    }
+}

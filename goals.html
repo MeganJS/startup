@@ -45,20 +45,72 @@
             </div>
         </header>
         <main>
-            <h1 class="container-fluid d-flex justify-content-center">Goals</h1>
-            <div class="col-3 p-3">
-                <div class="card">
-                    <h5 class="card-title">Goal Title</h5>
-                    <p class="card-text">description of goal</p>
-                    <div class="hstack gap-3">
-                        <div class="form-check form-check-inline">
+            <h1 class="container-fluid d-flex justify-content-center border border-2 border-info">Goals</h1>
+            <div class="goalsLayout">
+
+                <div class="container-fluid m-3">
+                    <div class="card p-3">
+                        <div class="form-check form-check-inline bg-white">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckbox">
+                            <h5 class="card-title bg-white">Goal Title</h5>
                         </div>
-                        <i class="bi bi-pencil-square"></i>
+                        <p class="card-text bg-white">description of goal</p>
+                        <div class="btn-group-sm bg-white" role="group" id="cardControls">
+                            <button type="button" class="btn" aria-label="edit">
+                                <i class="bi bi-pencil-square bg-transparent"></i>
+                            </button>
+                            <button type="button" class="btn btn-info" data-bs-toggle="button" aria-label="pin">
+                                <i class="bi bi-pin-fill bg-transparent"></i>
+                            </button>
+                            <button type="button" class="btn bg-black" aria-label="delete">
+                                <i class="bi bi-trash bg-transparent"></i>
+                            </button>
+                        </div>
                     </div>
-                    
+                    <div class="card p-2 m-3">
+                        <div class="form-check form-check-inline bg-white">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckbox">
+                            <h5 class="card-title bg-white">Step1</h6>
+                        </div>
+                        <p class="card-text bg-white">description of step</p>
+                        <div class="btn-group-sm bg-white" role="group" id="cardControls">
+                            <button type="button" class="btn" aria-label="edit">
+                                <i class="bi bi-pencil-square bg-transparent"></i>
+                            </button>
+                            <button type="button" class="btn btn-info" data-bs-toggle="button" aria-label="pin">
+                                <i class="bi bi-pin-fill bg-transparent"></i>
+                            </button>
+                            <button type="button" class="btn bg-black" aria-label="delete">
+                                <i class="bi bi-trash bg-transparent"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="button" class="btn" aria-label="addStep">
+                        <h4>
+                            <i class="bi bi-plus-circle bg-transparent"></i>
+                            Add Step
+                        </h4>
+                    </button>
+                </div>
+
+                <div class="container-fluid m-3 d-flex justify-content-center align-items-start">
+                        <button type="button" class="btn" aria-label="addGoal">
+                            <h2>
+                                <i class="bi bi-plus-circle bg-transparent"></i>
+                                Add Goal
+                            </h2>
+                        </button>
+                </div>
+                <div class="container-fluid m-3 d-flex justify-content-center align-items-start">
+                    <button type="button" class="btn" aria-label="addGoal">
+                        <h2>
+                            <i class="bi bi-plus-circle bg-transparent"></i>
+                            Add Goal
+                        </h2>
+                    </button>
                 </div>
             </div>
+            
 
         </main>
         <footer class="position-absolute bottom-0">
