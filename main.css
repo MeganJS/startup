@@ -38,6 +38,12 @@ footer {
     flex-direction: row;
 }
 
+
+#repImage {
+    width: 45px;
+    height: 45px;
+}
+
 @media (max-height:600px){
     footer{
         display: none;
