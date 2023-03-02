@@ -1,6 +1,9 @@
 # startup
 CS260 startup project and notes:
 
+js notes: 
+in order to include variables or js code in a string, string must be surrounded by `, which are tick marks and _not_ apostrophes!
+
 Simon-CSS notes:
 Choose simple over nice to do things quickly. I want to use Bootstrap more; I spent a lot of time wrestling with flex trying to figure out how to make things line up how I wanted in CSS and there was probably tools in Bootstrap I could have used to help me. On the upside, you can totally use images you upload as the background of buttons, which I think is fun.
 
