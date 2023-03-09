@@ -20,6 +20,14 @@ History
 <br>CSS - Wium Lie - stylization seperate from content/structure
 <br>JavaScript for scripting webpages - allowing them to change dynamically based on user interaction
 
+Tech Stack
+<br>web framework: React, web server (hosted by AWS): Caddy, web services run with Node.js, MongoDB as database.
+<br>lots of different tech involved - key is be adaptive
+
+Console
+<br>POXIX compliant - supports a standard set of console commands. Git Bash will help.
+<br>WSL will work because it's linux.
+<br>ls -la lists all the files and info, even the hidden files.
 
 
 
