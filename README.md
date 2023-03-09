@@ -29,6 +29,16 @@ Console
 <br>WSL will work because it's linux.
 <br>ls -la lists all the files and info, even the hidden files.
 
+DOM
+<br> you can type "document" into the console in the browser debugging window (click "inspect") to see the DOM for the document currently being rendered
+<br> DOM - document object model
+<br> Each DOM is like a tree, with a branch/node for each thing in an HTML - elements, attributes, text, comments, whitespace, etc.
+<br> textContent contains all of an element's text
+<br> querySelector selects a the first element by that name, and querySelectorAll will select all of the elements by that name
+<br> ex: document.querySelectorAll('div');
+<br> you can createElement, appendChild and removeChild
+<br>
+
 
 
 js notes: 
