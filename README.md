@@ -53,6 +53,26 @@ Async/Await:
 <br>await keyword goes in front of a call to a promise and blocks execution until the promise has resolved, and returns the result of the promise.
 <br>await and async are very useful in letting code run asynchronously but still has a flow to it that makes sense. Great for when working with many promises.
 
+Modules:
+<br>let you partition JS code. You need to import and export for the code to be visible outside of the module it exists in.
+
+Scope:
+<br>This: global use (outside of function or class or object) means runtime environment, ie a browser window
+<br>Function this - used in a function. refers to the object that owns the function. If function declared independently of object, then it's the same as global this.
+<br>Object this - used in an object, refers to the object
+<br>Closure - A this used in a function declared as part of an object will be an object this. Unless it is an arrow function, because arrow functions have the same this as their creation context. The Object was declared globally, so the this in the arrow function within it will likely also be global.
+
+Domain Name:
+<br> whois console utility lets you get info on a domain registry
+<br>A is Address (IP I guess)
+<br> dig console utility lets you get IP for a domain name
+<br> CNAME - canonical name - lets you map domain names to other domain names
+
+JSON:
+<br>The variable names are strings.
+<br>Only: boolean, number, string, array, object, and null types allowed.
+<br>JSON.parse makes it JS, thing.stringify makes it JSON
+
 
 
 
