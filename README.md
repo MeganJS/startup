@@ -37,7 +37,10 @@ DOM
 <br> querySelector selects a the first element by that name, and querySelectorAll will select all of the elements by that name
 <br> ex: document.querySelectorAll('div');
 <br> you can createElement, appendChild and removeChild
-<br>
+<br> be careful that any input you get from the user (even http and URL stuff) isn't directly injected into your HTML via DOM. Easy way for hackers to mess with stuff.
+<br> you can addEventListener to call a function when a thing happens
+
+
 
 
 
