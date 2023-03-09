@@ -1,17 +1,24 @@
 # startup
 CS260 startup project and notes:
 
-Midterm Notes:
+Midterm Notes:<br>
 Intro
-Web design skills involve tech, art, social, and discovery.
-Develop social skills, and value discovery.
-Make mistakes! =)
+<br>Web design skills involve tech, art, social, and discovery.
+<br>Develop social skills, and value discovery.
+<br>Make mistakes! =)
 
 Demo
-HTML, CSS and JS make a basic webpage. 
-HTML - structure and content.
-CSS - stylization.
-JS - interactability and function.
+<br>HTML, CSS and JS make a basic webpage. 
+<br>HTML - structure and content.
+<br>CSS - stylization.
+<br>JS - interactability and function.
+
+History
+<br>started as ARPANET - network of computers
+<br>started IP and DNS, later transferred to public
+<br> World wide web - HTML and hyperlinks to connect related documents
+<br>CSS - Wium Lie - stylization seperate from content/structure
+<br>JavaScript for scripting webpages - allowing them to change dynamically based on user interaction
 
 
 
