@@ -46,7 +46,12 @@ Promises:
 <br>create a promise using promise object constructor
 <br>use setTimeout to create a delay of milliseconds. Nested for loops can be neat.
 <br>then is called if promise fullfilled. Catch is called if rejected, and finally will be called no matter what. These allow you to do something with the outcome of a promise.
+<br> use resolve for a fulfilled result and reject for a rejected/failed result
 
+Async/Await:
+<br>making a function async means it is a promise that is immediately resolved and it's value is the return value of the function. It's a function that returns a promise? 
+<br>await keyword goes in front of a call to a promise and blocks execution until the promise has resolved, and returns the result of the promise.
+<br>await and async are very useful in letting code run asynchronously but still has a flow to it that makes sense. Great for when working with many promises.
 
 
 
