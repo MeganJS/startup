@@ -40,6 +40,14 @@ DOM
 <br> be careful that any input you get from the user (even http and URL stuff) isn't directly injected into your HTML via DOM. Easy way for hackers to mess with stuff.
 <br> you can addEventListener to call a function when a thing happens
 
+Promises:
+<br>JS is single threaded. Only one thing being executed at any given time. Use Promise to execute code in parallel.
+<br>Promise will be - pending (running asynchronously) fullfilled or rejected
+<br>create a promise using promise object constructor
+<br>use setTimeout to create a delay of milliseconds. Nested for loops can be neat.
+<br>then is called if promise fullfilled. Catch is called if rejected, and finally will be called no matter what. These allow you to do something with the outcome of a promise.
+
+
 
 
 
