@@ -1,6 +1,21 @@
 # startup
 CS260 startup project and notes:
 
+Midterm Notes:
+Intro
+Web design skills involve tech, art, social, and discovery.
+Develop social skills, and value discovery.
+Make mistakes! =)
+
+Demo
+HTML, CSS and JS make a basic webpage. 
+HTML - structure and content.
+CSS - stylization.
+JS - interactability and function.
+
+
+
+
 js notes: 
 in order to include variables or js code in a string, string must be surrounded by `, which are tick marks and _not_ apostrophes!
 
