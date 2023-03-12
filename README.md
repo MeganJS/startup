@@ -1,6 +1,85 @@
 # startup
 CS260 startup project and notes:
 
+Midterm Notes:<br>
+Intro
+<br>Web design skills involve tech, art, social, and discovery.
+<br>Develop social skills, and value discovery.
+<br>Make mistakes! =)
+
+Demo
+<br>HTML, CSS and JS make a basic webpage. 
+<br>HTML - structure and content.
+<br>CSS - stylization.
+<br>JS - interactability and function.
+
+History
+<br>started as ARPANET - network of computers
+<br>started IP and DNS, later transferred to public
+<br> World wide web - HTML and hyperlinks to connect related documents
+<br>CSS - Wium Lie - stylization seperate from content/structure
+<br>JavaScript for scripting webpages - allowing them to change dynamically based on user interaction
+
+Tech Stack
+<br>web framework: React, web server (hosted by AWS): Caddy, web services run with Node.js, MongoDB as database.
+<br>lots of different tech involved - key is be adaptive
+
+Console
+<br>POXIX compliant - supports a standard set of console commands. Git Bash will help.
+<br>WSL will work because it's linux.
+<br>ls -la lists all the files and info, even the hidden files.
+
+DOM
+<br> you can type "document" into the console in the browser debugging window (click "inspect") to see the DOM for the document currently being rendered
+<br> DOM - document object model
+<br> Each DOM is like a tree, with a branch/node for each thing in an HTML - elements, attributes, text, comments, whitespace, etc.
+<br> textContent contains all of an element's text
+<br> querySelector selects a the first element by that name, and querySelectorAll will select all of the elements by that name
+<br> ex: document.querySelectorAll('div');
+<br> you can createElement, appendChild and removeChild
+<br> be careful that any input you get from the user (even http and URL stuff) isn't directly injected into your HTML via DOM. Easy way for hackers to mess with stuff.
+<br> you can addEventListener to call a function when a thing happens
+
+Promises:
+<br>JS is single threaded. Only one thing being executed at any given time. Use Promise to execute code in parallel.
+<br>Promise will be - pending (running asynchronously) fullfilled or rejected
+<br>create a promise using promise object constructor
+<br>use setTimeout to create a delay of milliseconds. Nested for loops can be neat.
+<br>then is called if promise fullfilled. Catch is called if rejected, and finally will be called no matter what. These allow you to do something with the outcome of a promise.
+<br> use resolve for a fulfilled result and reject for a rejected/failed result
+
+Async/Await:
+<br>making a function async means it is a promise that is immediately resolved and it's value is the return value of the function. It's a function that returns a promise? 
+<br>await keyword goes in front of a call to a promise and blocks execution until the promise has resolved, and returns the result of the promise.
+<br>await and async are very useful in letting code run asynchronously but still has a flow to it that makes sense. Great for when working with many promises.
+
+Modules:
+<br>let you partition JS code. You need to import and export for the code to be visible outside of the module it exists in.
+
+Scope:
+<br>This: global use (outside of function or class or object) means runtime environment, ie a browser window
+<br>Function this - used in a function. refers to the object that owns the function. If function declared independently of object, then it's the same as global this.
+<br>Object this - used in an object, refers to the object
+<br>Closure - A this used in a function declared as part of an object will be an object this. Unless it is an arrow function, because arrow functions have the same this as their creation context. The Object was declared globally, so the this in the arrow function within it will likely also be global.
+
+Domain Name:
+<br> whois console utility lets you get info on a domain registry
+<br>A is Address (IP I guess)
+<br> dig console utility lets you get IP for a domain name
+<br> CNAME - canonical name - lets you map domain names to other domain names
+
+JSON:
+<br>The variable names are strings.
+<br>Only: boolean, number, string, array, object, and null types allowed.
+<br>JSON.parse makes it JS, thing.stringify makes it JSON
+
+
+
+
+
+js notes: 
+in order to include variables or js code in a string, string must be surrounded by `, which are tick marks and _not_ apostrophes!
+
 Simon-CSS notes:
 Choose simple over nice to do things quickly. I want to use Bootstrap more; I spent a lot of time wrestling with flex trying to figure out how to make things line up how I wanted in CSS and there was probably tools in Bootstrap I could have used to help me. On the upside, you can totally use images you upload as the background of buttons, which I think is fun.
 
