@@ -40,8 +40,56 @@ footer {
 
 
 #repImage {
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
+}
+
+/*stuff for home page*/
+#projectListHeader {
+    font-size: x-large;
+    font-weight: bold;
+    color: darkslategray;
+}
+#friendsListHeader {
+    font-weight: bold;
+    font-size: x-large;
+    color: darkslategray;
+}
+
+.homeLayout{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#dashboard{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, 200px);
+    grid-auto-rows: 190px;
+    gap:10px;
+    justify-content: center;
+    align-items: center;
+}
+#profileSettings{
+    display:flex;
+    justify-content: start;
+    align-items: baseline;
+}
+#profile{
+    width:200px;
+}
+#pinPlace{
+    width:150px;
+    height:150px;
+    justify-content:center;
+    align-items:center;
+}
+
+#projectList{
+    border: dashed medium turquoise;
+}
+#friendList{
+    border-top: double thick brown;
+    border-bottom: double thick brown;
 }
 
 @media (max-height:600px){
@@ -50,8 +98,14 @@ footer {
     }
 }
 
-@media (max-width:600px) {
+@media (max-width:700px) {
     .goalsLayout{
-        flex-direction:column;
+        flex-direction: column;
+    }
+    .homeLayout{
+        flex-direction: column;
+    }
+    #dashboard{
+        flex-direction: column;
     }
 }

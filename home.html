@@ -45,59 +45,125 @@
             </div>
         </header>
         <main>
-            <div class="card bg-transparent border-0" style="width: max-content;" id="profile">
-                <h2>
-                    <i class="bi bi-gear-fill p-2"></i>
-                    Username
-                    <img src="q-mark.png" class="rounded-circle border border-2" alt="q-mark" id="repImage">
-                </h2>
-            </div>
-            <!--project info-->
+            
 
-
-            <!--friend info-->
-            <div class="accordion" id="friendList">
-                <div class="accordion-item">
-                    <h4 class="accordion-header bg-white p-2">
-                        Friends and Associates
-                    </h4>
-                </div>
-                <div class="accordion-item">
-                    <h4 class="accordion-header" id="friendHeader1">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            Friend Frensdatter
-                        </button>
-                    </h4>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="friendHeader1"
-                        data-bs-parent="#friendList">
-                        <div class="accordion-body">
-                            <div class="btn-group-sm bg-white" role="group" id="friendControls">
-                                <button type="button" class="btn btn-outline-info" aria-label="chat">converse</button>
-                                <button type="button" class="btn btn-outline-dark" aria-label="vanish">vanish</button>
-                            </div>
+            <div class="homeLayout">
+                <div class="container-fluid" id="dashboard">
+                    <div class="card bg-transparent border-0 m-2 p-2" id="profile">
+                        <h4 class="bg-transparent m-1">
+                            Username
+                            <img src="q-mark.png" class="rounded-circle border border-2" alt="q-mark" id="repImage">
+                        </h4>
+                        <div class="container-fluid bg-transparent m-1" id="profileSettings">
+                            <i class="bi bi-gear-fill bg-transparent m-1 h4"></i>
+                            <input type="color" class="form-control form-control-color m-1" id="colorInput" title="choose a color">
                         </div>
                     </div>
-                </div>
-
-                <div class="accordion-item">
-                    <h4 class="accordion-header" id="friendHeader2">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Aurtura Glenki
-                        </button>
-                    </h4>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="friendHeader2"
-                        data-bs-parent="#friendList">
-                        <div class="accordion-body">
-                            <div class="btn-group-sm bg-white" role="group" id="friendControls">
-                                <button type="button" class="btn btn-outline-info" aria-label="chat">converse</button>
-                                <button type="button" class="btn btn-outline-dark" aria-label="vanish">vanish</button>
-                            </div>
-                        </div>
+                    <div class="card m-2" id="pinPlace">
+                        <i class="bi bi-plus-circle bg-transparent p-2 h1"></i>
+                    </div>
+                    <div class="card m-2" id="pinPlace">
+                        <i class="bi bi-plus-circle bg-transparent p-2 h1"></i>
+                    </div>
+                    <div class="card m-2" id="pinPlace">
+                        <i class="bi bi-plus-circle bg-transparent p-2 h1"></i>
                     </div>
                 </div>
+                <!--project info-->
+                <div class="container-fluid m-3" style="max-width: 400px;">
+                    <ul class="list-group" id="projectList">
+                        <li class="list-group-item" id="projectListHeader">
+                            Projects
+                        </li>
+                        <li class="list-group-item">
+                            <a href="workbench.html" class="link-dark bg-transparent">Project 1</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="workbench.html" class="link-dark bg-transparent">2nd Project</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="workbench.html" class="link-dark bg-transparent">593 and the Dolphins</a>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="bi bi-plus-circle bg-transparent pe-1"></i>
+                            <a href="workbench.html" class="link-dark bg-transparent">Create New Project</a>
+                            <i class="bi bi-plus-circle bg-transparent ps-1"></i>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!--friend info-->
+                <div class="container-fluid m-3" style="max-width: 400px;">
+                    <div class="accordion" id="friendList">
+                        <div class="accordion-item">
+                            <h4 class="accordion-header bg-white p-2" id="friendsListHeader">
+                                Friends and Associates
+                            </h4>
+                        </div>
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="friendHeader1">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    Friend Frensdatter
+                                </button>
+                            </h4>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="friendHeader1"
+                                data-bs-parent="#friendList">
+                                <div class="accordion-body">
+                                    <div class="btn-group-sm bg-white" role="group" id="friendControls">
+                                        <button type="button" class="btn btn-outline-info" aria-label="chat">converse</button>
+                                        <button type="button" class="btn btn-outline-dark" aria-label="vanish">vanish</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="friendHeader2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Aurtura Glenki
+                                </button>
+                            </h4>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="friendHeader2"
+                                data-bs-parent="#friendList">
+                                <div class="accordion-body">
+                                    <div class="btn-group-sm bg-white" role="group" id="friendControls">
+                                        <button type="button" class="btn btn-outline-info" aria-label="chat">converse</button>
+                                        <button type="button" class="btn btn-outline-dark" aria-label="vanish">vanish</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h4 class="accordion-header" id="friendHeader3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <i class="bi bi-plus-circle bg-transparent pe-2"></i>
+                                    Request New Association
+                                    <i class="bi bi-plus-circle bg-transparent ps-2"></i>
+                                </button>
+                            </h4>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="friendHeader3"
+                                data-bs-parent="#friendList">
+                                <div class="accordion-body">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="friend username" aria-label="friend username" aria-describedby="request-button">
+                                        <button type="button" class="btn btn-outline-info" id="request-button">request</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--need to add alert for when usename is incorrect-->
+                    </div>
+                </div>
+                
             </div>
+            
+
+
+
         </main>
         <footer class="position-absolute bottom-0">
             <div class="container-fluid">
