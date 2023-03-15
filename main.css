@@ -92,6 +92,39 @@ footer {
     border-bottom: double thick brown;
 }
 
+
+/*stuff for workbench*/
+#projectControls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#projectTitle {
+    display: flex;
+    margin:1em;
+}
+#projectSettings {
+    display: flex;
+    margin:1em;
+    align-items: center;
+}
+
+#workAreaHome {
+    padding:0;
+    margin:0;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:75%;
+}
+#workArea {
+    background-color: white;
+    width:90%;
+    height:100%;
+}
+
+
+
 @media (max-height:600px){
     footer{
         display: none;

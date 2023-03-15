@@ -5,7 +5,7 @@
         <meta charset="UTF-8" />
         <!--this should keep things from scaling automatically-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>WORKBENCH</title>
+        <title>Workbench</title>
         <!--link to css file-->
         <link rel="stylesheet" href="main.css" />
         <!--bootstrap css info-->
@@ -22,6 +22,8 @@
         />
     </head>
     <body>
+        <!--this should include js-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
         <header>
             <div class="navbar">
                 <div class="container-fluid d-flex justify-content-center">
@@ -45,8 +47,41 @@
                 </div>
             </div>
         </header>
-        <main>
 
+        <main>
+            <!--project controls-->
+            <div id="projectControls">
+                <div id="projectTitle">
+                    <h3 class="m-1" style="text-decoration: underline;">
+                        593 and the Dolphins
+                    </h3>
+                    <img src="q-mark.png" class="rounded-circle border border-2 m-1" alt="q-mark" id="repImage">
+                    <button type="button" class="btn bg-white btn-sm" aria-label="edit">
+                        <i class="bi bi-pencil-square bg-transparent"></i>
+                    </button>
+                </div>
+                <div id="projectSettings">
+                    <i class="bi bi-gear-fill bg-transparent m-1 h4"></i>
+                    <div class="dropdown m-1">
+                        <button class="btn btn-secondary dropdown toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Project List
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item bg-white" href="#">Project 1</a></li>
+                            <li><a class="dropdown-item bg-white" href="#">2nd Project</a></li>
+                            <li><a class="dropdown-item bg-white" href="#">593 and the Dolphins</a></li>
+                            <li><a class="dropdown-item bg-white" href="#">Create New Project</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--work area-->
+            <div class="container-fluid" id="workAreaHome">
+                <div id="workArea">
+                    frogs
+                    
+                </div>
+            </div>
         </main>
         <footer class="position-absolute bottom-0">
             <div class="container-fluid">
