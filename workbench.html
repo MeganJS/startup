@@ -82,7 +82,6 @@
                         <div id="toolbar">
                             <button type="button" class="btn btn-info">add person</button>
                             <button type="button" class="btn btn-secondary">add element</button>
-                            <button type="button" class="btn btn-danger">save</button>
                         </div>
                         <div id="building-block-stage">
                             <div class="card" id="building-block">
@@ -161,8 +160,12 @@
                     </div>
 
                     <div id="editArea">
-                        <h4>Outline</h4>
-                        
+                        <h4>
+                            Outline
+                            <button type="button" class="btn btn-success m-2">+ block</button>
+                        </h4>
+                        <textarea class="form-control" id="outlineTextArea" rows="14"></textarea>
+                        <button type="button" class="btn btn-danger m-2">save</button>
                     </div>
                 </div>
             </div>

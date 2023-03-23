@@ -160,6 +160,7 @@ footer {
     color: black;
     padding-left:3px;
     padding-top:3px;
+    border-radius:8%;
 }
 #bb-label-element {
     align-self: left;
@@ -167,6 +168,7 @@ footer {
     color: white;
     padding-left:3px;
     padding-top:3px;
+    border-radius: 8%;
 }
 #bb-tags {
     background-color: white;
@@ -186,6 +188,14 @@ footer {
     overflow-y: scroll;
     background-color: white;
     border-left: solid thin darkslategray;
+}
+#editArea h4 {
+    background-color: white;
+    padding:2px; 
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 
