@@ -121,8 +121,72 @@ footer {
     background-color: white;
     width:90%;
     height:100%;
+    border: solid thin darkgrey;
+    display: flex;
+    flex-direction:row;
 }
 
+#displayArea {
+    flex:1.2;
+}
+#toolbar {
+    background-color: white;
+    border-bottom: solid thin darkslategrey;
+    padding: 3px;
+    height:11%;
+}
+
+#building-block-stage {
+    padding:5px;
+    display:grid;
+    grid-template-columns: repeat(auto-fill, 110px);
+    grid-auto-rows: 160px;
+    gap:20px;
+    height:89%;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    overflow-y:scroll;
+}
+#building-block {
+    width: 110px;
+    height: 160px;
+    border: solid thin darkgrey;
+    justify-content: space-between;
+}
+#bb-label-person {
+    align-self: left;
+    background-color:darkturquoise;
+    color: black;
+    padding-left:3px;
+    padding-top:3px;
+}
+#bb-label-element {
+    align-self: left;
+    background-color: dimgray;
+    color: white;
+    padding-left:3px;
+    padding-top:3px;
+}
+#bb-tags {
+    background-color: white;
+    border-top: solid thin darkgrey;
+    color:black;
+    font-size: small;
+    max-height: 50px;
+    border-radius: 10%;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    overflow:hidden;
+}
+
+#editArea{
+    flex:0.8;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: white;
+    border-left: solid thin darkslategray;
+}
 
 
 @media (max-height:600px){
@@ -139,6 +203,9 @@ footer {
         flex-direction: column;
     }
     #dashboard{
+        flex-direction: column;
+    }
+    #workArea{
         flex-direction: column;
     }
 }
