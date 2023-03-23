@@ -48,19 +48,21 @@
             </div>
         </header>
         <main>
-            
+            <div class="container-fluid" id="profile">
+                <h4 class="bg-transparent m-1">
+                    Username
+                    <img src="q-mark.png" class="rounded-circle border border-2" alt="q-mark" id="repImage">
+                </h4>
+                <div class="container-fluid bg-transparent m-1" id="profileSettings">
+                    <i class="bi bi-gear-fill bg-transparent m-1 h4"></i>
+                    <input type="color" class="form-control form-control-color m-1" id="colorInput" title="choose a color">
+                </div>
+            </div>
 
             <div class="homeLayout">
                 <div class="container-fluid" id="dashboard">
-                    <div class="card bg-transparent border-0 m-2 p-2" id="profile">
-                        <h4 class="bg-transparent m-1">
-                            Username
-                            <img src="q-mark.png" class="rounded-circle border border-2" alt="q-mark" id="repImage">
-                        </h4>
-                        <div class="container-fluid bg-transparent m-1" id="profileSettings">
-                            <i class="bi bi-gear-fill bg-transparent m-1 h4"></i>
-                            <input type="color" class="form-control form-control-color m-1" id="colorInput" title="choose a color">
-                        </div>
+                    <div class="card m-2" id="pinPlace">
+                        <i class="bi bi-plus-circle bg-transparent p-2 h1"></i>
                     </div>
                     <div class="card m-2" id="pinPlace">
                         <i class="bi bi-plus-circle bg-transparent p-2 h1"></i>

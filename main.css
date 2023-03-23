@@ -75,7 +75,8 @@ footer {
     align-items: baseline;
 }
 #profile{
-    width:200px;
+    display: flex;
+    flex-direction:row;
 }
 #pinPlace{
     width:150px;
