@@ -19,6 +19,7 @@
             rel="stylesheet" 
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
         />
+
     </head>
     <body>
         <!--this should include js-->
@@ -36,9 +37,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="workbench.html">workbench</a>
                             </li>
+                            <!--
                             <li class="nav-item">
                                 <a class="nav-link" href="goals.html">goals</a>
                             </li>
+                            -->
                             <li class="nav-item">
                                 <a class="nav-link" href="index.html">logout</a>
                             </li>
@@ -49,10 +52,11 @@
         </header>
         <main>
             <div class="container-fluid" id="profile">
-                <h4 class="bg-transparent m-1">
-                    <img src="q-mark.png" class="rounded-circle border border-2" alt="q-mark" id="repImage">
-                    Username
-                </h4>
+                <img src="q-mark.png" class="rounded-circle border border-2" alt="q-mark" id="repImage">
+                <h3 class="bg-transparent m-1" id="profileName">
+
+                </h3>
+                </h3>
                 <div class="container-fluid bg-transparent m-1" id="profileSettings">
                     <i class="bi bi-gear-fill bg-transparent m-1 h4"></i>
                     <input type="color" class="form-control form-control-color m-1" id="colorInput" title="choose a color">
@@ -60,6 +64,7 @@
             </div>
 
             <div class="homeLayout">
+                <!--
                 <div class="container-fluid" id="dashboard">
                     <div class="card m-2" id="pinPlace">
                         <i class="bi bi-plus-circle bg-transparent p-2 h1"></i>
@@ -74,6 +79,7 @@
                         <i class="bi bi-plus-circle bg-transparent p-2 h1"></i>
                     </div>
                 </div>
+                -->
                 <!--project info-->
                 <div class="container-fluid m-3" style="max-width: 400px;">
                     <ul class="list-group" id="projectList">
@@ -175,6 +181,8 @@
                 Made by Megan S.
             </div>
         </footer>
+        <!--script goes here because js references html elements during initialization-->
+        <script src="home.js"></script>
     </body>
 </html>
 

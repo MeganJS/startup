@@ -60,7 +60,9 @@ footer {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
 }
+/*
 #dashboard{
     display:grid;
     grid-template-columns: repeat(auto-fill, 200px);
@@ -69,6 +71,7 @@ footer {
     justify-content: center;
     align-items: center;
 }
+*/
 #profileSettings{
     display:flex;
     justify-content: start;
@@ -76,17 +79,19 @@ footer {
 }
 #profile{
     display: flex;
-    flex-direction:row;
+    flex-direction: column;
     padding-left:4rem;
-    border: solid thin darkgrey;
+    border-top: solid thin darkgrey;
+    border-bottom: solid thin darkgrey;
 }
+/*
 #pinPlace{
     width:150px;
     height:150px;
     justify-content:center;
     align-items:center;
 }
-
+*/
 #projectList{
     border: dashed medium turquoise;
 }
