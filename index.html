@@ -14,6 +14,7 @@
             integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
             crossorigin="anonymous"
         />
+        <script src="index.js"></script>
     </head>
     <body>
         <header class="d-flex align-items-center">
@@ -24,7 +25,7 @@
                 <h1 class="display-2">Hi!</h1>
                 <div class="h4">Welcome to writ360, an organizational tool for story creators.</div>
             </div>
-            <div class="col-3 p-3 text-center">
+            <div class="col-3 p-3 text-center" style="display:block;" id="loginCenter">
                 <h2 class="h2">Login</h2>
                 <div class="form-floating mb-3" id="inputField">
                     <input type="text" class="form-control" id="floatingName" placeholder="username" aria-label="username">
@@ -35,9 +36,26 @@
                     <label for="floatingPassword" class="bg-transparent">password</label>
                 </div>
                 <!--submit button will be (for now) a link to homepage-->
-                <a class="btn btn-info" href="home.html" role="button">Submit</a>
+                <input class="btn btn-info" type="button" value="Submit" onclick="login()">
                 <!--sign up button will do nothing for now-->
-                <input class="btn bg-black" type="button" value="Sign Up" style="color:white;">
+                <input class="btn bg-black" type="button" value="Sign Up" style="color:white;" onclick="signup()">
+            </div>
+            <div class="col-3 p-3 text-center" style="display:none;" id="signupCenter">
+                <h2>Sign Up</h2>
+                <div class="form-floating mb-3" id="inputField">
+                    <input type="text" class="form-control" id="floatingName" placeholder="username" aria-label="username">
+                    <label for="floatingName" class="bg-transparent">username</label>
+                </div>
+                <div class="form-floating mb-3" id="inputField">
+                    <input type="text" class="form-control" id="floatingPassword" placeholder="password" aria-label="password">
+                    <label for="floatingPassword" class="bg-transparent">password</label>
+                </div>
+                <div class="form-floating mb-3" id="inputField">
+                    <input type="text" class="form-control" id="floatingPassword" placeholder="password" aria-label="password">
+                    <label for="floatingPassword" class="bg-transparent">confirm password</label>
+                </div>
+                <input class="btn btn-info" type="button" value="Submit" onclick="login()">
+                <input class="btn bg-black" type="button" value="Back" style="color:white;" onclick="back()">
             </div>
         </main>
         <footer class="position-absolute bottom-0">
