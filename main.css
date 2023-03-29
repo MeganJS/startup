@@ -19,6 +19,8 @@ header {
 
 main {
     flex: 1 calc(100vh - 110px);
+    position: relative;
+    top: 80px;
 }
 
 footer {

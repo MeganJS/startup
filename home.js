@@ -7,7 +7,6 @@ function getUsername(){
     return localStorage.getItem('userName') ?? '???';
 }
 
-
 class Friend {
 
     constructor (friendName){
@@ -19,16 +18,42 @@ class Friend {
     }
 }
 
-const friendList = [];
-localStorage.setItem('friendList', friendList);
+let friendList = [];
+const friendStorage = localStorage.getItem('friendList');
+
+if (friendStorage) {
+    friendList = JSON.parse(friendStorage);
+}
+else {
+    localStorage.setItem('friendList', JSON.stringify(friendList));
+}
+
+console.log(friendList.constructor);
 /*FIXME: this will reset friendlist whenever page reopens I think so don't do that */
+
+//this should make sure the page has the friendList correct when it opens
+if (friendList.length !== 0){
+    for (const friendVal of friendList){
+        const newFriendItem = document.createElement('li');
+        newFriendItem.innerHTML = '<div class="btn-group-sm bg-transparent" role="group" id="friendControls"><button type="button" class="btn btn-info" aria-label="chat">converse</button><button type="button" class="btn btn-dark" aria-label="banish">banish</button></div>';
+        newFriendItem.className = "list-group-item";
+        const newFriend = document.createElement('div');
+        newFriend.textContent = friendVal.name;
+        newFriend.className = "friendName";
+        newFriendItem.insertBefore(newFriend, newFriendItem.firstChild);
+        const parentEl = document.querySelector('#friendList');
+        parentEl.appendChild(newFriendItem);
+    }
+}
+
+
 
 function addFriend(){
     var friendName = getInput();
     var isDuplicate = false;
     /*check for duplicates*/
     for (const friendVal of friendList) {
-        if (friendVal.getName() === friendName){
+        if (friendVal.name === friendName){
             console.log("duplicate friend");
             isDuplicate = true;
             break;
@@ -38,7 +63,7 @@ function addFriend(){
         const newFriend = new Friend(friendName);
         friendList.push(newFriend);
         console.log("friend added");
-        localStorage.setItem('friendList', friendList);
+        localStorage.setItem('friendList', JSON.stringify(friendList));
         updateFriendListAdd(newFriend);
     }
     else {
@@ -49,12 +74,12 @@ function addFriend(){
 function removeFriend(removeName){
     var deleteIndex = 0;
     for (const friendVal of friendList){
-        if (friendVal.getName() === removeName){
+        if (friendVal.name === removeName){
             deleteIndex = friendList.indexOf(friendVal);
-            this.friends.splice(deleteIndex, 1);
+            friendList.splice(deleteIndex, 1);
             console.log("friend removed");
-            localStorage.setItem('friendList', friendList);
-            this.updateFriendListRemove(removeName);
+            localStorage.setItem('friendList', JSON.stringify(friendList));
+            updateFriendListRemove(removeName);
             break;
         }
     }
@@ -64,12 +89,12 @@ function removeFriend(removeName){
     }
     */
    /*This will need to actually make the html show the friend list */
-function updateFriendListAdd(friendName){
+function updateFriendListAdd(friendVal){
     const newFriendItem = document.createElement('li');
-    newFriendItem.innerHTML = '<div class="btn-group-sm bg-transparent" role="group" id="friendControls"><button type="button" class="btn btn-info" aria-label="chat">converse</button><button type="button" class="btn btn-dark" aria-label="vanish">vanish</button></div>';
+    newFriendItem.innerHTML = '<div class="btn-group-sm bg-transparent" role="group" id="friendControls"><button type="button" class="btn btn-info" aria-label="chat">converse</button><button type="button" class="btn btn-dark" aria-label="banish">banish</button></div>';
     newFriendItem.className = "list-group-item";
     const newFriend = document.createElement('div');
-    newFriend.textContent = friendName.getName();
+    newFriend.textContent = friendVal.name;
     newFriend.className = "friendName";
     newFriendItem.insertBefore(newFriend, newFriendItem.firstChild);
     const parentEl = document.querySelector('#friendList');
@@ -77,7 +102,7 @@ function updateFriendListAdd(friendName){
 }
     
 function updateFriendListRemove(removeName){
-
+    
 }
 
 
