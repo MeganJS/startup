@@ -19,8 +19,6 @@ header {
 
 main {
     flex: 1 calc(100vh - 110px);
-    position: relative;
-    top: 80px;
 }
 
 footer {
@@ -33,7 +31,6 @@ footer {
 }
 .navbar {
     font-weight: bold;
-    max-height: 80px;
 }
 
 .goalsLayout{
@@ -52,14 +49,23 @@ footer {
     font-weight: bold;
     color: darkslategray;
 }
-#friendsListHeader {
+#friendListHeader {
     font-weight: bold;
     font-size: x-large;
     color: darkslategray;
 }
+#friendListItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .friendName {
     background-color: white;
     padding:3px;
+    font-size:large;
+    color: black;
+    margin-right:1rem;
 }
 
 .homeLayout{

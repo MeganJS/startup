@@ -35,8 +35,9 @@ console.log(friendList.constructor);
 if (friendList.length !== 0){
     for (const friendVal of friendList){
         const newFriendItem = document.createElement('li');
-        newFriendItem.innerHTML = '<div class="btn-group-sm bg-transparent" role="group" id="friendControls"><button type="button" class="btn btn-info" aria-label="chat">converse</button><button type="button" class="btn btn-dark" aria-label="banish">banish</button></div>';
+        newFriendItem.innerHTML = '<button type="button" class="btn btn-info btn-sm m-1" aria-label="chat">converse</button><button type="button" class="btn btn-dark btn-sm m-1" aria-label="banish">banish</button>';
         newFriendItem.className = "list-group-item";
+        newFriendItem.id = "friendListItem";
         const newFriend = document.createElement('div');
         newFriend.textContent = friendVal.name;
         newFriend.className = "friendName";
@@ -91,8 +92,9 @@ function removeFriend(removeName){
    /*This will need to actually make the html show the friend list */
 function updateFriendListAdd(friendVal){
     const newFriendItem = document.createElement('li');
-    newFriendItem.innerHTML = '<div class="btn-group-sm bg-transparent" role="group" id="friendControls"><button type="button" class="btn btn-info" aria-label="chat">converse</button><button type="button" class="btn btn-dark" aria-label="banish">banish</button></div>';
+    newFriendItem.innerHTML = '<button type="button" class="btn btn-info btn-sm m-1" aria-label="chat">converse</button><button type="button" class="btn btn-dark btn-sm m-1" aria-label="banish">banish</button>';
     newFriendItem.className = "list-group-item";
+    newFriendItem.id = "friendListItem";
     const newFriend = document.createElement('div');
     newFriend.textContent = friendVal.name;
     newFriend.className = "friendName";
@@ -102,7 +104,7 @@ function updateFriendListAdd(friendVal){
 }
     
 function updateFriendListRemove(removeName){
-    
+
 }
 
 
