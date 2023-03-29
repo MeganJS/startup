@@ -31,13 +31,13 @@ footer {
 }
 .navbar {
     font-weight: bold;
+    max-height: 80px;
 }
 
 .goalsLayout{
     display:flex;
     flex-direction: row;
 }
-
 
 #repImage {
     width: 35px;
@@ -54,6 +54,10 @@ footer {
     font-weight: bold;
     font-size: x-large;
     color: darkslategray;
+}
+.friendName {
+    background-color: white;
+    padding:3px;
 }
 
 .homeLayout{
@@ -79,7 +83,7 @@ footer {
 }
 #profile{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding-left:4rem;
     border-top: solid thin darkgrey;
     border-bottom: solid thin darkgrey;

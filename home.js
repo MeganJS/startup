@@ -3,79 +3,83 @@ usernameEl.textContent = getUsername();
 /*
 what does "this" mean here?
 */
-
 function getUsername(){
     return localStorage.getItem('userName') ?? '???';
 }
 
 
-class FriendList {
-    friends;
+class Friend {
 
-    constructor(){
-        this.friends = Array();
+    constructor (friendName){
+        this.name = friendName;
     }
 
-    addFriend(){
-        var friendName = getInput();
-        /*var duplicate = false;*/
-        if(this.friends === undefined){
-            console.log(friendName);
-            this.friends.push(friendName);
-            localStorage.setItem('friendList', this.friends);
-            this.updateFriendListAdd(friendName);
-        }
-        else if (this.friends.find(friendName) === undefined){
-            console.log(friendName);
-            this.friends.push(friendName);
-            localStorage.setItem('friendList', this.friends);
-            this.updateFriendListAdd(friendName);
-        }
-        /*
-        for (const friendVal of this.friends){
-            if (friendVal ===  friendName){ /*Do I need to use super here?*/
-                /*FIXME: Insert error message here*//*
-                duplicate = true;
-                break;
-            }
-        }
-        if (!duplicate){
-            console.log(friendName);
-            this.friends.push(friendName);
-            localStorage.setItem('friendList', this.friends);
-            this.updateFriendListAdd(friendName);
-        }
-        */
+    getName(){
+        return this.name;
     }
-    removeFriend(removeName){
-        var deleteIndex = 0;
-        for (const friendVal of this.friends){
-            if (friendVal === removeName){
-                deleteIndex = this.friends.indexOf(friendVal);
-                this.friends.splice(deleteIndex, 1);
-                localStorage.setItem('friendList', friends);
-                this.updateFriendListRemove(removeName);
-                break;
-            }
+}
+
+const friendList = [];
+localStorage.setItem('friendList', friendList);
+/*FIXME: this will reset friendlist whenever page reopens I think so don't do that */
+
+function addFriend(){
+    var friendName = getInput();
+    var isDuplicate = false;
+    /*check for duplicates*/
+    for (const friendVal of friendList) {
+        if (friendVal.getName() === friendName){
+            console.log("duplicate friend");
+            isDuplicate = true;
+            break;
         }
     }
+    if (!isDuplicate){
+        const newFriend = new Friend(friendName);
+        friendList.push(newFriend);
+        console.log("friend added");
+        localStorage.setItem('friendList', friendList);
+        updateFriendListAdd(newFriend);
+    }
+    else {
+        /*FIXME add error message/alert popup */
+    }
+}
+
+function removeFriend(removeName){
+    var deleteIndex = 0;
+    for (const friendVal of friendList){
+        if (friendVal.getName() === removeName){
+            deleteIndex = friendList.indexOf(friendVal);
+            this.friends.splice(deleteIndex, 1);
+            console.log("friend removed");
+            localStorage.setItem('friendList', friendList);
+            this.updateFriendListRemove(removeName);
+            break;
+        }
+    }
+}
     /* we will deal with this later
     converseFriend(){
     }
     */
    /*This will need to actually make the html show the friend list */
-    updateFriendListAdd(friendName){
-        const newFriend = document.createElement('div');
-        newFriend.textContent = friendName;
-        newFriend.className = "accordion-item";
-        const accordionEl = document.querySelector('.accordion');
-        accordionEl.appendChild(newFriend);
-        
-    }
-    updateFriendListRemove(removeName){
-
-    }
+function updateFriendListAdd(friendName){
+    const newFriendItem = document.createElement('li');
+    newFriendItem.innerHTML = '<div class="btn-group-sm bg-transparent" role="group" id="friendControls"><button type="button" class="btn btn-info" aria-label="chat">converse</button><button type="button" class="btn btn-dark" aria-label="vanish">vanish</button></div>';
+    newFriendItem.className = "list-group-item";
+    const newFriend = document.createElement('div');
+    newFriend.textContent = friendName.getName();
+    newFriend.className = "friendName";
+    newFriendItem.insertBefore(newFriend, newFriendItem.firstChild);
+    const parentEl = document.querySelector('#friendList');
+    parentEl.appendChild(newFriendItem);
 }
+    
+function updateFriendListRemove(removeName){
+
+}
+
 
 
 function getInput(){
@@ -84,6 +88,5 @@ function getInput(){
     return friendNameEl.value;
 }
 
-const listOfFriends = new FriendList();
 const requestFriendEl = document.querySelector("#request-button");
-requestFriendEl.addEventListener('click', listOfFriends.addFriend);
+requestFriendEl.addEventListener('click', addFriend);
