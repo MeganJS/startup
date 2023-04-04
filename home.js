@@ -35,13 +35,32 @@ console.log(friendList.constructor);
 if (friendList.length !== 0){
     for (const friendVal of friendList){
         const newFriendItem = document.createElement('li');
-        newFriendItem.innerHTML = '<button type="button" class="btn btn-info btn-sm m-1" aria-label="chat">converse</button><button type="button" class="btn btn-dark btn-sm m-1" aria-label="banish">banish</button>';
+        newFriendItem.setAttribute("name", friendVal.name);
+
+        //newFriendItem.innerHTML = '<button type="button" class="btn btn-info btn-sm m-1" aria-label="chat">converse</button><button type="button" class="btn btn-dark btn-sm m-1" aria-label="banish">banish</button>';
         newFriendItem.className = "list-group-item";
         newFriendItem.id = "friendListItem";
         const newFriend = document.createElement('div');
         newFriend.textContent = friendVal.name;
         newFriend.className = "friendName";
-        newFriendItem.insertBefore(newFriend, newFriendItem.firstChild);
+        newFriendItem.appendChild(newFriend);
+        //converse button
+        const converseButton = document.createElement('button');
+        converseButton.type = "button";
+        converseButton.className = "btn btn-info btn-sm m-1";
+        converseButton.setAttribute("aria-label", "converse");
+        converseButton.textContent = "converse";
+        newFriendItem.appendChild(converseButton);
+        //deleteButton
+        const deleteButton = document.createElement('button');
+        deleteButton.type = "button";
+        deleteButton.className = "btn btn-dark btn-sm m-1";
+        deleteButton.setAttribute("aria-label", "banish");
+        deleteButton.setAttribute('id', 'delete-button');
+        deleteButton.textContent = "banish";
+        deleteButton.addEventListener('click', () => {removeFriend(friendVal.name)});
+        newFriendItem.appendChild(deleteButton);
+
         const parentEl = document.querySelector('#friendList');
         parentEl.appendChild(newFriendItem);
     }
@@ -72,16 +91,20 @@ function addFriend(){
     }
 }
 
+
 function removeFriend(removeName){
-    var deleteIndex = 0;
-    for (const friendVal of friendList){
-        if (friendVal.name === removeName){
-            deleteIndex = friendList.indexOf(friendVal);
-            friendList.splice(deleteIndex, 1);
-            console.log("friend removed");
-            localStorage.setItem('friendList', JSON.stringify(friendList));
-            updateFriendListRemove(removeName);
-            break;
+    console.log(removeName);
+    if (window.confirm("Banish friend?")){
+        var deleteIndex = 0;
+        for (const friendVal of friendList){
+            if (friendVal.name === removeName){
+                deleteIndex = friendList.indexOf(friendVal);
+                friendList.splice(deleteIndex, 1);
+                console.log("friend removed");
+                localStorage.setItem('friendList', JSON.stringify(friendList));
+                updateFriendListRemove(removeName);
+                break;
+            }
         }
     }
 }
@@ -92,19 +115,42 @@ function removeFriend(removeName){
    /*This will need to actually make the html show the friend list */
 function updateFriendListAdd(friendVal){
     const newFriendItem = document.createElement('li');
-    newFriendItem.innerHTML = '<button type="button" class="btn btn-info btn-sm m-1" aria-label="chat">converse</button><button type="button" class="btn btn-dark btn-sm m-1" aria-label="banish">banish</button>';
+    newFriendItem.setAttribute("name", friendVal.name);
+
+    //newFriendItem.innerHTML = '<button type="button" class="btn btn-info btn-sm m-1" aria-label="chat">converse</button><button type="button" class="btn btn-dark btn-sm m-1" aria-label="banish">banish</button>';
     newFriendItem.className = "list-group-item";
     newFriendItem.id = "friendListItem";
     const newFriend = document.createElement('div');
     newFriend.textContent = friendVal.name;
     newFriend.className = "friendName";
-    newFriendItem.insertBefore(newFriend, newFriendItem.firstChild);
+    newFriendItem.appendChild(newFriend);
+    //converse button
+    const converseButton = document.createElement('button');
+    converseButton.type = "button";
+    converseButton.className = "btn btn-info btn-sm m-1";
+    converseButton.setAttribute("aria-label", "converse");
+    converseButton.textContent = "converse";
+    newFriendItem.appendChild(converseButton);
+    //deleteButton
+    const deleteButton = document.createElement('button');
+    deleteButton.type = "button";
+    deleteButton.className = "btn btn-dark btn-sm m-1";
+    deleteButton.setAttribute("aria-label", "banish");
+    deleteButton.setAttribute('id', 'delete-button');
+    deleteButton.textContent = "banish";
+    deleteButton.addEventListener('click', () => {removeFriend(friendVal.name)});
+    newFriendItem.appendChild(deleteButton);
+
     const parentEl = document.querySelector('#friendList');
     parentEl.appendChild(newFriendItem);
 }
     
 function updateFriendListRemove(removeName){
-
+    const elToDelete = document.querySelector(`li[name='${removeName}']`);
+    while(elToDelete.firstChild){
+        elToDelete.removeChild(elToDelete.firstChild);
+    }
+    elToDelete.parentElement.removeChild(elToDelete);
 }
 
 
@@ -117,3 +163,8 @@ function getInput(){
 
 const requestFriendEl = document.querySelector("#request-button");
 requestFriendEl.addEventListener('click', addFriend);
+
+
+
+
+
