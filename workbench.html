@@ -36,9 +36,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="workbench.html">workbench</a>
                             </li>
+                            <!--
                             <li class="nav-item">
                                 <a class="nav-link" href="goals.html">goals</a>
                             </li>
+                        -->
                             <li class="nav-item">
                                 <a class="nav-link" href="index.html">logout</a>
                             </li>
@@ -51,14 +53,19 @@
         <main>
             <!--project controls-->
             <div id="projectControls">
-                <div id="projectTitle">
-                    <h3 class="m-1" style="text-decoration: underline;">
+                <div id="projectTitle" style="display:flex;">
+                    <h3 class="m-1" style="text-decoration: underline;" id="nameOfProject">
                         593 and the Dolphins
                     </h3>
                     <img src="q-mark.png" class="rounded-circle border border-2 m-1" alt="q-mark" id="repImage">
-                    <button type="button" class="btn bg-white btn-sm" aria-label="edit">
+                    <button type="button" class="btn bg-white btn-sm" aria-label="edit" id="editProjectName">
                         <i class="bi bi-pencil-square bg-transparent"></i>
                     </button>
+                </div>
+                <div id="projectTitleEdit" style="display:none;">
+                    <input type="text" class="form-control" id="projectTitleInput" placeholder="project title" aria-label="project title">
+                    <input class="btn btn-info btn-sm" type="button" value="Apply" aria-label="Apply" id="saveNewTitle">
+                    <input class="btn btn-dark btn-sm" type="button" value="Cancel" aria-label="Cancel" id="cancelNewTitle">
                 </div>
                 <div id="projectSettings">
                     <i class="bi bi-gear-fill bg-transparent m-1 h4"></i>
@@ -175,5 +182,7 @@
                 Made by Megan S.
             </div>
         </footer>
+        <!--script goes here because js references html elements during initialization-->
+        <script src="workbench.js"></script>
     </body>
 </html>

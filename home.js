@@ -8,7 +8,7 @@ function getUsername(){
     return localStorage.getItem('userName') ?? '???';
 }
 
-//create class for frienc objects
+//create class for friend objects
 class Friend {
 
     constructor (friendName){
@@ -183,15 +183,22 @@ if (projectList.length !== 0){
         const newProjectItem = document.createElement('li');
         newProjectItem.setAttribute("name", projectVal.name);
 
-        //newFriendItem.innerHTML = '<button type="button" class="btn btn-info btn-sm m-1" aria-label="chat">converse</button><button type="button" class="btn btn-dark btn-sm m-1" aria-label="banish">banish</button>';
         newProjectItem.className = "list-group-item";
         const projectEl = document.createElement('a');
         projectEl.setAttribute("href", "workbench.html");
         projectEl.setAttribute("class", "link-dark bg-transparent");
         projectEl.textContent = projectVal.name;
+        projectEl.addEventListener('click', () => {projectLink(projectVal)});
+
         newProjectItem.appendChild(projectEl);
 
         const parentEl = document.querySelector('#projectList');
         parentEl.insertBefore(newProjectItem, parentEl.lastChild);
     }
 }
+//should let me make it show the right project on workbench
+function projectLink(projectVal){
+    localStorage.setItem("currentProject", JSON.stringify(projectVal));
+}
+
+

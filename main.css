@@ -123,6 +123,11 @@ footer {
     display: flex;
     margin:1em;
 }
+#projectTitleEdit {
+    display:flex;
+    flex-direction:row;
+    margin:1em;
+}
 #projectSettings {
     display: flex;
     margin:1em;
