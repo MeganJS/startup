@@ -1,3 +1,4 @@
+//set profile name
 const usernameEl = document.querySelector("#profileName");
 usernameEl.textContent = getUsername();
 /*
@@ -7,6 +8,7 @@ function getUsername(){
     return localStorage.getItem('userName') ?? '???';
 }
 
+//create class for frienc objects
 class Friend {
 
     constructor (friendName){
@@ -18,6 +20,7 @@ class Friend {
     }
 }
 
+//create/initialize friend list
 let friendList = [];
 const friendStorage = localStorage.getItem('friendList');
 
@@ -27,9 +30,7 @@ if (friendStorage) {
 else {
     localStorage.setItem('friendList', JSON.stringify(friendList));
 }
-
 console.log(friendList.constructor);
-/*FIXME: this will reset friendlist whenever page reopens I think so don't do that */
 
 //this should make sure the page has the friendList correct when it opens
 if (friendList.length !== 0){
@@ -66,8 +67,7 @@ if (friendList.length !== 0){
     }
 }
 
-
-
+//enables add friend functionality
 function addFriend(){
     var friendName = getInput();
     var isDuplicate = false;
@@ -88,10 +88,11 @@ function addFriend(){
     }
     else {
         /*FIXME add error message/alert popup */
+        window.alert("Duplicate friend.");
     }
 }
 
-
+//enables removing friends
 function removeFriend(removeName){
     console.log(removeName);
     if (window.confirm("Banish friend?")){
@@ -112,7 +113,8 @@ function removeFriend(removeName){
     converseFriend(){
     }
     */
-   /*This will need to actually make the html show the friend list */
+
+    /*This will need to actually make the html show the friend list */
 function updateFriendListAdd(friendVal){
     const newFriendItem = document.createElement('li');
     newFriendItem.setAttribute("name", friendVal.name);
@@ -144,7 +146,8 @@ function updateFriendListAdd(friendVal){
     const parentEl = document.querySelector('#friendList');
     parentEl.appendChild(newFriendItem);
 }
-    
+
+//gets rid of deleted friends
 function updateFriendListRemove(removeName){
     const elToDelete = document.querySelector(`li[name='${removeName}']`);
     while(elToDelete.firstChild){
@@ -153,18 +156,42 @@ function updateFriendListRemove(removeName){
     elToDelete.parentElement.removeChild(elToDelete);
 }
 
-
-
+//useful function for friend requests
 function getInput(){
     const friendNameEl = document.querySelector("#friendName");
     console.log(friendNameEl.value);
     return friendNameEl.value;
 }
 
+//add event listener for friend request button
 const requestFriendEl = document.querySelector("#request-button");
 requestFriendEl.addEventListener('click', addFriend);
 
+//projects time 
+let projectList = [];
+const projectStorage = localStorage.getItem('projectList');
 
+if (projectStorage) {
+    projectList = JSON.parse(projectStorage);
+}
+else {
+    localStorage.setItem('projectList', JSON.stringify(projectList));
+}
 
+if (projectList.length !== 0){
+    for (const projectVal of projectList){
+        const newProjectItem = document.createElement('li');
+        newProjectItem.setAttribute("name", projectVal.name);
 
+        //newFriendItem.innerHTML = '<button type="button" class="btn btn-info btn-sm m-1" aria-label="chat">converse</button><button type="button" class="btn btn-dark btn-sm m-1" aria-label="banish">banish</button>';
+        newProjectItem.className = "list-group-item";
+        const projectEl = document.createElement('a');
+        projectEl.setAttribute("href", "workbench.html");
+        projectEl.setAttribute("class", "link-dark bg-transparent");
+        projectEl.textContent = projectVal.name;
+        newProjectItem.appendChild(projectEl);
 
+        const parentEl = document.querySelector('#projectList');
+        parentEl.insertBefore(newProjectItem, parentEl.lastChild);
+    }
+}
