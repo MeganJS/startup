@@ -2,8 +2,8 @@
 class Project {
     constructor(projectName) {
         this.name = projectName;
+        this.blocklist = [];
     }
-
 }
 
 //and now, let's initialize a projectList
@@ -62,3 +62,10 @@ const cancelProjectTitleEl = document.querySelector("#cancelNewTitle");
 editProjectTitleEl.addEventListener('click', editProjectTitle);
 saveProjectTitleEl.addEventListener('click', saveProjectTitle);
 cancelProjectTitleEl.addEventListener('click', cancelProjectTitle);
+
+
+
+//let's do some blocklist stuff
+
+
+

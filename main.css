@@ -128,6 +128,9 @@ footer {
     flex-direction:row;
     margin:1em;
 }
+#editProjectName {
+    height:30px;
+}
 #projectSettings {
     display: flex;
     margin:1em;
@@ -181,6 +184,8 @@ footer {
 }
 #bb-label-person {
     align-self: left;
+    display:flex;
+    justify-content: space-between;
     background-color:darkturquoise;
     color: black;
     padding-left:3px;
@@ -189,6 +194,8 @@ footer {
 }
 #bb-label-element {
     align-self: left;
+    display:flex;
+    justify-content: space-between;
     background-color: dimgray;
     color: white;
     padding-left:3px;
@@ -205,6 +212,18 @@ footer {
     text-overflow:ellipsis;
     white-space: nowrap;
     overflow:hidden;
+}
+#editCardBtn {
+    width:25px;
+    height:25px;
+}
+#saveCardBtn {
+    width:25px;
+    height:25px;
+}
+#deleteCardBtn {
+    width:25px;
+    height:25px;
 }
 
 #editArea{
