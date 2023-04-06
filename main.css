@@ -182,6 +182,12 @@ footer {
     border: solid thin darkgrey;
     justify-content: space-between;
 }
+#building-block-edit {
+    width: 110px;
+    height: 160px;
+    border: solid thin darkgrey;
+    justify-content: space-between;
+}
 #bb-label-person {
     align-self: left;
     display:flex;
@@ -213,7 +219,7 @@ footer {
     white-space: nowrap;
     overflow:hidden;
 }
-#editCardBtn {
+#editBlockBtn {
     width:25px;
     height:25px;
 }
@@ -222,6 +228,10 @@ footer {
     height:25px;
 }
 #deleteBlockBtn {
+    width:25px;
+    height:25px;
+}
+#returnBlockBtn {
     width:25px;
     height:25px;
 }

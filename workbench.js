@@ -68,6 +68,13 @@ cancelProjectTitleEl.addEventListener('click', cancelProjectTitle);
 //let's do some blocklist stuff
 function addBlock(){
     const blockId = `${blocklist.length}`;
+    const editBlockEl = document.querySelector("#building-block-edit");
+    editBlockEl.style.display = "flex";
+    editBlockEl.setAttribute("name", blockId);
+    //add listener events for the buttons below:
+
+
+    /*
     const parentEl = document.querySelector("#building-block-stage");
     
     const newBlock = document.createElement("div");
@@ -137,17 +144,22 @@ function addBlock(){
 
     parentEl.appendChild(newBlock);
     //add listener events here
+    */
 }
 
 
-
 function saveBlock(blockIdString){
-    const block = {blockId: "", name:"", taglist:[]};
+    //change to allow for edited blocks
+
+    const block = {blockId: "", name:"", blockType:"", taglist:[]};
     block.blockId = blockIdString;
     const blockEl = document.querySelector(`div[name="${blockIdString}"]`);
     const childList = blockEl.childNodes;
     for(const child of childList) {
-        if(child.id === "blockTitleInput"){
+        if(child.tagName === "SELECT"){
+            block.blockType = child.value;
+        }
+        else if(child.id === "blockTitleInput"){
             block.name = child.value;
         }
         else if (child.id === "bb-tags"){
@@ -160,6 +172,93 @@ function saveBlock(blockIdString){
     currentProject.blocklist.push(block);
     localStorage.setItem("currentProject", JSON.stringify(currentProject));
     localStorage.setItem("projectList", JSON.stringify(projectList));
+    updateBlocksSave(blockIdString, block);
+}
+
+function updateBlocksSave(blockIdString, block){
+    const editBlockEl = document.querySelector(`div[name="${blockIdString}"]`);
+    //figure out what to do about edited blocks, no sense in creating them again
+
+    const parentEl = document.querySelector("#building-block-stage");
+    const newBlock = document.createElement("div");
+    newBlock.class = "card";
+    newBlock.id = "building-block";
+    newBlock.setAttribute("name", blockIdString);
+
+
+    const blockTypeEl = document.createElement("div");
+    blockTypeEl.id = "bb-label-person";
+    blockTypeEl.setAttribute("aria-label", `${block.blockType}`);
+    blockTypeEl.textContent = `${block.blockType}`;
+
+    const editBtnEl = document.createElement("button");
+    editBtnEl.setAttribute("type", "button");
+    editBtnEl.setAttribute("aria-label", "edit-block");
+    editBtnEl.class = "btn btn-outline-dark btn-sm p-0";
+    editBtnEl.id = "editBlockBtn";
+    editBtnEl.innerHTML = "<i class=\"bi bi-pencil-square bg-transparent m-0 p-0\" style=\"color:black;\"></i>";
+
+    blockTypeEl.appendChild(editBtnEl);
+
+    newBlock.appendChild(blockTypeEl);
+
+    const blockNameEl = document.createElement("div");
+    blockNameEl.class="bg-transparent";
+    blockNameEl.setAttribute("style", "align-self: center;")
+    blockNameEl.textContent = `${block.name}`;
+
+    newBlock.appendChild(blockNameEl);
+
+    const blockTagsEl = document.createElement("div");
+    //THIS is wehere I left off
+    //going tobed now
+
+
+    const saveBlockBtn = document.createElement("button");
+    saveBlockBtn.setAttribute("type", "button");
+    saveBlockBtn.setAttribute("aria-label", "save block");
+    saveBlockBtn.class="btn btn-success btn-sm p-0";
+    saveBlockBtn.id="saveBlockBtn";
+    saveBlockBtn.innerHTML="<i class=\"bi bi-check-square bg-transparent m-0 p-0\" style=\"color:black;\"></i>"
+    //Add even listener for save button
+
+    buttonHolder.appendChild(saveBlockBtn);
+
+    const deleteBlockBtn = document.createElement("button");
+    deleteBlockBtn.setAttribute("type", "button");
+    deleteBlockBtn.setAttribute("aria-label", "delete block");
+    deleteBlockBtn.class="btn btn-warning btn-sm p-0";
+    deleteBlockBtn.id="deleteBlockBtn";
+    deleteBlockBtn.innerHTML="<i class=\"bi bi-trash bg-transparent m-0 p-0\" style=\"color:black;\"></i>"
+    //Add event listener for delete button
+
+    buttonHolder.appendChild(deleteBlockBtn);
+
+    newBlock.appendChild(buttonHolder);
+
+    const bbTags = document.createElement("div");
+    bbTags.class="container-fluid p-1";
+    bbTags.id="bb-tags";
+
+    const connectBtn = document.createElement("button");
+    connectBtn.setAttribute("type", "button");
+    connectBtn.setAttribute("aria-label", "connect");
+    connectBtn.class="btn btn-light btn-sm";
+    connectBtn.id="connectBtn";
+    connectBtn.textContent = "+connect";
+    //Add listener event for connect button
+
+    bbTags.appendChild(connectBtn);
+
+    newBlock.appendChild(bbTags);
+
+    parentEl.appendChild(newBlock);
+
+    //add listener events here
+    editBlockEl.setAttribute("name", "");
+    editBlockEl.style.display = "none";
+    //clear out the data in editBlock so it's blank again?
+
 }
 
 

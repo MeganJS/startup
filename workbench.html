@@ -91,74 +91,16 @@
                             <button type="button" class="btn btn-secondary">add element</button>
                         </div>
                         <div id="building-block-stage">
-                            <div class="card" id="building-block">
-                                <div id="bb-label-person">
-                                    Person
-                                </div>
-                                <img src="q-mark.png" class="rounded-circle border border-2 m-1" alt="q-mark" id="repImage" style="align-self: center;">
-                                <div class="bg-transparent" style="align-self: center;">
-                                    Smiley Face (Dolphinus)
-                                </div>
-                                <div class="container-fluid p-1" id="bb-tags">
-                                    +Frog +St. Louis +Hendrisk +Ghosts
-                                </div>
-                            </div>
-                            <div class="card" id="building-block">
-                                <div id="bb-label-element">
-                                    Element
-                                </div>
-                                <img src="q-mark.png" class="rounded-circle border border-2 m-1" alt="q-mark" id="repImage" style="align-self: center;">
-                                <div class="bg-transparent" style="align-self: center;">
-                                    St. Louis
-                                </div>
-                                <div class="container-fluid p-1" id="bb-tags">
-                                    +Dolphin City +Smiley Face +Ghosts
-                                </div>
-                            </div>
-                            <div class="card" id="building-block">
-                                <div id="bb-label-element">
-                                    Element
-                                </div>
-                                <img src="q-mark.png" class="rounded-circle border border-2 m-1" alt="q-mark" id="repImage" style="align-self: center;">
-                                <div class="bg-transparent" style="align-self: center;">
-                                    Ghosts
-                                </div>
-                                <div class="container-fluid p-1" id="bb-tags">
-                                    +St. Louis +Hendrisk
-                                </div>
-                            </div>
-                            <div class="card" id="building-block">
-                                <div id="bb-label-person">
-                                    Person
-                                </div>
-                                <img src="q-mark.png" class="rounded-circle border border-2 m-1" alt="q-mark" id="repImage" style="align-self: center;">
-                                <div class="bg-transparent" style="align-self: center;">
-                                    Frog
-                                </div>
-                                <div class="container-fluid p-1" id="bb-tags">
-                                    +Smiley Face +Dolphin City +Hendrisk
-                                </div>
-                            </div>
-                            <div class="card" id="building-block">
-                                <div id="bb-label-person">
-                                    Person
-                                </div>
-                                <img src="q-mark.png" class="rounded-circle border border-2 m-1" alt="q-mark" id="repImage" style="align-self: center;">
-                                <div class="bg-transparent" style="align-self: center;">
-                                    Hendrisk
-                                </div>
-                                <div class="container-fluid p-1" id="bb-tags">
-                                    +Frog +Ghosts +St. Louis +Smiley Face
-                                </div>
-                            </div>
-                            <div class="card" id="building-block">
+                            <div class="card" id="building-block" style="display:flex;">
                                 <div id="bb-label-element">
                                     Element
                                     <button type="button" class="btn btn-outline-light btn-sm p-0" aria-label="edit-card" id="editCardBtn">
                                         <i class="bi bi-pencil-square bg-transparent m-0 p-0" style="color:white;"></i>
                                     </button>
                                 </div>
+                                <!--
                                 <img src="q-mark.png" class="rounded-circle border border-2 m-1" alt="q-mark" id="repImage" style="align-self: center;">
+                                -->
                                 <div class="bg-transparent" style="align-self: center;">
                                     Dolphin City
                                 </div>
@@ -167,16 +109,16 @@
                                 </div>
                             </div>
 
-                            <div class="card" id="building-block">
-                                <div id="bb-label-person">
+                            <div class="card" id="building-block" style="display:flex;">
+                                <div id="bb-label-person" aria-label="Person">
                                     Person
-                                    <button type="button" class="btn btn-outline-dark btn-sm p-0" aria-label="edit-card" id="editCardBtn">
+                                    <button type="button" class="btn btn-outline-dark btn-sm p-0" aria-label="edit-block" id="editBlockBtn">
                                         <i class="bi bi-pencil-square bg-transparent m-0 p-0" style="color:black;"></i>
                                     </button>
                                 </div>
-                                
+                                <!--
                                 <img src="q-mark.png" class="rounded-circle border border-2 m-1" alt="q-mark" id="repImage" style="align-self: center;">
-
+                                -->
                                 <div class="bg-transparent" style="align-self: center;">
                                     ???
                                 </div>
@@ -185,23 +127,26 @@
                                 </div>
                             </div>
 
-                            <div class="card" id="building-block">
+                            <div class="card" id="building-block-edit" style="display: flex;">
                                 <select class="form-select form-select-sm" aria-label="block-type-select" id="block-type-select">
-                                    <option selected value="Element" style="background-color:dimgrey; color:white;">
+                                    <option selected value="Element" aria-label="Element" style="background-color:dimgrey; color:white;">
                                         Element
                                     </option>
-                                    <option value="Person" style="background-color: dimgrey; color: white;">
+                                    <option value="Person" aria-label="Person" style="background-color: darkturquoise; color: white;">
                                         Person
                                     </option>
                                 </select>
                                 
                                 <input type="text" class="form-control" id="blockTitleInput" placeholder="block name" aria-label="name of block">
 
-                                <div class="container-fluid bg-transparent" style="display:flex; justify-content:space-between;">
-                                    <button type="button" class="btn btn-success btn-sm p-0" aria-label="save-card" id="saveBlockBtn">
+                                <div class="container-fluid bg-transparent p-1" style="display:flex; justify-content:space-between;">
+                                    <button type="button" class="btn btn-success btn-sm p-0" aria-label="save block" id="saveBlockBtn">
                                         <i class="bi bi-check-square bg-transparent m-0 p-0" style="color:black;"></i>
                                     </button>
-                                    <button type="button" class="btn btn-warning btn sm p-0" aria-label="delete-card" id="deleteBlockBtn">
+                                    <button type="button" class="btn btn-warning btn-sm p-0" aria-label="return-from-block" id="returnBlockBtn">
+                                        <i class="bi bi-arrow-return-left bg-transparent m-0 p-0" style="color:black;"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm p-0" aria-label="delete block" id="deleteBlockBtn">
                                         <i class="bi bi-trash bg-transparent m-0 p-0" style="color:black;"></i>
                                     </button>
                                 </div>
