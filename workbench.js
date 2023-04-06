@@ -67,12 +67,15 @@ cancelProjectTitleEl.addEventListener('click', cancelProjectTitle);
 
 //let's do some blocklist stuff
 function addBlock(){
+    const blockId = `${blocklist.length}`;
     const parentEl = document.querySelector("#building-block-stage");
     
     const newBlock = document.createElement("div");
     newBlock.class = "card";
     newBlock.id = "building-block";
-    
+    newBlock.setAttribute("name", blockId);
+
+
     const typeSelect = document.createElement("select");
     typeSelect.class = "form-select form-select-sm";
     typeSelect.setAttribute("aria-label", "block-type-select");
@@ -133,13 +136,56 @@ function addBlock(){
     newBlock.appendChild(bbTags);
 
     parentEl.appendChild(newBlock);
+    //add listener events here
 }
 
-function deleteBlock(){
 
+
+function saveBlock(blockIdString){
+    const block = {blockId: "", name:"", taglist:[]};
+    block.blockId = blockIdString;
+    const blockEl = document.querySelector(`div[name="${blockIdString}"]`);
+    const childList = blockEl.childNodes;
+    for(const child of childList) {
+        if(child.id === "blockTitleInput"){
+            block.name = child.value;
+        }
+        else if (child.id === "bb-tags"){
+            for(const tag of child.childNodes){
+                taglist.push(tag.textContent); // I'm going to store these as spans I think
+            }
+        }
+    }
+
+    currentProject.blocklist.push(block);
+    localStorage.setItem("currentProject", JSON.stringify(currentProject));
+    localStorage.setItem("projectList", JSON.stringify(projectList));
 }
-const block = {name:"Froggos", tagList:[]};
-block.tagList.push("thingy");
 
 
+function deleteBlock(blockIdString){
+    var deleteIndex = 0;
+    for (const block of currentProject.blocklist){
+        if (block.blockId === blockIdString){
+            deleteIndex = blocklist.indexOf(block);
+            currentProject.blocklist.splice(deleteIndex, 1);
+            console.log(`deleted block ${blockIdString}`);
+            localStorage.setItem("currentProject", JSON.stringify(currentProject));
+            localStorage.setItem("projectList", JSON.stringify(projectList));
+            updateBlocksRemove(blockIdString);
+            break;
+        }
+    }
+}
+
+function updateBlocksRemove(blockIdString){
+    const blockEl = document.querySelector(`div[name="${blockIdString}"]`);
+    while(blockEl.firstChild){
+        blockEl.removeChild(blockEl.firstChild); //will this cause problems if child elements have children?
+    }
+    blockEl.parentElement.removeChild(blockEl);
+}
+
+
+//TODO add back button
 
