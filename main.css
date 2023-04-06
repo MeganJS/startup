@@ -203,7 +203,7 @@ footer {
     border-radius: 8%;
 }
 #bb-tags {
-    background-color: white;
+    background-color: beige;
     border-top: solid thin darkgrey;
     color:black;
     font-size: small;
@@ -217,13 +217,21 @@ footer {
     width:25px;
     height:25px;
 }
-#saveCardBtn {
+#saveBlockBtn {
     width:25px;
     height:25px;
 }
-#deleteCardBtn {
+#deleteBlockBtn {
     width:25px;
     height:25px;
+}
+#connectBtn{
+    border-radius:0%;
+    border: solid thin black;
+    max-height: 25px;
+    align-items: center;
+    font-size: small;
+    color: black;
 }
 
 #editArea{

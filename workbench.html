@@ -186,23 +186,31 @@
                             </div>
 
                             <div class="card" id="building-block">
-                                <div id="bb-label-person">
-                                    Person
-                                    <button type="button" class="btn btn-success btn-sm p-0" aria-label="save-card" id="saveCardBtn">
+                                <select class="form-select form-select-sm" aria-label="block-type-select" id="block-type-select">
+                                    <option selected value="Element" style="background-color:dimgrey; color:white;">
+                                        Element
+                                    </option>
+                                    <option value="Person" style="background-color: dimgrey; color: white;">
+                                        Person
+                                    </option>
+                                </select>
+                                
+                                <input type="text" class="form-control" id="blockTitleInput" placeholder="block name" aria-label="name of block">
+
+                                <div class="container-fluid bg-transparent" style="display:flex; justify-content:space-between;">
+                                    <button type="button" class="btn btn-success btn-sm p-0" aria-label="save-card" id="saveBlockBtn">
                                         <i class="bi bi-check-square bg-transparent m-0 p-0" style="color:black;"></i>
                                     </button>
-                                    <button type="button" class="btn btn-warning btn sm p-0" aria-label="delete-card" id="deleteCardBtn">
+                                    <button type="button" class="btn btn-warning btn sm p-0" aria-label="delete-card" id="deleteBlockBtn">
                                         <i class="bi bi-trash bg-transparent m-0 p-0" style="color:black;"></i>
                                     </button>
                                 </div>
                                 
+                                <!--
                                 <img src="q-mark.png" class="rounded-circle border border-2 m-1" alt="q-mark" id="repImage" style="align-self: center;">
-
-                                <div class="bg-transparent" style="align-self: center;">
-                                    <input type="text" class="form-control" id="blockTitleInput" placeholder="" aria-label="name of block">
-                                </div>
+                                -->
                                 <div class="container-fluid p-1" id="bb-tags">
-                                    +Smiley Face +Dolphin City +Hendrisk
+                                    <button type="button" class="btn btn-light btn-sm" aria-label="connect" id="connectBtn">+connect</button>
                                 </div>
                             </div>
                         </div>

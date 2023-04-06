@@ -66,6 +66,80 @@ cancelProjectTitleEl.addEventListener('click', cancelProjectTitle);
 
 
 //let's do some blocklist stuff
+function addBlock(){
+    const parentEl = document.querySelector("#building-block-stage");
+    
+    const newBlock = document.createElement("div");
+    newBlock.class = "card";
+    newBlock.id = "building-block";
+    
+    const typeSelect = document.createElement("select");
+    typeSelect.class = "form-select form-select-sm";
+    typeSelect.setAttribute("aria-label", "block-type-select");
+    typeSelect.id = "block-type-select";
+    typeSelect.innerHTML="<option selected value=\"Element\" style=\"background-color:dimgrey; color:white;\">Element</option><option value=\"Person\" style=\"background-color: dimgrey; color: white;\">Person</option>"
+
+    newBlock.appendChild(typeSelect);
+
+    const nameInput = document.createElement("input");
+    nameInput.type="text";
+    nameInput.class="form-control";
+    nameInput.id="blockTitleInput";
+    nameInput.setAttribute("placeholder", "block name");
+    nameInput.setAttribute("aria-label", "block name");
+    
+    newBlock.appendChild(nameInput);
+
+    const buttonHolder = document.createElement("div");
+    buttonHolder.class="container-fluid bg-transparent";
+    buttonHolder.setAttribute("style", "display:flex; justify-content:space-between;")
+
+    const saveBlockBtn = document.createElement("button");
+    saveBlockBtn.setAttribute("type", "button");
+    saveBlockBtn.setAttribute("aria-label", "save block");
+    saveBlockBtn.class="btn btn-success btn-sm p-0";
+    saveBlockBtn.id="saveBlockBtn";
+    saveBlockBtn.innerHTML="<i class=\"bi bi-check-square bg-transparent m-0 p-0\" style=\"color:black;\"></i>"
+    //Add even listener for save button
+
+    buttonHolder.appendChild(saveBlockBtn);
+
+    const deleteBlockBtn = document.createElement("button");
+    deleteBlockBtn.setAttribute("type", "button");
+    deleteBlockBtn.setAttribute("aria-label", "delete block");
+    deleteBlockBtn.class="btn btn-warning btn-sm p-0";
+    deleteBlockBtn.id="deleteBlockBtn";
+    deleteBlockBtn.innerHTML="<i class=\"bi bi-trash bg-transparent m-0 p-0\" style=\"color:black;\"></i>"
+    //Add event listener for delete button
+
+    buttonHolder.appendChild(deleteBlockBtn);
+
+    newBlock.appendChild(buttonHolder);
+
+    const bbTags = document.createElement("div");
+    bbTags.class="container-fluid p-1";
+    bbTags.id="bb-tags";
+
+    const connectBtn = document.createElement("button");
+    connectBtn.setAttribute("type", "button");
+    connectBtn.setAttribute("aria-label", "connect");
+    connectBtn.class="btn btn-light btn-sm";
+    connectBtn.id="connectBtn";
+    connectBtn.textContent = "+connect";
+    //Add listener event for connect button
+
+    bbTags.appendChild(connectBtn);
+
+    newBlock.appendChild(bbTags);
+
+    parentEl.appendChild(newBlock);
+}
+
+function deleteBlock(){
+
+}
+const block = {name:"Froggos", tagList:[]};
+block.tagList.push("thingy");
 
 
 
