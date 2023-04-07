@@ -87,8 +87,7 @@
                 <div id="workArea">
                     <div id="displayArea">
                         <div id="toolbar">
-                            <button type="button" class="btn btn-info">add person</button>
-                            <button type="button" class="btn btn-secondary">add element</button>
+                            <button type="button" class="btn btn-success" aria-label="add-block" id="addBlockBtn">add building block</button>
                         </div>
                         <div id="building-block-stage">
                             <div class="card" id="building-block" style="display:flex;">
@@ -127,7 +126,7 @@
                                 </div>
                             </div>
 
-                            <div class="card" id="building-block-edit" style="display: flex;">
+                            <div class="card" id="building-block-edit" style="display: none;">
                                 <select class="form-select form-select-sm" aria-label="block-type-select" id="block-type-select">
                                     <option selected value="Element" aria-label="Element" style="background-color:dimgrey; color:white;">
                                         Element

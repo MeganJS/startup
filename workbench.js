@@ -67,16 +67,23 @@ cancelProjectTitleEl.addEventListener('click', cancelProjectTitle);
 
 //let's do some blocklist stuff
 function addBlock(){
-    const blockId = `${blocklist.length}`;
+    const blockId=0;
+    if (currentProject.blocklist.length){
+        blockId = `${currentProject.blocklist.length}`;
+    }
+    console.log(`${blockId}`);
     const editBlockEl = document.querySelector("#building-block-edit");
     editBlockEl.style.display = "flex";
     editBlockEl.setAttribute("name", blockId);
     //add listener events for the buttons below:
-    const buttonHolderEl = document.querySelector("#buttonHolder");
-    buttonHolderEl.setAttribute("name", blockId);
-    const connectBtnEl = document.querySelector("#connectBtn");
-    connectBtnEl.setAttribute("name", blockId);
-
+    const saveBlockBtnEl = document.querySelector("#saveBlockBtn");
+    const deleteBlockBtnEl = document.querySelector("#deleteBlockBtn");
+    const returnBlockBtnEl = document.querySelector("#saveBlockBtn");
+    const connectBlockBtnEl = document.querySelector("#connectBtn");
+    saveBlockBtnEl.addEventListener("click", () => {saveBlockNew(blockId)});
+    deleteBlockBtnEl.addEventListener("click", () => {deleteBlockNew(blockId)});
+    returnBlockBtnEl.addEventListener("click", () => {returnBlockNew(blockId)});
+    connectBlockBtnEl.addEventListener("click", () => {connectBlock(blockId)});
 
 
     /*
@@ -153,7 +160,7 @@ function addBlock(){
 }
 
 
-function saveBlock(blockIdString){
+function saveBlockNew(blockIdString){
     //change to allow for edited blocks
 
     const block = {blockId: "", name:"", blockType:"", taglist:[]};
@@ -180,10 +187,10 @@ function saveBlock(blockIdString){
     currentProject.blocklist.push(block);
     localStorage.setItem("currentProject", JSON.stringify(currentProject));
     localStorage.setItem("projectList", JSON.stringify(projectList));
-    updateBlocksSave(blockIdString, block);
+    updateBlocksSaveNew(blockIdString, block);
 }
 
-function updateBlocksSave(blockIdString, block){
+function updateBlocksSaveNew(blockIdString, block){
     const editBlockEl = document.querySelector(`div[name="${blockIdString}"]`);
     //figure out what to do about edited blocks, no sense in creating them again
 
@@ -250,16 +257,55 @@ function updateBlocksSave(blockIdString, block){
             }
         }
     }
-    const buttonHolderEl = document.querySelector("#buttonHolder");
-    buttonHolderEl.setAttribute("name", "");
-    const connectBtnEl = document.querySelector("#connectBtn");
-    connectBtnEl.setAttribute("name", "");
+    const saveBlockBtnEl = document.querySelector("#saveBlockBtn");
+    const deleteBlockBtnEl = document.querySelector("#deleteBlockBtn");
+    const returnBlockBtnEl = document.querySelector("#saveBlockBtn");
+    const connectBlockBtnEl = document.querySelector("#connectBtn");
+    saveBlockBtnEl.removeEventListener("click", () => {saveBlockNew(blockIdString)});
+    deleteBlockBtnEl.removeEventListener("click", () => {deleteBlockNew(blockIdString)});
+    returnBlockBtnEl.removeEventListener("click", () => {returnBlockNew(blockIdString)});
+    connectBlockBtnEl.removeEventListener("click", () => {connectBlock(blockIdString)});
+}
 
-
+function deleteBlockNew (blockIdString){
+    //same as returnBlockNew
+    const editBlockEl = document.querySelector(`div[name="${blockIdString}"]`);
+    editBlockEl.setAttribute("name", "");
+    editBlockEl.style.display = "none";
+    //clear out the data in editBlock so it's blank again?
+    const childList = editBlockEl.childNodes;
+    for(const child of childList) {
+        if(child.id === "blockTitleInput"){
+            child.value = "";
+        }
+        else if (child.id === "bb-tags"){
+            for(const tag of child.childNodes){
+                if (tag.tagName === "SPAN"){
+                    child.removeChild(tag);
+                }
+            }
+        }
+    }
+    const saveBlockBtnEl = document.querySelector("#saveBlockBtn");
+    const deleteBlockBtnEl = document.querySelector("#deleteBlockBtn");
+    const returnBlockBtnEl = document.querySelector("#saveBlockBtn");
+    const connectBlockBtnEl = document.querySelector("#connectBtn");
+    saveBlockBtnEl.removeEventListener("click", () => {saveBlockNew(blockIdString)});
+    deleteBlockBtnEl.removeEventListener("click", () => {deleteBlockNew(blockIdString)});
+    returnBlockBtnEl.removeEventListener("click", () => {returnBlockNew(blockIdString)});
+    connectBlockBtnEl.removeEventListener("click", () => {connectBlock(blockIdString)});
 }
 
 
-function deleteBlock(blockIdString){
+
+
+
+
+
+
+
+
+function deleteBlockEdit(blockIdString){
     var deleteIndex = 0;
     for (const block of currentProject.blocklist){
         if (block.blockId === blockIdString){
@@ -268,13 +314,13 @@ function deleteBlock(blockIdString){
             console.log(`deleted block ${blockIdString}`);
             localStorage.setItem("currentProject", JSON.stringify(currentProject));
             localStorage.setItem("projectList", JSON.stringify(projectList));
-            updateBlocksRemove(blockIdString);
+            updateBlocksRemoveEdit(blockIdString);
             break;
         }
     }
 }
 
-function updateBlocksRemove(blockIdString){
+function updateBlocksRemoveEdit(blockIdString){
     const blockEl = document.querySelector(`div[name="${blockIdString}"]`);
     while(blockEl.firstChild){
         blockEl.removeChild(blockEl.firstChild); //will this cause problems if child elements have children?
@@ -284,26 +330,29 @@ function updateBlocksRemove(blockIdString){
 
 
 //TODO add back button
-function returnBlock (blockIdString){
 
-}
 
 function editBlock (blockIdString){
 
 }
 
-function connectBlock(){
+function saveBlockEdit(){
+
+}
+
+function returnBlockEdit(){
+
+}
+
+function updateBlocksSaveEdit(){
 
 }
 
 
+function connectBlock(){
 
-const saveBlockBtnEl = document.querySelector("#saveBlockBtn");
-const deleteBlockBtnEl = document.querySelector("#deleteBlockBtn");
-const returnBlockBtnEl = document.querySelector("#saveBlockBtn");
-const connectBlockBtnEl = document.querySelector("#connectBtn");
-saveBlockBtnEl.addEventListener("click", () => {saveBlock(`${saveBlockBtnEl.parentElement.getAttribute("name")}`)});
-deleteBlockBtnEl.addEventListener("click", () => {deleteBlock(`${deleteBlockBtnEl.parentElement.getAttribute("name")}`)});
-returnBlockBtnEl.addEventListener("click", () => {returnBlock(`${returnBlockBtnEl.parentElement.getAttribute("name")}`)});
-connectBlockBtnEl.addEventListener("click", () => {connectBlock(`${connectBlockBtnEl.getAttribute("name")}`)});
+}
 
+//block button event listeners
+const addBlockBtn = document.querySelector("#addBlockBtn");
+addBlockBtn.addEventListener("click", addBlock);
