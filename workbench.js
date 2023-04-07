@@ -72,6 +72,11 @@ function addBlock(){
     editBlockEl.style.display = "flex";
     editBlockEl.setAttribute("name", blockId);
     //add listener events for the buttons below:
+    const buttonHolderEl = document.querySelector("#buttonHolder");
+    buttonHolderEl.setAttribute("name", blockId);
+    const connectBtnEl = document.querySelector("#connectBtn");
+    connectBtnEl.setAttribute("name", blockId);
+
 
 
     /*
@@ -164,7 +169,10 @@ function saveBlock(blockIdString){
         }
         else if (child.id === "bb-tags"){
             for(const tag of child.childNodes){
-                taglist.push(tag.textContent); // I'm going to store these as spans I think
+                if(tag.tagName === "SPAN"){
+                    taglist.push(tag.textContent);
+                }
+                 // I'm going to store these as spans I think
             }
         }
     }
@@ -210,54 +218,43 @@ function updateBlocksSave(blockIdString, block){
     newBlock.appendChild(blockNameEl);
 
     const blockTagsEl = document.createElement("div");
-    //THIS is wehere I left off
-    //going tobed now
+    blockTagsEl.id = "bb-tags";
+    blockTagsEl.class = "container-fluid p-1";
+    for (const tag of block.taglist){
+        const tagEl = document.createElement("span");
+        tagEl.textContent = `${tag}`;
+        blockTagsEl.appendChild(tagEl); 
+    }
 
-
-    const saveBlockBtn = document.createElement("button");
-    saveBlockBtn.setAttribute("type", "button");
-    saveBlockBtn.setAttribute("aria-label", "save block");
-    saveBlockBtn.class="btn btn-success btn-sm p-0";
-    saveBlockBtn.id="saveBlockBtn";
-    saveBlockBtn.innerHTML="<i class=\"bi bi-check-square bg-transparent m-0 p-0\" style=\"color:black;\"></i>"
-    //Add even listener for save button
-
-    buttonHolder.appendChild(saveBlockBtn);
-
-    const deleteBlockBtn = document.createElement("button");
-    deleteBlockBtn.setAttribute("type", "button");
-    deleteBlockBtn.setAttribute("aria-label", "delete block");
-    deleteBlockBtn.class="btn btn-warning btn-sm p-0";
-    deleteBlockBtn.id="deleteBlockBtn";
-    deleteBlockBtn.innerHTML="<i class=\"bi bi-trash bg-transparent m-0 p-0\" style=\"color:black;\"></i>"
-    //Add event listener for delete button
-
-    buttonHolder.appendChild(deleteBlockBtn);
-
-    newBlock.appendChild(buttonHolder);
-
-    const bbTags = document.createElement("div");
-    bbTags.class="container-fluid p-1";
-    bbTags.id="bb-tags";
-
-    const connectBtn = document.createElement("button");
-    connectBtn.setAttribute("type", "button");
-    connectBtn.setAttribute("aria-label", "connect");
-    connectBtn.class="btn btn-light btn-sm";
-    connectBtn.id="connectBtn";
-    connectBtn.textContent = "+connect";
-    //Add listener event for connect button
-
-    bbTags.appendChild(connectBtn);
-
-    newBlock.appendChild(bbTags);
+    newBlock.appendChild(blockTagsEl);
 
     parentEl.appendChild(newBlock);
 
     //add listener events here
+
+
+
     editBlockEl.setAttribute("name", "");
     editBlockEl.style.display = "none";
     //clear out the data in editBlock so it's blank again?
+    const childList = editBlockEl.childNodes;
+    for(const child of childList) {
+        if(child.id === "blockTitleInput"){
+            child.value = "";
+        }
+        else if (child.id === "bb-tags"){
+            for(const tag of child.childNodes){
+                if (tag.tagName === "SPAN"){
+                    child.removeChild(tag);
+                }
+            }
+        }
+    }
+    const buttonHolderEl = document.querySelector("#buttonHolder");
+    buttonHolderEl.setAttribute("name", "");
+    const connectBtnEl = document.querySelector("#connectBtn");
+    connectBtnEl.setAttribute("name", "");
+
 
 }
 
@@ -287,4 +284,26 @@ function updateBlocksRemove(blockIdString){
 
 
 //TODO add back button
+function returnBlock (blockIdString){
+
+}
+
+function editBlock (blockIdString){
+
+}
+
+function connectBlock(){
+
+}
+
+
+
+const saveBlockBtnEl = document.querySelector("#saveBlockBtn");
+const deleteBlockBtnEl = document.querySelector("#deleteBlockBtn");
+const returnBlockBtnEl = document.querySelector("#saveBlockBtn");
+const connectBlockBtnEl = document.querySelector("#connectBtn");
+saveBlockBtnEl.addEventListener("click", () => {saveBlock(`${saveBlockBtnEl.parentElement.getAttribute("name")}`)});
+deleteBlockBtnEl.addEventListener("click", () => {deleteBlock(`${deleteBlockBtnEl.parentElement.getAttribute("name")}`)});
+returnBlockBtnEl.addEventListener("click", () => {returnBlock(`${returnBlockBtnEl.parentElement.getAttribute("name")}`)});
+connectBlockBtnEl.addEventListener("click", () => {connectBlock(`${connectBlockBtnEl.getAttribute("name")}`)});
 
