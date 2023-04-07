@@ -2,7 +2,9 @@
 class Project {
     constructor(projectName) {
         this.name = projectName;
-        this.blocklist = [];
+        console.log(this.name);
+        this.blocklist = []; //might need to stringify this so it gets stored in local storage properly
+        console.log(this.blocklist);
     }
 }
 
@@ -23,7 +25,24 @@ const currentStorage = localStorage.getItem("currentProject");
 
 if (currentStorage){
     currentProject = JSON.parse(currentStorage);
+    //FIXME check if currentProject is valid and if not, fix that
+    //should have each property
+    if(Object.hasOwn(currentProject, "name") !== true){
+        Object.defineProperty(currentProject, "name", {
+            value:"",
+            writable:true
+        });
+        console.log("rewrote name");
+    }
+    if(Object.hasOwn(currentProject, "blocklist") !== true){
+        Object.defineProperty(currentProject, "blocklist", {
+            value:[],
+            writable:true
+        });
+        console.log("rewrote blocklist");
+    }
     projectNameEl.textContent = currentProject.name;
+    localStorage.setItem("currentProject", JSON.stringify(currentProject));
 }
 else {
     let newName = `Project ${projectList.length}`;
@@ -33,6 +52,58 @@ else {
     localStorage.setItem("currentProject", JSON.stringify(currentProject));
     localStorage.setItem("projectList", JSON.stringify(projectList));   
 }
+
+//TODO: load in blocks from blocklist on opening the page
+if (currentProject.blocklist.length > 0){
+    for (const block of currentProject.blocklist){
+        const parentEl = document.querySelector("#building-block-stage");
+        const newBlock = document.createElement("div");
+        newBlock.class = "card";
+        newBlock.setAttribute("style", "display:flex;");
+        newBlock.id = "building-block";
+        newBlock.setAttribute("name", block.blockId);
+
+
+        const blockTypeEl = document.createElement("div");
+        blockTypeEl.id = "bb-label-person";
+        blockTypeEl.setAttribute("aria-label", `${block.blockType}`);
+        blockTypeEl.textContent = `${block.blockType}`;
+
+        const editBtnEl = document.createElement("button");
+        editBtnEl.setAttribute("type", "button");
+        editBtnEl.setAttribute("aria-label", "edit-block");
+        editBtnEl.class = "btn btn-outline-dark btn-sm p-0";
+        editBtnEl.id = "editBlockBtn";
+        editBtnEl.innerHTML = "<i class=\"bi bi-pencil-square bg-transparent m-0 p-0\" style=\"color:black;\"></i>";
+
+        blockTypeEl.appendChild(editBtnEl);
+
+        newBlock.appendChild(blockTypeEl);
+
+        const blockNameEl = document.createElement("div");
+        blockNameEl.class="bg-transparent";
+        blockNameEl.setAttribute("style", "align-self: center;")
+        blockNameEl.textContent = `${block.name}`;
+
+        newBlock.appendChild(blockNameEl);
+
+        const blockTagsEl = document.createElement("div");
+        blockTagsEl.id = "bb-tags";
+        blockTagsEl.class = "container-fluid p-1";
+        for (const tag of block.taglist){
+            const tagEl = document.createElement("span");
+            tagEl.textContent = `${tag}`;
+            blockTagsEl.appendChild(tagEl); 
+        }
+
+        newBlock.appendChild(blockTagsEl);
+
+        parentEl.appendChild(newBlock);
+    }
+}
+
+
+
 
 
 function editProjectTitle() {
@@ -67,7 +138,7 @@ cancelProjectTitleEl.addEventListener('click', cancelProjectTitle);
 
 //let's do some blocklist stuff
 function addBlock(){
-    const blockId=0;
+    const blockId="0";
     if (currentProject.blocklist.length){
         blockId = `${currentProject.blocklist.length}`;
     }
@@ -78,90 +149,17 @@ function addBlock(){
     //add listener events for the buttons below:
     const saveBlockBtnEl = document.querySelector("#saveBlockBtn");
     const deleteBlockBtnEl = document.querySelector("#deleteBlockBtn");
-    const returnBlockBtnEl = document.querySelector("#saveBlockBtn");
+    const returnBlockBtnEl = document.querySelector("#returnBlockBtn");
     const connectBlockBtnEl = document.querySelector("#connectBtn");
     saveBlockBtnEl.addEventListener("click", () => {saveBlockNew(blockId)});
     deleteBlockBtnEl.addEventListener("click", () => {deleteBlockNew(blockId)});
-    returnBlockBtnEl.addEventListener("click", () => {returnBlockNew(blockId)});
+    returnBlockBtnEl.addEventListener("click", () => {deleteBlockNew(blockId)});
     connectBlockBtnEl.addEventListener("click", () => {connectBlock(blockId)});
 
-
-    /*
-    const parentEl = document.querySelector("#building-block-stage");
-    
-    const newBlock = document.createElement("div");
-    newBlock.class = "card";
-    newBlock.id = "building-block";
-    newBlock.setAttribute("name", blockId);
-
-
-    const typeSelect = document.createElement("select");
-    typeSelect.class = "form-select form-select-sm";
-    typeSelect.setAttribute("aria-label", "block-type-select");
-    typeSelect.id = "block-type-select";
-    typeSelect.innerHTML="<option selected value=\"Element\" style=\"background-color:dimgrey; color:white;\">Element</option><option value=\"Person\" style=\"background-color: dimgrey; color: white;\">Person</option>"
-
-    newBlock.appendChild(typeSelect);
-
-    const nameInput = document.createElement("input");
-    nameInput.type="text";
-    nameInput.class="form-control";
-    nameInput.id="blockTitleInput";
-    nameInput.setAttribute("placeholder", "block name");
-    nameInput.setAttribute("aria-label", "block name");
-    
-    newBlock.appendChild(nameInput);
-
-    const buttonHolder = document.createElement("div");
-    buttonHolder.class="container-fluid bg-transparent";
-    buttonHolder.setAttribute("style", "display:flex; justify-content:space-between;")
-
-    const saveBlockBtn = document.createElement("button");
-    saveBlockBtn.setAttribute("type", "button");
-    saveBlockBtn.setAttribute("aria-label", "save block");
-    saveBlockBtn.class="btn btn-success btn-sm p-0";
-    saveBlockBtn.id="saveBlockBtn";
-    saveBlockBtn.innerHTML="<i class=\"bi bi-check-square bg-transparent m-0 p-0\" style=\"color:black;\"></i>"
-    //Add even listener for save button
-
-    buttonHolder.appendChild(saveBlockBtn);
-
-    const deleteBlockBtn = document.createElement("button");
-    deleteBlockBtn.setAttribute("type", "button");
-    deleteBlockBtn.setAttribute("aria-label", "delete block");
-    deleteBlockBtn.class="btn btn-warning btn-sm p-0";
-    deleteBlockBtn.id="deleteBlockBtn";
-    deleteBlockBtn.innerHTML="<i class=\"bi bi-trash bg-transparent m-0 p-0\" style=\"color:black;\"></i>"
-    //Add event listener for delete button
-
-    buttonHolder.appendChild(deleteBlockBtn);
-
-    newBlock.appendChild(buttonHolder);
-
-    const bbTags = document.createElement("div");
-    bbTags.class="container-fluid p-1";
-    bbTags.id="bb-tags";
-
-    const connectBtn = document.createElement("button");
-    connectBtn.setAttribute("type", "button");
-    connectBtn.setAttribute("aria-label", "connect");
-    connectBtn.class="btn btn-light btn-sm";
-    connectBtn.id="connectBtn";
-    connectBtn.textContent = "+connect";
-    //Add listener event for connect button
-
-    bbTags.appendChild(connectBtn);
-
-    newBlock.appendChild(bbTags);
-
-    parentEl.appendChild(newBlock);
-    //add listener events here
-    */
 }
 
 
 function saveBlockNew(blockIdString){
-    //change to allow for edited blocks
 
     const block = {blockId: "", name:"", blockType:"", taglist:[]};
     block.blockId = blockIdString;
@@ -177,7 +175,7 @@ function saveBlockNew(blockIdString){
         else if (child.id === "bb-tags"){
             for(const tag of child.childNodes){
                 if(tag.tagName === "SPAN"){
-                    taglist.push(tag.textContent);
+                    block.taglist.push(tag.textContent);
                 }
                  // I'm going to store these as spans I think
             }
@@ -187,18 +185,19 @@ function saveBlockNew(blockIdString){
     currentProject.blocklist.push(block);
     localStorage.setItem("currentProject", JSON.stringify(currentProject));
     localStorage.setItem("projectList", JSON.stringify(projectList));
-    updateBlocksSaveNew(blockIdString, block);
+    updateBlocksSaveNew(block);
 }
 
-function updateBlocksSaveNew(blockIdString, block){
-    const editBlockEl = document.querySelector(`div[name="${blockIdString}"]`);
+function updateBlocksSaveNew(block){
+    const editBlockEl = document.querySelector(`div[name="${block.blockId}"]`);
     //figure out what to do about edited blocks, no sense in creating them again
 
     const parentEl = document.querySelector("#building-block-stage");
     const newBlock = document.createElement("div");
     newBlock.class = "card";
+    newBlock.setAttribute("style", "display:flex;");
     newBlock.id = "building-block";
-    newBlock.setAttribute("name", blockIdString);
+    newBlock.setAttribute("name", block.blockId);
 
 
     const blockTypeEl = document.createElement("div");
@@ -227,11 +226,14 @@ function updateBlocksSaveNew(blockIdString, block){
     const blockTagsEl = document.createElement("div");
     blockTagsEl.id = "bb-tags";
     blockTagsEl.class = "container-fluid p-1";
-    for (const tag of block.taglist){
-        const tagEl = document.createElement("span");
-        tagEl.textContent = `${tag}`;
-        blockTagsEl.appendChild(tagEl); 
+    if(block.taglist.length > 0){
+        for (const tag of block.taglist){
+            const tagEl = document.createElement("span");
+            tagEl.textContent = `${tag}`;
+            blockTagsEl.appendChild(tagEl); 
+        }
     }
+
 
     newBlock.appendChild(blockTagsEl);
 
@@ -239,10 +241,8 @@ function updateBlocksSaveNew(blockIdString, block){
 
     //add listener events here
 
-
-
     editBlockEl.setAttribute("name", "");
-    editBlockEl.style.display = "none";
+
     //clear out the data in editBlock so it's blank again?
     const childList = editBlockEl.childNodes;
     for(const child of childList) {
@@ -257,21 +257,24 @@ function updateBlocksSaveNew(blockIdString, block){
             }
         }
     }
+
     const saveBlockBtnEl = document.querySelector("#saveBlockBtn");
     const deleteBlockBtnEl = document.querySelector("#deleteBlockBtn");
-    const returnBlockBtnEl = document.querySelector("#saveBlockBtn");
+    const returnBlockBtnEl = document.querySelector("#returnBlockBtn");
     const connectBlockBtnEl = document.querySelector("#connectBtn");
-    saveBlockBtnEl.removeEventListener("click", () => {saveBlockNew(blockIdString)});
-    deleteBlockBtnEl.removeEventListener("click", () => {deleteBlockNew(blockIdString)});
-    returnBlockBtnEl.removeEventListener("click", () => {returnBlockNew(blockIdString)});
-    connectBlockBtnEl.removeEventListener("click", () => {connectBlock(blockIdString)});
+    saveBlockBtnEl.removeEventListener("click", () => {saveBlockNew(block.blockId)});
+    deleteBlockBtnEl.removeEventListener("click", () => {deleteBlockNew(block.blockId)});
+    returnBlockBtnEl.removeEventListener("click", () => {deleteBlockNew(block.blockId)});
+    connectBlockBtnEl.removeEventListener("click", () => {connectBlock(block.blockId)});
+
+    editBlockEl.style.display = "none";
 }
 
 function deleteBlockNew (blockIdString){
     //same as returnBlockNew
     const editBlockEl = document.querySelector(`div[name="${blockIdString}"]`);
     editBlockEl.setAttribute("name", "");
-    editBlockEl.style.display = "none";
+    
     //clear out the data in editBlock so it's blank again?
     const childList = editBlockEl.childNodes;
     for(const child of childList) {
@@ -288,20 +291,15 @@ function deleteBlockNew (blockIdString){
     }
     const saveBlockBtnEl = document.querySelector("#saveBlockBtn");
     const deleteBlockBtnEl = document.querySelector("#deleteBlockBtn");
-    const returnBlockBtnEl = document.querySelector("#saveBlockBtn");
+    const returnBlockBtnEl = document.querySelector("#returnBlockBtn");
     const connectBlockBtnEl = document.querySelector("#connectBtn");
     saveBlockBtnEl.removeEventListener("click", () => {saveBlockNew(blockIdString)});
     deleteBlockBtnEl.removeEventListener("click", () => {deleteBlockNew(blockIdString)});
-    returnBlockBtnEl.removeEventListener("click", () => {returnBlockNew(blockIdString)});
+    returnBlockBtnEl.removeEventListener("click", () => {deleteBlockNew(blockIdString)});
     connectBlockBtnEl.removeEventListener("click", () => {connectBlock(blockIdString)});
+
+    editBlockEl.style.display = "none";
 }
-
-
-
-
-
-
-
 
 
 
@@ -356,3 +354,12 @@ function connectBlock(){
 //block button event listeners
 const addBlockBtn = document.querySelector("#addBlockBtn");
 addBlockBtn.addEventListener("click", addBlock);
+
+
+
+
+
+//need to add this
+function deleteProject(){
+
+}

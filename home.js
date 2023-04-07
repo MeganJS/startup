@@ -201,4 +201,12 @@ function projectLink(projectVal){
     localStorage.setItem("currentProject", JSON.stringify(projectVal));
 }
 
+//add something to indicate we're creating a new project
+const createProjectEL = document.querySelector("#newProjectLink");
+createProjectEL.addEventListener('click', newProjectLink);
+
+function newProjectLink(){
+    localStorage.setItem("currentProject", "");
+    localStorage.removeItem("currentProject");
+}
 
