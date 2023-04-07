@@ -36,7 +36,7 @@ if (currentStorage){
     }
     if(Object.hasOwn(currentProject, "blocklist") !== true){
         Object.defineProperty(currentProject, "blocklist", {
-            value:[],
+            value:JSON.stringify([]),
             writable:true
         });
         console.log("rewrote blocklist");
@@ -59,7 +59,7 @@ if (currentProject.blocklist.length > 0){
         const parentEl = document.querySelector("#building-block-stage");
         const newBlock = document.createElement("div");
         newBlock.class = "card";
-        newBlock.setAttribute("style", "display:flex;");
+        //newBlock.setAttribute("style", "display:flex;");
         newBlock.id = "building-block";
         newBlock.setAttribute("name", block.blockId);
 
@@ -138,7 +138,7 @@ cancelProjectTitleEl.addEventListener('click', cancelProjectTitle);
 
 //let's do some blocklist stuff
 function addBlock(){
-    const blockId="0";
+    let blockId="0";
     if (currentProject.blocklist.length){
         blockId = `${currentProject.blocklist.length}`;
     }
@@ -181,7 +181,6 @@ function saveBlockNew(blockIdString){
             }
         }
     }
-
     currentProject.blocklist.push(block);
     localStorage.setItem("currentProject", JSON.stringify(currentProject));
     localStorage.setItem("projectList", JSON.stringify(projectList));
@@ -195,7 +194,7 @@ function updateBlocksSaveNew(block){
     const parentEl = document.querySelector("#building-block-stage");
     const newBlock = document.createElement("div");
     newBlock.class = "card";
-    newBlock.setAttribute("style", "display:flex;");
+    //newBlock.setAttribute("style", "display:flex;");
     newBlock.id = "building-block";
     newBlock.setAttribute("name", block.blockId);
 
@@ -307,7 +306,7 @@ function deleteBlockEdit(blockIdString){
     var deleteIndex = 0;
     for (const block of currentProject.blocklist){
         if (block.blockId === blockIdString){
-            deleteIndex = blocklist.indexOf(block);
+            deleteIndex = currentProject.blocklist.indexOf(block);
             currentProject.blocklist.splice(deleteIndex, 1);
             console.log(`deleted block ${blockIdString}`);
             localStorage.setItem("currentProject", JSON.stringify(currentProject));
