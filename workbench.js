@@ -134,27 +134,40 @@ editProjectTitleEl.addEventListener('click', editProjectTitle);
 saveProjectTitleEl.addEventListener('click', saveProjectTitle);
 cancelProjectTitleEl.addEventListener('click', cancelProjectTitle);
 
+function generateId(){
+    return `${Math.floor(Math.random() * 1000)}`;
+}
 
+function duplicateId(blockIdString){
+    for (const block of currentProject.blocklist){
+        if (block.blockId === blockIdString){
+            return true;
+        }
+    }
+    return false;
+}
 
 //let's do some blocklist stuff
 function addBlock(){
-    let blockId="0";
-    if (currentProject.blocklist.length){
-        blockId = `${currentProject.blocklist.length}`;
+    let blockIdString = generateId();
+
+    while (duplicateId(blockIdString)){  //FIXME will this do what i think it will?
+        blockIdString = generateId();
     }
-    console.log(`${blockId}`);
+
+    console.log(`${blockIdString}`);
     const editBlockEl = document.querySelector("#building-block-edit");
     editBlockEl.style.display = "flex";
-    editBlockEl.setAttribute("name", blockId);
+    editBlockEl.setAttribute("name", blockIdString);
     //add listener events for the buttons below:
     const saveBlockBtnEl = document.querySelector("#saveBlockBtn");
     const deleteBlockBtnEl = document.querySelector("#deleteBlockBtn");
     const returnBlockBtnEl = document.querySelector("#returnBlockBtn");
     const connectBlockBtnEl = document.querySelector("#connectBtn");
-    saveBlockBtnEl.addEventListener("click", () => {saveBlockNew(blockId)});
-    deleteBlockBtnEl.addEventListener("click", () => {deleteBlockNew(blockId)});
-    returnBlockBtnEl.addEventListener("click", () => {deleteBlockNew(blockId)});
-    connectBlockBtnEl.addEventListener("click", () => {connectBlock(blockId)});
+    saveBlockBtnEl.addEventListener("click", () => {saveBlockNew(blockIdString)});
+    deleteBlockBtnEl.addEventListener("click", () => {deleteBlockNew(blockIdString)});
+    returnBlockBtnEl.addEventListener("click", () => {deleteBlockNew(blockIdString)});
+    connectBlockBtnEl.addEventListener("click", () => {connectBlock(blockIdString)});
 
 }
 
@@ -194,10 +207,9 @@ function updateBlocksSaveNew(block){
     const parentEl = document.querySelector("#building-block-stage");
     const newBlock = document.createElement("div");
     newBlock.class = "card";
-    //newBlock.setAttribute("style", "display:flex;");
+    newBlock.setAttribute("style", "display:flex;");
     newBlock.id = "building-block";
     newBlock.setAttribute("name", block.blockId);
-
 
     const blockTypeEl = document.createElement("div");
     blockTypeEl.id = "bb-label-person";
@@ -233,13 +245,10 @@ function updateBlocksSaveNew(block){
         }
     }
 
-
     newBlock.appendChild(blockTagsEl);
-
     parentEl.appendChild(newBlock);
 
     //add listener events here
-
     editBlockEl.setAttribute("name", "");
 
     //clear out the data in editBlock so it's blank again?
@@ -301,6 +310,94 @@ function deleteBlockNew (blockIdString){
 }
 
 
+//TODO add back button
+
+function editBlock (blockIdString){
+    const editBlockEl = document.querySelector("#building-block-edit");
+    editBlockEl.style.display = "flex";
+    editBlockEl.setAttribute("name", blockIdString);
+    const oldBlockEl = document.querySelector(`div[name="${blockIdString}"]`);
+    oldBlockEl.style.display = "none";
+    //add listener events for the buttons below:
+    const saveBlockBtnEl = document.querySelector("#saveBlockBtn");
+    const deleteBlockBtnEl = document.querySelector("#deleteBlockBtn");
+    const returnBlockBtnEl = document.querySelector("#returnBlockBtn");
+    const connectBlockBtnEl = document.querySelector("#connectBtn");
+    saveBlockBtnEl.addEventListener("click", () => {saveBlockEdit(blockIdString)});
+    deleteBlockBtnEl.addEventListener("click", () => {returnBlockEdit(blockIdString)});
+    returnBlockBtnEl.addEventListener("click", () => {deleteBlockEdit(blockIdString)});
+    connectBlockBtnEl.addEventListener("click", () => {connectBlock(blockIdString)});
+}
+
+function saveBlockEdit(){
+    const editBlockEl = document.querySelector("#building-block-edit");
+    blockIdString = editBlockEl.getAttribute("name");
+    const selectEl = document.querySelector("#building-block-edit select");
+    let newType = selectEl.value;
+    const nameEl = document.querySelector("#building-block-edit input");
+    let newName = nameEl.value;
+    const tagsEl = document.querySelector("#building-block-edit div[id='bb-tags']");
+    let newTags = [];
+    for (const tag of tagsEl.childNodes){
+        if (tag.tagName === "SPAN"){
+            newTags.push(tag.textContent);
+        }
+    }
+
+    for(let block of currentProject.blocklist){
+        if(block.blockId === blockIdString){
+            block.name = newName;
+            block.taglist = newTags;
+            block.blockType = newType;
+        }
+    }
+
+    localStorage.setItem("currentProject", JSON.stringify(currentProject));
+    localStorage.setItem("projectList", JSON.stringify(projectList));
+    updateBlocksSaveEdit(block);
+}
+
+function updateBlocksSaveEdit(block){
+    const editBlockEl = document.querySelector("#building-block-edit");
+    const oldBlockEl = document.querySelector(`div[name="${block.blockId}"]`);
+    oldBlockEl.style.display = "flex";
+
+    //TODO: keep working (this is where i left off)
+
+
+    editBlockEl.setAttribute("name", "");
+
+    //clear out the data in editBlock so it's blank again?
+    const childList = editBlockEl.childNodes;
+    for(const child of childList) {
+        if(child.id === "blockTitleInput"){
+            child.value = "";
+        }
+        else if (child.id === "bb-tags"){
+            for(const tag of child.childNodes){
+                if (tag.tagName === "SPAN"){
+                    child.removeChild(tag);
+                }
+            }
+        }
+    }
+
+    const saveBlockBtnEl = document.querySelector("#saveBlockBtn");
+    const deleteBlockBtnEl = document.querySelector("#deleteBlockBtn");
+    const returnBlockBtnEl = document.querySelector("#returnBlockBtn");
+    const connectBlockBtnEl = document.querySelector("#connectBtn");
+    saveBlockBtnEl.removeEventListener("click", () => {saveBlockEdit(block.blockId)});
+    deleteBlockBtnEl.removeEventListener("click", () => {returnBlockEdit(block.blockId)});
+    returnBlockBtnEl.removeEventListener("click", () => {deleteBlockEdit(block.blockId)});
+    connectBlockBtnEl.removeEventListener("click", () => {connectBlock(block.blockId)});
+
+    editBlockEl.style.display = "none";
+
+}
+
+function returnBlockEdit(){
+
+}
 
 function deleteBlockEdit(blockIdString){
     var deleteIndex = 0;
@@ -317,32 +414,13 @@ function deleteBlockEdit(blockIdString){
     }
 }
 
+
 function updateBlocksRemoveEdit(blockIdString){
     const blockEl = document.querySelector(`div[name="${blockIdString}"]`);
     while(blockEl.firstChild){
         blockEl.removeChild(blockEl.firstChild); //will this cause problems if child elements have children?
     }
     blockEl.parentElement.removeChild(blockEl);
-}
-
-
-//TODO add back button
-
-
-function editBlock (blockIdString){
-
-}
-
-function saveBlockEdit(){
-
-}
-
-function returnBlockEdit(){
-
-}
-
-function updateBlocksSaveEdit(){
-
 }
 
 
