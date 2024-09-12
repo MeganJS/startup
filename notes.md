@@ -1,7 +1,7 @@
 # Heading!
 ## Slightly smaller heading...
 ### tiny heading
-***why hello there***
+***why hello there***\n
 _this is italic_ and *so is this*
 __this is bold__ and **so is this**
 *look we can even do them __inside__ each other!*
