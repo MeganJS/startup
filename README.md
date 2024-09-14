@@ -24,4 +24,4 @@ Idea-thing will implement the following technologies:
 - **WebSocket:** Users can make friend connections with other users and share their projects with their friends. Changes that friends make to a shared project will be visible to the user in real time.
 
 ### Preliminary Design
-![design docs for idea-thing, including a sketch of a projects page, a page for a specific project showing all the cards within the project, and a page for a specific card](startup-prelim-design.png) From left to right: The home page, featuring a list of the user's projects; A sample project page featuring the cards within a project; A sample card page for a character card.
+![design docs for idea-thing, including a sketch of a projects page, a page for a specific project showing all the cards within the project, and a page for a specific card](startup-prelim-design.png) From left to right: The home page, featuring a list of the user's projects; a sample project page featuring the cards within a project; a sample card page for a character card.
