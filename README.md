@@ -25,3 +25,4 @@ Idea-thing will implement the following technologies:
 
 ### Preliminary Design
 ![design docs for idea-thing, including a sketch of a projects page, a page for a specific project showing all the cards within the project, and a page for a specific card](startup-prelim-design.png)
+From left to right: The home page, featuring a list of the user's projects; A sample project page featuring the cards within a project; A sample card page for a character card.
