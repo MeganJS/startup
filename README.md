@@ -2,12 +2,13 @@
 ## Startup Application for CS260: Web Development
 ### Pitch
 Idea-thing is a tool to help story creators organize ideas. Create character, item, or place cards, connect them with tags and add them to projects! Share your projects with your friends to build ideas together.
+Soon to be hosted at [idea-thing.click](https://idea-thing.click/).
 
 ### Key Features
 Key features of idea-thing include:
-- Ability to create projects and cards
-- Ability to edit, update, and delete projects and cards
-- Ability to friend other users and share projects with them
+- Ability to create projects and cards.
+- Ability to edit, update, and delete projects and cards.
+- Ability to friend other users and share projects with them.
 
 ### Technology
 Idea-thing will implement the following technologies:
@@ -21,3 +22,6 @@ Idea-thing will implement the following technologies:
 - **Authentication:** The user will login to access their projects/cards, ensuring only those with permission will be able to view and edit them.
 - **Database:** Authentication data for users, project and card data, friend lists, and more will be stored on the database.
 - **WebSocket:** Users can make friend connections with other users and share their projects with their friends. Changes that friends make to a shared project will be visible to the user in real time.
+
+### Preliminary Design
+
