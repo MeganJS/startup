@@ -20,4 +20,5 @@ Today I learned to always pull from Github when I start working and commit whene
 
 command for updating startup:
 > ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup
+> 
 from inside startup directory
