@@ -18,3 +18,6 @@ __this is bold__ and **so is this**
 ## Notes for Sept. 11, 2024:
 Today I learned to always pull from Github when I start working and commit whenever I make large changes, or at the end of a coding session.
 
+command for updating startup:
+> ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup
+from inside startup directory
