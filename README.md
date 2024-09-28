@@ -2,7 +2,7 @@
 ## Startup Application for CS260: Web Development
 ### Pitch
 Idea-thing is a tool to help story creators organize ideas. Create character, item, or place cards, connect them with tags and add them to projects! Share your projects with your friends to build ideas together.
-Soon to be hosted at [idea-thing.click](https://idea-thing.click/).
+Soon to be hosted at [startup.idea-thing.click](https://startup.idea-thing.click/).
 
 ### Key Features
 Key features of idea-thing include:
