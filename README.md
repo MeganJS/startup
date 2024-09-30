@@ -1,6 +1,10 @@
 # startup: idea-thing
 ## Startup Application for CS260: Web Development
-### Pitch
+
+## HTML
+Now includes a login page, a home page, a project page, a card page, and a card-edit page in HTML. The home page includes a friends section and a list of projects. I also put a menu for updating the user's profile picture, which is where the API connection to random animal pictures will be. This menu is hidden by default but you can see it in the HTML for the home page header. See [startup.idea-thing.click](https://startup.idea-thing.click/) for further details.
+
+## Pitch
 Idea-thing is a tool to help story creators organize ideas. Create character, item, or place cards, connect them with tags and add them to projects! Share your projects with your friends to build ideas together.
 Soon to be hosted at [startup.idea-thing.click](https://startup.idea-thing.click/).
 
