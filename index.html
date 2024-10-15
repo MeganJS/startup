@@ -1,28 +1,36 @@
 <!DOCTYPE html>
-<body>
-    <header>
-        <h1>idea-thing</h1>
-    </header>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>idea-thing</title>
+        <link rel="stylesheet" href="index.css"/>
+    </head>
+    <body>
+        <header>
+            <h1>idea-thing</h1>
+        </header>
 
-    <main>
-        <form>
-            <ul>
-                <li>
-                    <label for="username">Username</label>
-                    <input type="text" id="username" pattern="\w{1,24}" required/>
-                    <!-- todo:  how to allow for non-english characters in text box? -->
-                </li>
-                <li>
-                    <label for="password">Password</label>
-                    <input type="text" id="password" pattern="{8,24}" required/>
-                </li>
-            </ul>
-            <button type="submit" id="login"><a href="home.html">login</a></button>
-            <button type="submit" id="create-account"><a href="home.html">create account</a></button>
-        </form>        
-    </main>
-    <footer>
-        <p>Megan Shellman <a href="https://github.com/MeganJS/startup">github</a></p>
-    </footer>
+        <main>
+            <form>
+                <ul>
+                    <li>
+                        <label for="username">Username</label>
+                        <input type="text" id="username" pattern="\w{1,24}" required/>
+                        <!-- todo:  how to allow for non-english characters in text box? -->
+                    </li>
+                    <li>
+                        <label for="password">Password</label>
+                        <input type="text" id="password" pattern="{8,24}" required/>
+                    </li>
+                </ul>
+                <button type="submit" id="login"><a href="home.html">login</a></button>
+                <button type="submit" id="create-account"><a href="home.html">create account</a></button>
+            </form>        
+        </main>
 
-</body>
+        <footer>
+            <p>Megan Shellman <a href="https://github.com/MeganJS/startup">github</a></p>
+        </footer>
+    </body>
+</html>

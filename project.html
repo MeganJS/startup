@@ -1,79 +1,87 @@
 <!DOCTYPE html>
-<body>
-    <header>
-        <h1>idea-thing</h1>
-        <nav>
-            <button type="submit" id="sign-out"><a href="index.html">sign out</a></button>
-            <button type="submit" id="home"><a href="home.html">home</a></button>
-        </nav>
-        
-        <h3>
-            <img alt="smile icon" src="images/smile icon.png" />
-            username
-        </h3>
-        <div id="profile-menu" hidden>
-            <button type="submit" id="change-picture">change picture</button>
-            <button type="submit" id="change-user">change username</button>
-            <button type="submit" id="change-password">change password</button>
-        </div>
-    </header>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>idea-thing</title>
+        <link rel="stylesheet" href="project.css"/>
+    </head>
+    <body>
+        <header>
+            <h1>idea-thing</h1>
+            <nav>
+                <button type="submit" id="sign-out"><a href="index.html">sign out</a></button>
+                <button type="submit" id="home"><a href="home.html">home</a></button>
+            </nav>
+            
+            <h3>
+                <img alt="smile icon" src="images/smile icon.png" />
+                username
+            </h3>
+            <div id="profile-menu" hidden>
+                <button type="submit" id="change-picture">change picture</button>
+                <button type="submit" id="change-user">change username</button>
+                <button type="submit" id="change-password">change password</button>
+            </div>
+        </header>
 
-    <main>
-        <section>
-            <h1 id="project-title">Dolphins=evil???</h1>
-            <label for="sort-by">Sort by:</label>
-            <select id="sort-by" name="sort-by">
-                <option>Card Type</option>
-                <option>Date of Creation</option>
-                <option>Alphabet Order</option>
-            </select>
-            <section id="project-cards">
-                <ul>
+        <main>
+            <section>
+                <h1 id="project-title">Dolphins=evil???</h1>
+                <label for="sort-by">Sort by:</label>
+                <select id="sort-by" name="sort-by">
+                    <option>Card Type</option>
+                    <option>Date of Creation</option>
+                    <option>Alphabet Order</option>
+                </select>
+                <section id="project-cards">
+                    <ul>
+                        <li>
+                            <div id="card">
+                                <div>Character</div>
+                                <img alt="smile icon" src="images/smile icon.png" />
+                                <div><a href="card.html">Agent Squeaker</a></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="card">
+                                <div>Object</div>
+                                <img alt="button icon" src="images/button icon.png" />
+                                <div><a href="card.html">Button of DOOM</a></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="card">
+                                <div>Setting</div>
+                                <img alt="setting icon" src="images/setting icon.png" />
+                                <div><a href="card.html">The Arctic Sea</a></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div id="card">
+                                <div><a href="card-edit.html">New Card</a></div>
+                            </div>
+                        </li>
+                        <!--Add button to make new card!!!-->
+                    </ul>
+                </section>
+                <section id="shared">
+                    <h3>Shared With:</h3>
                     <li>
-                        <div id="card">
-                            <div>Character</div>
-                            <img alt="smile icon" src="images/smile icon.png" />
-                            <div><a href="card.html">Agent Squeaker</a></div>
-                        </div>
+                        A. P. Eerson
+                        <button type="submit">remove from shared</button>
                     </li>
                     <li>
-                        <div id="card">
-                            <div>Object</div>
-                            <img alt="button icon" src="images/button icon.png" />
-                            <div><a href="card.html">Button of DOOM</a></div>
-                        </div>
+                        <label for="share-with">Share with:</label>
+                        <input type="text" id="share-with" pattern="\w{1,24}" required/>
+                        <button type="submit"><a href="project.html">submit</a></button>
                     </li>
-                    <li>
-                        <div id="card">
-                            <div>Setting</div>
-                            <img alt="setting icon" src="images/setting icon.png" />
-                            <div><a href="card.html">The Arctic Sea</a></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div id="card">
-                            <div><a href="card-edit.html">New Card</a></div>
-                        </div>
-                    </li>
-                    <!--Add button to make new card!!!-->
-                </ul>
+                </section>
             </section>
-            <section id="shared">
-                <h3>Shared With:</h3>
-                <li>
-                    A. P. Eerson
-                    <button type="submit">remove from shared</button>
-                </li>
-                <li>
-                    <label for="share-with">Share with:</label>
-                    <input type="text" id="share-with" pattern="\w{1,24}" required/>
-                    <button type="submit"><a href="project.html">submit</a></button>
-                </li>
-            </section>
-        </section>
-    </main>
-    <footer>
-        <p>Megan Shellman, <a href="https://github.com/MeganJS/startup">github</a></p>
-    </footer>
+        </main>
+        <footer>
+            <p>Megan Shellman, <a href="https://github.com/MeganJS/startup">github</a></p>
+        </footer>
 
-</body>
+    </body>
+</html>
