@@ -1,0 +1,12 @@
+/*hsl for background: hsl(53 100% 94%)*/
+/*hsl for text: hsl(201 100% 7%)*/
+/*I NEED to give them a way to change the font - api connnection?*/
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+  
+body {
+    background-color: hsl(53 70% 95%);
+    color: hsl(201 30% 16%);
+    font-family: "Shadows Into Light", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
