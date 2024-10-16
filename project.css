@@ -1,0 +1,43 @@
+#project-card {
+    width: 200px;
+    height: 250px;
+}
+#project-card-new {
+    width: 200px;
+    height: 250px;
+}
+#card-img {
+    align-self: center;
+    justify-self: center;
+    max-height:75px;
+    min-height: 75px;
+}
+
+.card-body {
+    width:200px;
+    height:250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: center;
+}
+.card-text {
+    font-size: small;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    border: solid;
+    border-radius:10%;
+    border-width: 1px;
+    padding:2px;
+    min-width: 160px;
+    max-width:160px;
+    min-height:20px;
+}
+
+#card-footer {
+    display: flex;
+    flex-direction: row;
+    justify-self: end;
+}
+
+

@@ -42,43 +42,64 @@
 
         <main>
             <section>
-                <h1 id="project-title">Dolphins=evil???</h1>
+                <h2 id="project-title">Dolphins=evil???</h2>
                 <label for="sort-by">Sort by:</label>
                 <select id="sort-by" name="sort-by">
                     <option>Card Type</option>
                     <option>Date of Creation</option>
                     <option>Alphabet Order</option>
                 </select>
+
+
                 <section id="project-cards">
-                    <ul>
-                        <li>
-                            <div id="card">
-                                <div>Character</div>
-                                <img alt="smile icon" src="images/smile icon.png" />
-                                <div><a href="card.html">Agent Squeaker</a></div>
-                            </div>
-                        </li>
-                        <li>
-                            <div id="card">
-                                <div>Object</div>
-                                <img alt="button icon" src="images/button icon.png" />
-                                <div><a href="card.html">Button of DOOM</a></div>
-                            </div>
-                        </li>
-                        <li>
-                            <div id="card">
-                                <div>Setting</div>
-                                <img alt="setting icon" src="images/setting icon.png" />
-                                <div><a href="card.html">The Arctic Sea</a></div>
-                            </div>
-                        </li>
-                        <li>
-                            <div id="card">
-                                <div><a href="card-edit.html">New Card</a></div>
-                            </div>
-                        </li>
-                        <!--Add button to make new card!!!-->
-                    </ul>
+                    <div class="card" id="project-card">
+                        <div class="card-body">
+                            <img id = "card-img" alt="smile icon" src="images/smile icon.png" />
+                          <h5 class="card-title">Agent Squeaker</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">Character</h6>
+                          <p class="card-text">Agent Squeaker started training very young - as a jazz musician. Now that the music club cabal have swept that career off the deck, 
+                            she's joined up with the task force bent on taking them down - with the help of some friends... </p>
+                          <div id="card-footer">
+                            <a href="card.html" class="card-link">view card</a>
+                          <div>tags</div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="card" id="project-card">
+                        <div class="card-body">
+                            <img alt="button icon" src="images/button icon.png" />
+                          <h5 class="card-title">Button of DOOM</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">Item</h6>
+                          <p class="card-text"></p>
+                          <div id="card-footer">
+                            <a href="card.html" class="card-link">view card</a>
+                          <div>tags</div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="card" id="project-card">
+                        <div class="card-body">
+                            <img alt="setting icon" src="images/setting icon.png" />
+                          <h5 class="card-title">The Arctic Sea</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">Setting</h6>
+                          <p class="card-text"></p>
+                          <div id="card-footer">
+                            <a href="card.html" class="card-link">view card</a>
+                          <div>tags</div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="card" id="project-card-new">
+                        <div class="card-body">
+                            <img id = "card-img" alt="plus icon" src="images/plus-circle.svg" />
+                          <h5 class="card-title">New Card</h5>
+                          <h6 class="card-subtitle mb-2 text-body-secondary">???</h6>
+                          <p class="card-text"></p>
+                          <div id="card-footer">
+                            <a href="card.html" class="card-link">view card</a>
+                          </div>
+                        </div>
+                    </div>
                 </section>
                 <section id="shared">
                     <h3>Shared With:</h3>
