@@ -14,6 +14,13 @@ body {
     margin: 0;
 }
 
+main {
+    flex: 1;
+    display: flex;
+    flex-direction:row;
+    justify-content: space-evenly;
+}
+
 header {
     flex: 0 80px;
 }
@@ -27,4 +34,10 @@ footer {
     border-top-color: hsl(223 4% 48%);
     border-top-width: 2px;
     border-top-style: dashed;
+}
+
+@media (max-width: 600px) {
+    main {
+        flex-direction: column;
+    }
 }

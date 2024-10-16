@@ -15,22 +15,19 @@
         <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
+                    <h1>
+                        idea-thing
+                    </h1>
+                
+                  <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="sign-out" aria-current="page" href="index.html">sign out</a>
+                    </li>
+                </ul> 
                 <a class="navbar-brand" href="#">
                     <img alt="smile icon" src="images/smile icon.png" />
                     username
                 </a>
-
-                  <ul class="nav justify-content-center">
-                    
-                    <li class="nav-item">
-                      <a class="nav-link active" id="sign-out" aria-current="page" href="index.html">sign out</a>
-                    </li>
-                    <li>
-                        <h1>
-                            idea-thing
-                        </h1>
-                    </li>
-                </ul> 
                 </div>
             </nav>
             
@@ -43,31 +40,63 @@
 
         <main>
             <section id="projects">
-                <h1>Projects</h1>
-                <section>
-                    <a href="project.html"><div>Project1</div></a>
-                    <a href="project.html"><div>Dolphins=evil???</div></a>
-                    <a href="project.html"><div>Project2</div></a>
-                    <a href="project.html"><div>Create New Project</div></a>
+                <h2>Projects</h2>
+                <section id="projects-list">
+                    <div id="project"><a href="project.html" id="project-link">Project1</a></div>
+                    <div id="project">Dolphins=evil???</div>
+
+                    <div id="project"><a href="project.html" id="project-link">Dolphins=evil???</a></div>
+                    <div id="project"><a href="project.html" id="project-link">Project3</a></div>
+                    <div id="project"><a href="project.html" id="project-link">Create New Project</a></div>
                 </section>
             </section>
             <section id="connections">
-                <h1>Connections</h1>
-                <ul>
-                    <li>
-                        A. P. Eerson
-                        <button type="submit"><a href="home.html">remove connection</a></button>
-                        <button type="submit"><a href="home.html">see shared projects</a></button>
-                    </li> 
-                    <li>Mr. Frogdatterson
-                        <button type="submit"><a href="home.html">remove connection</a></button>
-                        <button type="submit"><a href="home.html">see shared projects</a></button>
-                    </li> 
-                    <li>Donna Noble
-                        <button type="submit"><a href="home.html">remove connection</a></button>
-                        <button type="submit"><a href="home.html">see shared projects</a></button>
-                    </li>
-                    <li>
+                <h2>Connections</h2>
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            A. P. Eerson
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <button type="submit"><a href="home.html">disconnect</a></button>
+                            <button type="submit"><a href="home.html">see shared projects</a></button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Mr. Frogdatterson
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <button type="submit"><a href="home.html">disconnect</a></button>
+                            <button type="submit"><a href="home.html">see shared projects</a></button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Donna Noble
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <button type="submit"><a href="home.html">disconnect</a></button>
+                            <button type="submit"><a href="home.html">see shared projects</a></button>
+                        </div>
+                      </div>
+                      
+                      
+                    </div>
+                  </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
                         <label for="find-connection">Request Connection</label>
                         <input type="text" id="find-connection" pattern="\w{1,24}" required/>
                         <button type="submit"><a href="home.html">find</a></button>

@@ -1,3 +1,35 @@
-/*hsl for background: hsl(53 100% 94%)*/
-/*hsl for text: hsl(201 100% 7%)*/
-/*I NEED to give them a way to change the font - api connnection?*/
+h2 {
+    display: flex;
+    justify-content: center;
+}
+
+#projects {
+    flex:3;
+    justify-content: center;
+}
+
+#projects-list {
+    display: grid;
+    grid-auto-rows: 120px;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
+#project {
+    background-color: aqua;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-wrap: wrap;
+    overflow-wrap:break-word;
+    margin:10px;
+}
+
+#project-link {
+    overflow-wrap:break-word;
+}
+#connections {
+    flex: 1;
+    margin: 10px;
+}

@@ -13,18 +13,29 @@
     </head>
     <body>
         <header>
-            <h1>idea-thing</h1>
-            <nav>
-                <button type="submit" id="sign-out"><a href="index.html">sign out</a></button>
-                <button type="submit" id="home"><a href="home.html">home</a></button>
-                <button type="submit" id="back-to-project"><a href="project.html">back to project</a></button>
-                <button type="submit"><a href="card.html" id="back-to-card">back to card</a></button>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <h1>
+                        idea-thing
+                    </h1>
+                
+                  <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="back-to-project" aria-current="page" href="project.html">back to project</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" id="to-home" aria-current="page" href="home.html">home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" id="sign-out" aria-current="page" href="index.html">sign out</a>
+                    </li>
+                </ul> 
+                <a class="navbar-brand" href="#">
+                    <img alt="smile icon" src="images/smile icon.png" />
+                    username
+                </a>
+                </div>
             </nav>
-
-            <h3>
-                <img alt="smile icon" src="images/smile icon.png" />
-                username
-            </h3>
             <div id="profile-menu" hidden>
                 <button type="submit" id="change-picture">change picture</button>
                 <button type="submit" id="change-user">change username</button>
