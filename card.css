@@ -7,3 +7,16 @@ section {
     border-radius: 5%;
     border-width:2px;
 }
+
+#textarea-card-edit {
+    height:max-content;
+}
+
+#card-text-edit {
+    height: max-content;
+    border-style: solid;
+    border-color:darkgray;
+    border-radius: 5%;
+    border-width:1px;
+    margin:5px;
+}
