@@ -1,0 +1,9 @@
+section {
+    flex:1;
+    min-height:100%;
+    border: solid;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5%;
+    border-width:2px;
+}
