@@ -44,7 +44,7 @@
         </header>
 
         <main>
-            <section id="card">
+            <section id="card-data">
                 <label for="card-type">Card Type:</label>
                     <select id="card-type" name="card-type">
                     <option>Character</option>
@@ -52,19 +52,13 @@
                     <option>Setting</option>
                 </select>
                 
-                <button type="submit"><a href="card-edit.html">save</a></button>
+                <button type="submit"><a href="card.html">save</a></button>
                 <div id="card-image"><img alt="dolphin" src="images/dolphin.png" /></div>
 
-                <div id="card-name"><h3>Agent Squeaker</h3></div>
                 <div>
                     <input type="text" id="card-name" name="card-name" value="Agent Squeaker" />
                 </div>
-                <div>
-                    <textarea id="card-text" name="card-text">
-                        Agent Squeaker started training very young - as a jazz musician. Now that the music club cabal have swept that career off the deck, 
-                        she's joined up with the task force bent on taking them down - with the help of some friends... 
-                    </textarea>
-                </div>
+
                 <div id="card-tags">
                     <p>Tags:</p>
                     <ul>
@@ -88,6 +82,15 @@
                             <button type="submit">add</button>
                         </li>
                     </ul>
+                </div>
+            </section>
+
+            <section>
+                <div class="mb-3" id="card-text-edit">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">
+                        Agent Squeaker started training very young - as a jazz musician. Now that the music club cabal have swept that career off the deck, 
+                        she's joined up with the task force bent on taking them down - with the help of some friends... 
+                    </textarea>
                 </div>
             </section>
         </main>
