@@ -1,28 +1,39 @@
 #project-content {
     flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
+#project-title {
+    text-align: center;
+}
+
 
 #project-cards {
     flex: 1;
     display: grid;
     grid-auto-rows: 280px;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+    justify-content: center;
+    align-items: center;
 }
 
 #project-card {
-    margin:10px;
+    margin: 10px;
     width: 180px;
     height: 250px;
 }
+
 #project-card-new {
-    margin:10px;
+    margin: 10px;
     width: 180px;
     height: 250px;
 }
+
 #card-img {
     align-self: center;
     justify-self: center;
-    max-height:75px;
+    max-height: 75px;
     min-height: 75px;
 }
 
@@ -51,6 +62,15 @@
     display: flex;
     flex-direction: row;
     justify-self: end;
+}
+
+#project-controls {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#share-with > *{
+    display:inline;
 }
 
 

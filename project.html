@@ -43,13 +43,19 @@
         <main>
             <section id="project-content">
                 <h2 id="project-title">Dolphins=evil???</h2>
-                <label for="sort-by">Sort by:</label>
-                <select id="sort-by" name="sort-by">
-                    <option>Card Type</option>
-                    <option>Date of Creation</option>
-                    <option>Alphabet Order</option>
-                </select>
-
+                <div id="project-controls">
+                    <div class="dropdown">
+                        Sort by:
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Date of Creation
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">Card Type</a></li>
+                          <li><a class="dropdown-item" href="#">Date of Creation</a></li>
+                          <li><a class="dropdown-item" href="#">Alphabet Order</a></li>
+                        </ul>
+                    </div>
+                </div>
 
                 <section id="project-cards">
                     <div class="card" id="project-card">
@@ -101,20 +107,36 @@
                         </div>
                     </div>
                 </section>
-                <section id="shared">
-                    <h3>Shared With:</h3>
-                    <li>
-                        A. P. Eerson
-                        <button type="submit">remove from shared</button>
-                    </li>
-                    <li>
-                        <label for="share-with">Share with:</label>
-                        <input type="text" id="share-with" pattern="\w{1,24}" required/>
-                        <button type="submit"><a href="project.html">submit</a></button>
-                    </li>
-                </section>
-            </section>
+                
+                <div id="project-controls">
+                    <section id="shared">
+                        <b>Shared with:</b>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                A. P. Eerson
+                                <button type="submit">unshare</button>
+                            </li>
+                            <li class="list-group-item" id="share-with">
+                                <p>Add:</p>
+                                <div class="dropdown">
+                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    ____________
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                      <li><a class="dropdown-item" href="#">A. P. Eerson</a></li>
+                                      <li><a class="dropdown-item" href="#">Mr. Frogdatterson</a></li>
+                                      <li><a class="dropdown-item" href="#">Donna Noble</a></li>
+                                    </ul>
+                                  </div>
+                                <button type="submit"><a href="project.html">submit</a></button>
+                            </li>
+                          </ul>
+                    </section>
+                    
+                </div>
+                
         </main>
+
         <footer>
             Megan Shellman--<a href="https://github.com/MeganJS/startup">github</a>
         </footer>
