@@ -55,13 +55,21 @@ Midterm Questions
   -  span style="color:green;"> html </span
 - What will the following code output when executed using a for loop and console.log?
 - How would you use JavaScript to select an element with the id of “byu” and change the text color of that element to green?
+  - get element by id
+  - setAttribute(color, "green")
+  - or via style? or insertRule?
 - What is the opening HTML tag for a paragraph, ordered list, unordered list, second level heading, first level heading, third level heading?
+  - p,ol,ul,h2,h1,h3
 - How do you declare the document type to be html?
+  - !DOCTYPE html
 - What is valid javascript syntax for if, else, for, while, switch statements?
+  - 
 - What is the correct syntax for creating a javascript object?
 - Is it possible to add new properties to javascript objects?
 - If you want to include JavaScript on an HTML page, which tag do you use?
+  - script
 - Given the following HTML, what JavaScript could you use to set the text "animal" to "crow" and leave the "fish" text unaffected?
+  - use innerHTML?
 - Which of the following correctly describes JSON?
 - What does the console command chmod, pwd, cd, ls, vim, nano, mkdir, mv, rm, man, ssh, ps, wget, sudo  do?
 - Which of the following console command creates a remote shell session?
