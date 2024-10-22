@@ -45,43 +45,57 @@
 
         <main>
             <section id="card-data">
-                <label for="card-type">Card Type:</label>
-                    <select id="card-type" name="card-type">
-                    <option>Character</option>
-                    <option>Object</option>
-                    <option>Setting</option>
-                </select>
-                
                 <button type="submit"><a href="card.html">save</a></button>
+
+                <div class="dropdown">
+                    Card Type:
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Character
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Character</a></li>
+                      <li><a class="dropdown-item" href="#">Object</a></li>
+                      <li><a class="dropdown-item" href="#">Setting</a></li>
+                    </ul>
+                </div>
+                
                 <div id="card-image"><img alt="dolphin" src="images/dolphin.png" /></div>
 
                 <div>
                     <input type="text" id="card-name" name="card-name" value="Agent Squeaker" />
                 </div>
-
+                
+                
                 <div id="card-tags">
-                    <p>Tags:</p>
-                    <ul>
-                        <li>
-                            Samosed Maat
-                            <button type="submit">x</button>
-                        </li>
-                        <li>
-                            Tree Place Hollow Ground (Sea)
-                            <button type="submit">x</button>
-                        </li>
-                        <li>
-                            The Evil Overlords (musical piece)
-                            <button type="submit">x</button>
-                        </li>
-                        <li>
-                            <select id="add-tag" name="add-tag">
-                                <option>Button of Doom</option>
-                                <option>The Arctic Sea</option>
-                            </select>
-                            <button type="submit">add</button>
-                        </li>
-                    </ul>
+                    <b>tags:</b>
+                        <ul class="list-group" id="tag-list">
+                            <li class="list-group-item" style="max-height: 50px; padding: 4px">
+                                Samosed Maat
+                                <button type="submit">x</button>
+                            </li>
+                            
+                            <li class="list-group-item" style="max-height: 50px; padding: 4px">
+                                Tree Place Hollow Ground (Sea)
+                                <button type="submit">x</button>
+                            </li>
+                            <li class="list-group-item" style="max-height: 50px; padding: 4px">
+                                The Evil Overlords (musical piece)
+                                <button type="submit">x</button>
+                            </li>
+                            <li class="list-group-item" id="add-tag" style="display:inline; padding: 4px;">
+                                <p>Add:</p>
+                                <div class="dropdown">
+                                    <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    ____________
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                      <li><a class="dropdown-item" href="#">Button of Doom</a></li>
+                                      <li><a class="dropdown-item" href="#">The Arctic Sea</a></li>
+                                    </ul>
+                                    <button type="submit" style="display:inline;">submit</button>
+                                  </div>
+                            </li>
+                        </ul>
                 </div>
             </section>
 
