@@ -36,10 +36,15 @@ Midterm Questions
   - justify is sideways, align up and down
 - What does the following padding CSS do?
 - What does the following code using arrow syntax function declaration do?
+  - ()=> "27"; //returns "27"
+  - ()=>{27;} //returns undefined
+  - ()=>{return "27";} //returns "27"
 - What does the following code using map with an array output?
+  - 
 - What does the following code output using getElementByID and addEventListener?
 - What does the following line of Javascript do using a # selector?
 - Which of the following are true? (mark all that are true about the DOM)
+  - 
 - By default, the HTML span element has a default CSS display property value of:
   - inline, often used for giving emphasis to a certain part of text
 - How would you use CSS to change all the div elements to have a background color of red?
@@ -63,11 +68,21 @@ Midterm Questions
 - How do you declare the document type to be html?
   - !DOCTYPE html
 - What is valid javascript syntax for if, else, for, while, switch statements?
-  - 
+  - if (a === 1) {
+    //...
+  } else if (b === 2) {
+    //...
+  } else {
+    //...
+  - a === 1 ? console.log(1) : console.log('not 1'); //ternary operator
+  - for (name in thing) to iterate over an objects properties, using it on an array will iterate over indexes
+  - for and while loops same as in Java
+  - use for of to iterate over the items of a list, array, map, etc.
 - What is the correct syntax for creating a javascript object? Is it possible to add new properties to javascript objects?
   - const obj = new Object({ a: 3 });
     obj['b'] = 'fish';
     obj.c = [1, 2, 3];
+  - "properties and functions of classes private by prefixing them with a #." (see https://learn.cs260.click/page/javascript/objectClasses/objectClasses_md)
 - If you want to include JavaScript on an HTML page, which tag do you use?
   - script
 - Given the following HTML, what JavaScript could you use to set the text "animal" to "crow" and leave the "fish" text unaffected?
