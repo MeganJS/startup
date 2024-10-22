@@ -1,6 +1,6 @@
 section {
     flex:1;
-    min-height:100%;
+    min-height:100vh - 120px;
     border: solid;
     padding: 5px;
     margin: 5px;
