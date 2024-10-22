@@ -40,11 +40,11 @@ Midterm Questions
   - ()=>{27;} //returns undefined
   - ()=>{return "27";} //returns "27"
 - What does the following code using map with an array output?
-  - 
+  - ???
 - What does the following code output using getElementByID and addEventListener?
 - What does the following line of Javascript do using a # selector?
 - Which of the following are true? (mark all that are true about the DOM)
-  - 
+  - DOM: everything in HTML has an object in DOM, structured like a tree. Makes it accessible to JavaScript.
 - By default, the HTML span element has a default CSS display property value of:
   - inline, often used for giving emphasis to a certain part of text
 - How would you use CSS to change all the div elements to have a background color of red?
