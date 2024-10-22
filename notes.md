@@ -65,15 +65,22 @@ Midterm Questions
 - What is valid javascript syntax for if, else, for, while, switch statements?
   - 
 - What is the correct syntax for creating a javascript object?
+  - 
 - Is it possible to add new properties to javascript objects?
+  - 
 - If you want to include JavaScript on an HTML page, which tag do you use?
   - script
 - Given the following HTML, what JavaScript could you use to set the text "animal" to "crow" and leave the "fish" text unaffected?
   - use innerHTML?
 - Which of the following correctly describes JSON?
+  - way to store and transfer objects as strings
 - What does the console command chmod, pwd, cd, ls, vim, nano, mkdir, mv, rm, man, ssh, ps, wget, sudo  do?
+  - 
 - Which of the following console command creates a remote shell session?
+  - ssh
 - Which of the following is true when the -la parameter is specified for the ls console command?
+  - ls -la	list long format including hidden files
+  - source: https://www.rapidtables.com/code/linux/ls.html 
 - Which of the following is true for the domain name banana.fruit.bozo.click, which is the top level domain, which is a subdomain, which is a root domain?
 - Is a web certificate is necessary to use HTTPS.
 - Can a DNS A record can point to an IP address or another A record.
