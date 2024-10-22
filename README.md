@@ -1,5 +1,7 @@
 # startup: idea-thing
 ## Startup Application for CS260: Web Development
+## CSS
+Now includes an organized header and navigation bar, responsive design on all pages, organization of projects and cards into grids, and more! Friends lists, tags lists, and an input field on the card edit page that grows as you type. See [startup.idea-thing.click](https://startup.idea-thing.click/) for further details.
 
 ## HTML
 Now includes a login page, a home page, a project page, a card page, and a card-edit page in HTML. The home page includes a friends section and a list of projects. I also put a menu for updating the user's profile picture, which is where the API connection to random animal pictures will be. This menu is hidden by default but you can see it in the HTML for the home page header. See [startup.idea-thing.click](https://startup.idea-thing.click/) for further details.
