@@ -64,25 +64,48 @@ Midterm Questions
   - !DOCTYPE html
 - What is valid javascript syntax for if, else, for, while, switch statements?
   - 
-- What is the correct syntax for creating a javascript object?
-  - 
-- Is it possible to add new properties to javascript objects?
-  - 
+- What is the correct syntax for creating a javascript object? Is it possible to add new properties to javascript objects?
+  - const obj = new Object({ a: 3 });
+    obj['b'] = 'fish';
+    obj.c = [1, 2, 3];
 - If you want to include JavaScript on an HTML page, which tag do you use?
   - script
 - Given the following HTML, what JavaScript could you use to set the text "animal" to "crow" and leave the "fish" text unaffected?
   - use innerHTML?
 - Which of the following correctly describes JSON?
-  - way to store and transfer objects as strings
+  - way to store and transfer objects as strings. JavaScript Object Notation
 - What does the console command chmod, pwd, cd, ls, vim, nano, mkdir, mv, rm, man, ssh, ps, wget, sudo  do?
-  - 
+  - chmod - let's us modify permissions
+  - pwd - print working direction
+  - vim - enter vi editor
+  - cd -change directory
+  - ls - list contents of directory
+  - nano - enters nano editor for file; creates file if not already existing
+  - mkdir - creates directory
+  - mv - moves file/director
+  - rm - removes file
+  - man - lets us view man pages
+  - ssh - secure shell
+  - ps - lists running processes
+  - wget - web get, lets you download file from web (source: Wget Command in Linux/Unix Geeks to Geeks, also Hostinger)
+  - sudo - do as superuser
+  - do - execute group of commands?
 - Which of the following console command creates a remote shell session?
   - ssh
 - Which of the following is true when the -la parameter is specified for the ls console command?
   - ls -la	list long format including hidden files
   - source: https://www.rapidtables.com/code/linux/ls.html 
 - Which of the following is true for the domain name banana.fruit.bozo.click, which is the top level domain, which is a subdomain, which is a root domain?
+  - top level domain: .click
+  - subdomain: banana.fruit
+  - root: bozo
 - Is a web certificate is necessary to use HTTPS.
+  - Correct. Otherwise the HTTPS can't be sure the site is legit.
 - Can a DNS A record can point to an IP address or another A record.
+  - IP address
 - Port 443, 80, 22 is reserved for which protocol?
+  - Port 80 is default for HTTP
+  - 443 for HTTPS
+  - 22 for secure shell access - direct remote control access to device (source: https://www.cbtnuggets.com/common-ports/what-is-port-22)
 - What will the following code using Promises output when executed?
+  - Making promises is basically like making threads. We never know when they're going to finish once we make them.
