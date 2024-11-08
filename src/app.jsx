@@ -1,24 +1,30 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { Login } from './login/login';
+import { Home } from './home/home';
+import { Project } from './project/project';
+import { Card } from './card/card';
 
 
 export default function App() {
     return (
+    <BrowserRouter>
     <div className="body">
         <header>
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">
+            <nav className="navbar navbar-expand-lg">
+                <div className="container-fluid">
                     <h1>
                         idea-thing
                     </h1>
                 
-                  <ul class="nav justify-content-center">
-                    <li class="nav-item">
-                      <a class="nav-link active" id="sign-out" aria-current="page" href="login.html">sign out</a>
+                  <ul className="nav justify-content-center">
+                    <li className="nav-item">
+                        <NavLink className='nav-link' to=''>sign out</NavLink>
                     </li>
                 </ul> 
-                <a class="navbar-brand" href="#">
+                <a className="navbar-brand" href="#">
                     <img alt="smile icon" src="images/smile icon.png" />
                     username
                 </a>
@@ -33,7 +39,13 @@ export default function App() {
         </header>
 
         <main>
-            App will display here.
+            <Routes>
+                <Route path='/' element={<Login />} exact />
+                <Route path='/home' element={<Home />} />
+                <Route path='/project' element={<Project />} />
+                <Route path='/card' element={<Card />} />
+                <Route path='*' element={<NotFound />} />
+            </Routes>
         </main>
 
         <footer>
@@ -45,5 +57,10 @@ export default function App() {
             crossorigin="anonymous">
         </script>
     </div>
+    </BrowserRouter>
     );
+}
+
+function NotFound() {
+    return <main className='container-fluid text-center'>404: Return to sender. Address unknown.</main>;
 }
