@@ -6,6 +6,7 @@ import { Login } from './login/login';
 import { Home } from './home/home';
 import { Project } from './project/project';
 import { Card } from './card/card';
+import { CardEdit } from './card-edit/card-edit';
 
 
 export default function App() {
@@ -20,6 +21,9 @@ export default function App() {
                     </h1>
                 
                   <ul className="nav justify-content-center">
+                    <li class="nav-item">
+                        <NavLink className='nav-link' to='/home'>home</NavLink>
+                    </li>
                     <li className="nav-item">
                         <NavLink className='nav-link' to=''>sign out</NavLink>
                     </li>
@@ -44,6 +48,7 @@ export default function App() {
                 <Route path='/home' element={<Home />} />
                 <Route path='/project' element={<Project />} />
                 <Route path='/card' element={<Card />} />
+                <Route path='/card-edit' element={<CardEdit />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
         </main>

@@ -40,7 +40,7 @@ export function Project() {
                           <h6 className="card-subtitle mb-2 text-body-secondary">Item</h6>
                           <p className="card-text"></p>
                           <div id="card-footer">
-                            <NavLink className='nav-link' to='/Card'>view card</NavLink>
+                            <NavLink className='nav-link' to='/card'>view card</NavLink>
                           </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@ export function Project() {
                           <h6 className="card-subtitle mb-2 text-body-secondary">Setting</h6>
                           <p className="card-text"></p>
                           <div id="card-footer">
-                            <NavLink className='nav-link' to='/Card'>view card</NavLink>
+                            <NavLink className='nav-link' to='/card'>view card</NavLink>
                           </div>
                         </div>
                     </div>
@@ -59,10 +59,10 @@ export function Project() {
                         <div className="card-body">
                             <img id = "card-img" alt="plus icon" src="images/plus-circle.svg" />
                           <h5 className="card-title">New Card</h5>
-                          <h6 className="card-subtitle mb-2 text-body-secondary">???</h6>
+                          <h6 className="card-subtitle mb-2 text-body-secondary">---</h6>
                           <p className="card-text"></p>
                           <div id="card-footer">
-                            <NavLink className='nav-link' to='/Card'>view card</NavLink>
+                            <NavLink className='nav-link' to='/card'>view card</NavLink>
                           </div>
                         </div>
                     </div>
