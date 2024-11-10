@@ -21,16 +21,18 @@ export function Card() {
           <div id="card-name">
             <h3>Agent Squeaker</h3>
           </div>
-  
+          {/*
           <div id="card-tags">
               Tags:
               <span>Samosed Maat --</span>
               <span>Tree Place Hollow Ground (Sea) --</span>
               <span>The Evil Overlords (musical piece) --</span>
-              <button type="submit">
-                <NavLink className='nav-link' to='/card-edit'>edit</NavLink>
-              </button>
+              
           </div>
+          */}
+          <button type="submit">
+                <NavLink className='nav-link' to='/card-edit'>edit</NavLink>
+          </button>
         </section>
   
         <section id="card-text">

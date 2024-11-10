@@ -22,7 +22,7 @@ export default function App() {
                 
                   <ul className="nav justify-content-center">
                     <li class="nav-item">
-                        <NavLink className='nav-link' to='/home'>home</NavLink>
+                        <NavLink className='nav-link' to='home'>home</NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink className='nav-link' to=''>sign out</NavLink>
