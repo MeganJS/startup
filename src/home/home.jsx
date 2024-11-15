@@ -71,7 +71,6 @@ export function Home() {
                 {friendComps}
             </ul>
         </section>
-
     </main>
   );
 }
