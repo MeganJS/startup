@@ -74,6 +74,7 @@ export function Project() {
           </section>
       </section>
       <div id="project-controls">
+      <button type="button" className="btn btn-outline-info">download project</button>
         <section id="shared">
           <b>Shared with:</b>
           <ul className="list-group">
@@ -97,9 +98,15 @@ export function Project() {
             </li>
           </ul>
         </section>
+        <button type="button" className="btn btn-outline-danger">delete project</button>
       </div>
     </main>
   );
+}
+
+function getSharedList() {
+  let sharedList = [A. P. Eerson];
+  return sharedList;
 }
 
 function getCardList() {

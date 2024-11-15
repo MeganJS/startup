@@ -76,11 +76,17 @@ export function Home() {
 }
 
 function getFriendList() {
-    const frList = ["A. P. Eerson","Mr. Frogdatterson","Donna Noble"];
-    return frList;
+    const frList = localStorage.getItem('friendList');
+    if (frList) {
+        return JSON.parse(frList);
+    }
+    return [];
 }
 
 function getProjectList() {
-    const pList = ["Project1","Dolphins=evil???","ProjectTheThird"];
-    return pList;
+    const prList = localStorage.getItem('projectList');
+    if (prList) {
+        return JSON.parse(prList);
+    }
+    return [];
 }
