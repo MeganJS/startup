@@ -1,26 +1,45 @@
 import React from 'react';
 import "./home.css";
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
-
+//components for projects, friendlist
 export function Home() {
+    const [projects, setProjectList] = React.useState([]);
+
+  // Demonstrates calling a service asynchronously so that
+  // React can properly update state objects with the results.
+  useEffect(() => {
+    const pList = getProjectList();
+    if (pList) {
+      setProjectList(pList);
+    }
+  }, []);
+
+  // Demonstrates rendering an array with React
+  const projectComps = [];
+  if (projects.length) {
+    for (const project of projects) {
+      projectComps.push(
+        <div id="project">
+            <NavLink className='nav-link' to='/Project'>{project}</NavLink>
+        </div>
+      );
+    }
+  }
+  projectComps.push(
+    <div id="project">
+        <NavLink className='nav-link' to='/Project'>Create New Project</NavLink>
+    </div>
+  );
+  
+
   return (
     <main>
         <section id="projects">
             <h2>Projects</h2>
             <section id="projects-list">
-                <div id="project">
-                    <NavLink className='nav-link' to='/Project'>Project1</NavLink>
-                </div>
-                <div id="project">
-                    <NavLink className='nav-link' to='/Project'>Dolphins=evil???</NavLink>
-                </div>
-                <div id="project">
-                    <NavLink className='nav-link' to='/Project'>Project3</NavLink>
-                </div>
-                <div id="project">
-                    <NavLink className='nav-link' to='/Project'>Create New Project</NavLink>
-                </div>
+                {projectComps}
             </section>
         </section>
         <section id="connections">
@@ -80,4 +99,9 @@ export function Home() {
     </main>
 
   );
+}
+
+function getProjectList() {
+    const pList = ["Project1","Dolphins=evil???","ProjectTheThird"];
+    return pList;
 }

@@ -21,7 +21,7 @@ export default function App() {
                     </h1>
                 
                   <ul className="nav justify-content-center">
-                    <li class="nav-item">
+                    <li className="nav-item">
                         <NavLink className='nav-link' to='home'>home</NavLink>
                     </li>
                     <li className="nav-item">
