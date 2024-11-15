@@ -23,14 +23,19 @@ function ProjectCard({cardObj}){
 //cards
 export function Project() {
   const [cards, setCardList] = React.useState([]);
+  const [sharedList, setSharedList] = React.useState([]);
   
   // Demonstrates calling a service asynchronously so that
   // React can properly update state objects with the results.
   useEffect(() => {
     const cList = getCardList();
+    const sList = getSharedList();
     if (cList) {
-        setCardList(cList);
-      }
+      setCardList(cList);
+    }
+    if (sList) {
+      setSharedList(sList);
+    }
   }, []);
 
   const blankCard= {
@@ -51,6 +56,18 @@ export function Project() {
   cardComps.push(
     <ProjectCard cardObj={blankCard}></ProjectCard>
   );
+
+  const sharedComps = [];
+  if (sharedList.length) {
+    for (const shared of sharedList) {
+      sharedComps.push(
+        <li className="list-group-item">
+          {shared}
+          <button className="btn btn-outline-secondary btn-sm" type="submit">unshare</button>
+        </li>
+      );
+    }
+  }
 
   return (
     <main>
@@ -74,39 +91,116 @@ export function Project() {
           </section>
       </section>
       <div id="project-controls">
-      <button type="button" className="btn btn-outline-info">download project</button>
-        <section id="shared">
-          <b>Shared with:</b>
-          <ul className="list-group">
-            <li className="list-group-item">
-              A. P. Eerson
-              <button type="submit">unshare</button>
-            </li>
-            <li className="list-group-item" id="share-with">
-              <p>Add:</p>
-              <div className="dropdown">
-                <a className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  ____________
-                </a>
-                <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">A. P. Eerson</a></li>
-                  <li><a className="dropdown-item" href="#">Mr. Frogdatterson</a></li>
-                  <li><a className="dropdown-item" href="#">Donna Noble</a></li>
-                </ul>
-              </div>
-              <button type="submit"><a href="project.html">submit</a></button>
-            </li>
-          </ul>
-        </section>
+        <button type="button" className="btn btn-outline-info">download project</button>
+        <SharedWith></SharedWith>
         <button type="button" className="btn btn-outline-danger">delete project</button>
       </div>
     </main>
   );
 }
 
+function SharedWith(){
+  const [sharedList, setSharedList] = React.useState([]);
+  const [friendList, setFriendList] = React.useState([]);
+  const [shareVal, setShareVal] = React.useState("__________");
+
+  function changeShareVal(friend){
+    setShareVal(friend);
+  }
+
+  function addToSharedList(shareVal){
+    for (const shared of sharedList) {
+      if (shared === shareVal) {
+        return;
+      }
+    }
+    const newShare = sharedList.slice();
+    newShare.push(shareVal);
+    setSharedList(newShare);
+    updateSharedList(newShare);
+  }
+
+  function removeShareVal(shareVal){
+    const newShare = sharedList.slice();
+    let ind = sharedList.indexOf(shareVal);
+    newShare.splice(ind,1);
+    console.log(newShare);
+    setSharedList(newShare);
+    updateSharedList(newShare);
+  }
+
+  useEffect(() => {
+    const sList = getSharedList();
+    if (sList) {
+      setSharedList(sList);
+    }
+    const frList = getFriendList();
+    if (frList) {
+      setFriendList(frList);
+    }
+  }, []);
+
+  const sharedComps = [];
+  if (sharedList.length) {
+    for (const shared of sharedList) {
+      sharedComps.push(
+        <li className="list-group-item">
+          {shared}
+          <button className="btn btn-outline-secondary btn-sm" type="submit" onClick={()=>removeShareVal(shared)}>unshare</button>
+        </li>
+      );
+    }
+  }
+
+  const friendComps = [];
+  if (friendList.length) {
+    for (const friend of friendList) {
+      friendComps.push(
+        <li><a className="dropdown-item" href="#" onClick={()=>changeShareVal(friend)}>{friend}</a></li>
+      );
+    }
+  }
+
+  return (
+    <section id="shared">
+      <b>Shared with:</b>
+      <ul className="list-group">
+        {sharedComps}
+        <li className="list-group-item" id="share-with">
+          <p>Add:</p>
+          <div className="dropdown">
+            <a className="btn btn-dark btn-sm dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {shareVal}
+            </a>
+            <ul className="dropdown-menu">
+              {friendComps}
+            </ul>
+          </div>
+          <button className="btn btn-outline-secondary btn-sm" type="submit" onClick={()=>addToSharedList(shareVal)}>submit</button>
+        </li>
+      </ul>
+    </section>
+  );
+}
+
 function getSharedList() {
-  let sharedList = [A. P. Eerson];
-  return sharedList;
+  const sharedList = localStorage.getItem('sharedList');
+  if (sharedList) {
+      return JSON.parse(sharedList);
+  }
+  return [];
+}
+
+function updateSharedList(sharedList) {
+  localStorage.setItem('sharedList', JSON.stringify(sharedList));
+}
+
+function getFriendList() {
+  const frList = localStorage.getItem('friendList');
+  if (frList) {
+      return JSON.parse(frList);
+  }
+  return [];
 }
 
 function getCardList() {
