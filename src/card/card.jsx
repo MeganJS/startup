@@ -1,8 +1,23 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import "./card.css";
 
+//components on this page: card type, card image, card name, card text (all loaded from database)
 export function Card() {
+  const [cardType, setType] = React.useState('Card');
+  const [cardImage, setImage] = React.useState('images/Question.png');
+  const [cardTitle, setTitle] = React.useState('Loading...');
+  const [cardText, setText] = React.useState('Loading...');
+  useEffect(() => {
+    let cardObj = getCardInfo();
+    console.log(cardObj);
+    setType(cardObj.cType);
+    setImage(cardObj.cImage);
+    setTitle(cardObj.cTitle);
+    setText(cardObj.cText); 
+  }, []);
+
   return (
     <main>
       <div className="all">
@@ -13,13 +28,13 @@ export function Card() {
         <section id="card-data">
           
           <div id="card-type">
-            Character Card
+            {cardType}
           </div>
           <div id="card-image">
-            <img alt="dolphin" src="images/dolphin.png" />
+            <img alt="dolphin" src={cardImage} />
           </div>
           <div id="card-name">
-            <h3>Agent Squeaker</h3>
+            <h3>{cardTitle}</h3>
           </div>
           {/*
           <div id="card-tags">
@@ -38,8 +53,7 @@ export function Card() {
         <section id="card-text">
                   <div>
                       <p>
-                          Agent Squeaker started training very young - as a jazz musician. Now that the music club cabal have swept that career off the deck, 
-                          she's joined up with the task force bent on taking them down - with the help of some friends... 
+                         { cardText }
                       </p>
                   </div>
               </section>
@@ -47,4 +61,14 @@ export function Card() {
       </div>
     </main>
   );
+}
+
+function getCardInfo(){
+  const cardObj = {
+    cType: "Character",
+    cImage: 'images/dolphin.png',
+    cTitle: "Agent Squeaker",
+    cText: "Agent Squeaker started training very young - as a jazz musician. Now that the music club cabal have swept that career off the deck, she's joined up with the task force bent on taking them down - with the help of some friends... "
+  };
+  return cardObj;
 }
