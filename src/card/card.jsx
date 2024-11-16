@@ -32,7 +32,7 @@ export function Card() {
             {cardType}
           </div>
           <div id="card-image">
-            <img alt="dolphin" src={cardImage} />
+            <img alt={cardImage} src={cardImage} />
           </div>
           <div id="card-name">
             <h3>{cardTitle}</h3>
@@ -67,7 +67,7 @@ export function Card() {
 function getCardInfo(){
   const cardObj = {
     cType: "Character",
-    cImage: 'images/dolphin.png',
+    cImage: `dolphin.png`,
     cTitle: "Agent Squeaker",
     cText: "Agent Squeaker started training very young - as a jazz musician. Now that the music club cabal have swept that career off the deck, she's joined up with the task force bent on taking them down - with the help of some friends... "
   };

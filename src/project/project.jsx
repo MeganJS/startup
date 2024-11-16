@@ -9,7 +9,7 @@ function ProjectCard({cardObj}){
   return(
     <div className="card" id="project-card">
       <div className="card-body">
-          <img id = "card-img" alt="smile icon" src={cardObj.image} />
+        <img id = "card-img" alt="smile icon" src={cardObj.image} />
         <h5 className="card-title">{cardObj.title}</h5>
         <h6 className="card-subtitle mb-2 text-body-secondary">{cardObj.type}</h6>
         <p className="card-text">{cardObj.text}</p>
@@ -209,19 +209,19 @@ function getCardList() {
   const cObj1= {
     title: "Button of DOOM",
     type: "Item",
-    image: 'images/button icon.png',
+    image: `button icon.png`,
     text: "no one knows where this came from, and no one knows what it does. would you be the first to press it?"
   }
   const cObj2= {
     title: "Agent Squeaker",
     type: "Character",
-    image: 'images/dolphin.png',
+    image: `dolphin.png`,
     text: "Agent Squeaker started training very young - as a jazz musician. Now that the music club cabal have swept that career off the deck, she's joined up with the task force bent on taking them down - with the help of some friends... "
   }
   const cObj3= {
     title: "The Arctic Sea",
     type: "Setting",
-    image: 'images/setting icon.png',
+    image: `setting icon.png`, // Looks like images need to be wrapped in ``???
     text: "Surprisingly quite cozy, once you get used to it. The seedy underbelly of the seafloor is nothing to laugh at, of course..."
   }
   const cList = [cObj1,cObj2,cObj3];

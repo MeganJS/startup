@@ -22,7 +22,7 @@ export function CardEdit() {
                 </ul>
             </div>   
             <div id="card-image">
-                <img alt="dolphin" src="images/dolphin.png" />
+                <img alt="dolphin" src="dolphin.png" />
             </div>
             <div>
                 <input type="text" id="card-name" name="card-name" value="Agent Squeaker" />
