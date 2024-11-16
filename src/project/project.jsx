@@ -3,6 +3,8 @@ import "./project.css";
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
+//TODO need a way to sanitize user input
+//TODO load project cards from storage - use map?
 function ProjectCard({cardObj}){
   return(
     <div className="card" id="project-card">
@@ -77,7 +79,7 @@ export function Project() {
               <div className="dropdown">
                   Sort by:
                   <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Date of Creation
+                    Date of Creation
                   </button>
                   <ul className="dropdown-menu">
                     <li><a className="dropdown-item" href="#">Card Type</a></li>
