@@ -2,9 +2,12 @@ import React from 'react';
 import "./project.css";
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { CardObj, ProjectObj} from './projectAndCard.js';
 
 //TODO need a way to sanitize user input
 //TODO load project cards from storage - use map?
+//TODO add delete functionality
+//TODO fix shared with functionality
 function ProjectCard({cardObj}){
   return(
     <div className="card" id="project-card">
@@ -22,16 +25,20 @@ function ProjectCard({cardObj}){
 }
 
 
-//cards
 export function Project(props) {
+  const blankCard = new CardObj("NEW CARD",`plus-circle.svg`, "---","");
+  localStorage.setItem('currentCard',JSON.stringify(blankCard));
+  const [project, setProject] = React.useState(new ProjectObj());
   const [cards, setCardList] = React.useState([]);
   const [sharedList, setSharedList] = React.useState([]);
   
-  // Demonstrates calling a service asynchronously so that
-  // React can properly update state objects with the results.
   useEffect(() => {
-    const cList = getCardList();
-    const sList = getSharedList();
+    const project = getCurProject();
+    const cList = project.cardList;
+    const sList = project.sharedList;
+    if (project) {
+      setProject(project);
+    }
     if (cList) {
       setCardList(cList);
     }
@@ -40,23 +47,34 @@ export function Project(props) {
     }
   }, []);
 
-  const blankCard= {
-    title: "NEW CARD",
-    type: "---",
-    image: `plus-circle.svg`,
-    text: ""
+  function setCurCard(card){
+    localStorage.setItem('currentCard',JSON.stringify(card));
   }
-  // Demonstrates rendering an array with React
+
+  function createNewCard(bCard) {
+    let projectListStr = localStorage.getItem('projects');
+    if (projectListStr) {
+      let projectList = JSON.parse(projectListStr);
+      projectList.filter((p) => p !== project);
+      project.addCard(bCard);
+      projectList.push(project);
+      localStorage.setItem("currentProject",JSON.stringify(project));
+      localStorage.setItem('projects',JSON.stringify(projectList));
+    }
+  }
+
+
+
   const cardComps = [];
   if (cards.length) {
     for (const card of cards) {
       cardComps.push(
-        <ProjectCard cardObj={card}></ProjectCard>
+        <ProjectCard cardObj={card} onClick={()=>setCurCard(card)}></ProjectCard>
       );
     }
   }
   cardComps.push(
-    <ProjectCard cardObj={blankCard}></ProjectCard>
+    <ProjectCard cardObj={blankCard} onClick={()=>createNewCard(blankCard)}></ProjectCard>
   );
 
   const sharedComps = [];
@@ -204,8 +222,18 @@ function getFriendList() {
   }
   return [];
 }
-// turns out the folder needs to be named public
+{/* turns out the folder needs to be named public*/}
+function getCurProject(){
+  let curProjectStr = localStorage.getItem('currentProject');
+  let curProj = JSON.parse(curProjectStr);
+  return curProj;
+}
+
 function getCardList() {
+  let curProjectStr = localStorage.getItem('currentProject');
+  let curProj = JSON.parse(curProjectStr);
+  return curProj.cardList;
+  {/*
   const cObj1= {
     title: "Button of DOOM",
     type: "Item",
@@ -226,4 +254,5 @@ function getCardList() {
   }
   const cList = [cObj1,cObj2,cObj3];
   return cList;
+  */}
 }

@@ -22,9 +22,10 @@ class CardObj {
 
 class ProjectObj {
   cardList = [];
-  constructor(title, cards) {
+  constructor(title, cards, shared) {
     this.title = title;
     this.cardList = cards;
+    this.sharedList = shared;
   }
 
   setTitle(newTitle){
@@ -38,4 +39,14 @@ class ProjectObj {
   removeCard(card) {
     this.cardList.filter((c) => c !== card);
   }
+
+  addShared(shared){
+    this.sharedList.push(shared);
+  }
+
+  removeCard(shared) {
+    this.sharedList.filter((s) => s !== shared);
+  }
 }
+
+export {CardObj,ProjectObj};

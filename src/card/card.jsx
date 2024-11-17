@@ -65,7 +65,7 @@ export function Card() {
 }
 
 function getCardInfo(){
-  
+  return JSON.parse(localStorage.getItem('currentCard'));
   const cardObj = {
     cType: "Character",
     cImage: `dolphin.png`,
