@@ -125,9 +125,24 @@ export function Project(props) {
 }
 
 function SharedWith(){
-  const [sharedList, setSharedList] = React.useState([]);
-  const [friendList, setFriendList] = React.useState([]);
+  const sList = getSharedList();
+  const frList = getFriendList();
+  const [sharedList, setSharedList] = React.useState(sList);
+  const [friendList, setFriendList] = React.useState(frList);
   const [shareVal, setShareVal] = React.useState("__________");
+
+  {/*
+  useEffect(() => {
+    const sList = getSharedList();
+    if (sList) {
+      setSharedList(sList);
+    }
+    const frList = getFriendList();
+    if (frList) {
+      setFriendList(frList);
+    }
+  }, []);
+  */}
 
   function changeShareVal(friend){
     setShareVal(friend);
@@ -153,17 +168,6 @@ function SharedWith(){
     setSharedList(newShare);
     updateSharedList(newShare);
   }
-
-  useEffect(() => {
-    const sList = getSharedList();
-    if (sList) {
-      setSharedList(sList);
-    }
-    const frList = getFriendList();
-    if (frList) {
-      setFriendList(frList);
-    }
-  }, []);
 
   const sharedComps = [];
   if (sharedList.length) {
@@ -218,27 +222,26 @@ function getSharedList() {
 
 
 function updateSharedList(sharedList) {
-  let projectListStr = localStorage.getItem('projects');
-  console.log(projectListStr);
-  let project = getCurProject();
-    let projectList = JSON.parse(projectListStr);
-    let newProjList = projectList.slice();
-    for (const proj of newProjList) {
-      console.log(proj.title);
-      console.log(project.title);
-      if (proj.title === project.title) {
-        console.log(true);
-        projectList.filter((p) => p !== proj);
-        const newProjList = projectList.slice();
-        let ind = newProjList.indexOf(proj);
-        newProjList.splice(ind,1);
+    let projectListStr = localStorage.getItem('projects');
+    let project = getCurProject();
+    let cProject = { ...project }
+    if (projectListStr) {
+      let projectList = JSON.parse(projectListStr);
+      let cProjectList = projectList.slice();
+      for (const proj of projectList) {
+        if (proj.title === cProject.title) {
+          console.log("same");
+          let ind = cProjectList.indexOf(proj);
+          console.log(ind);
+          cProjectList.splice(ind,1);
+        }
       }
+      cProject.sharedList = sharedList;
+      cProjectList.push(cProject);
+      localStorage.setItem("currentProject",JSON.stringify(cProject));
+      localStorage.setItem('projects',JSON.stringify(cProjectList));
     }
-    project.sharedList = sharedList;
-    projectList.push(project);
-    localStorage.setItem("currentProject",JSON.stringify(project));
-    localStorage.setItem('projects',JSON.stringify(newProjList));
-}
+  }
 
 function getFriendList() {
   const frList = localStorage.getItem('friendList');
