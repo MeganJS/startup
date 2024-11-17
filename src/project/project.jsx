@@ -23,7 +23,7 @@ function ProjectCard({cardObj}){
 
 
 //cards
-export function Project() {
+export function Project(props) {
   const [cards, setCardList] = React.useState([]);
   const [sharedList, setSharedList] = React.useState([]);
   
@@ -43,7 +43,7 @@ export function Project() {
   const blankCard= {
     title: "NEW CARD",
     type: "---",
-    image: 'images/plus-circle.svg',
+    image: `plus-circle.svg`,
     text: ""
   }
   // Demonstrates rendering an array with React
@@ -204,7 +204,7 @@ function getFriendList() {
   }
   return [];
 }
-
+// turns out the folder needs to be named public
 function getCardList() {
   const cObj1= {
     title: "Button of DOOM",
@@ -221,7 +221,7 @@ function getCardList() {
   const cObj3= {
     title: "The Arctic Sea",
     type: "Setting",
-    image: `setting icon.png`, // Looks like images need to be wrapped in ``???
+    image: `setting icon.png`, 
     text: "Surprisingly quite cozy, once you get used to it. The seedy underbelly of the seafloor is nothing to laugh at, of course..."
   }
   const cList = [cObj1,cObj2,cObj3];

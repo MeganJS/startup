@@ -65,6 +65,7 @@ export function Card() {
 }
 
 function getCardInfo(){
+  
   const cardObj = {
     cType: "Character",
     cImage: `dolphin.png`,

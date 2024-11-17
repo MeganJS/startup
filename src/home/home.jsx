@@ -3,13 +3,15 @@ import "./home.css";
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-//components for projects, friendlist
+{/*components for projects, friendlist*/}
 export function Home() {
-    const [projects, setProjectList] = React.useState([]);
-    const [friends, setFriendList] = React.useState([]);
+  let blankProject = {
+    title: "Create New Project",
+    cardList: []
+  };
+  const [projects, setProjectList] = React.useState([]);
+  const [friends, setFriendList] = React.useState([]);
 
-  // Demonstrates calling a service asynchronously so that
-  // React can properly update state objects with the results.
   useEffect(() => {
     const pList = getProjectList();
     const frList = getFriendList(); 
@@ -21,20 +23,23 @@ export function Home() {
     }
   }, []);
 
-  // Demonstrates rendering an array with React
+  function setCurrentProject(project) {
+    localStorage.setItem('currentProject', JSON.stringify(project));
+  }
+
   const projectComps = [];
   if (projects.length) {
     for (const project of projects) {
       projectComps.push(
         <div id="project">
-            <NavLink className='nav-link' to='/Project'>{project}</NavLink>
+            <NavLink className='nav-link' to='/Project' onClick={()=>setCurrentProject(project)}>{project.title}</NavLink>
         </div>
       );
     }
   }
   projectComps.push(
     <div id="project">
-        <NavLink className='nav-link' to='/Project'>Create New Project</NavLink>
+        <NavLink className='nav-link' to='/Project' onClick={()=>setCurrentProject(blankProject)}>Create New Project</NavLink>
     </div>
   );
 
@@ -84,7 +89,7 @@ function getFriendList() {
 }
 
 function getProjectList() {
-    const prList = localStorage.getItem('projectList');
+    const prList = localStorage.getItem('projects');
     if (prList) {
         return JSON.parse(prList);
     }

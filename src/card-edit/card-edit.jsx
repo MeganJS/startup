@@ -3,6 +3,18 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import "../card/card.css";
 
 export function CardEdit() {
+    const [cardType, setType] = React.useState('Card');
+    const [cardImage, setImage] = React.useState('images/Question.png');
+    const [cardTitle, setTitle] = React.useState('Loading...');
+    const [cardText, setText] = React.useState('Loading...');
+    useEffect(() => {
+      let cardObj = getCardInfo();
+      console.log(cardObj);
+      setType(cardObj.cType);
+      setImage(cardObj.cImage);
+      setTitle(cardObj.cTitle);
+      setText(cardObj.cText); 
+    }, []);
   return (
     <main>
         <section id="card-data">
