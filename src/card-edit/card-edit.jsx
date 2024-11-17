@@ -25,7 +25,7 @@ export function CardEdit() {
             <div className="dropdown">
                 Card Type:
                 <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Character
+                    {cardType}
                 </button>
                 <ul className="dropdown-menu">
                     <li><a className="dropdown-item" href="#">Character</a></li>
@@ -34,11 +34,13 @@ export function CardEdit() {
                 </ul>
             </div>   
             <div id="card-image">
-                <img alt="dolphin" src="dolphin.png" />
+                <img alt="card-image" src={cardImage} />
             </div>
             <div>
-                <input type="text" id="card-name" name="card-name" value="Agent Squeaker" />
+                <input type="text" id="card-name" name="card-name" defaultValue={cardTitle} />
             </div>
+
+
             {/*
             <div id="card-tags">
                 <b>tags:</b>
@@ -77,8 +79,7 @@ export function CardEdit() {
         <section>
             <div className="mb-3" id="card-text-edit">
                 <span className="textarea" id="textarea-card-edit" role="textbox" contenteditable>
-                    Agent Squeaker started training very young - as a jazz musician. Now that the music club cabal have swept that career off the deck, 
-                    she's joined up with the task force bent on taking them down - with the help of some friends... 
+                    {cardText}
                 </span>
             </div>
         </section>

@@ -28,6 +28,16 @@ section {
 }
 
 
+#edit-button{
+    margin:10px;
+    display: inline;
+}
+
+#delete-button{
+    margin:10px;
+    display: inline;
+}
+
 #textarea-card-edit {
     height:max-content;
 }

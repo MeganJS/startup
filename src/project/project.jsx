@@ -228,9 +228,9 @@ function ProjectTitle({title}){
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
               </div>
               <div className="modal-body">
-                <div class="input-group mb-3">
-                  <button onClick={()=>saveChange()} class="btn btn-outline-secondary" type="button" id="button-addon1">save</button>
-                  <input onChange={(i)=>changeText(i)} type="text" class="form-control" defaultValue={title} placeholder={title} aria-label="save button for title edit" />
+                <div className="input-group mb-3">
+                  <button onClick={()=>saveChange()} className="btn btn-outline-secondary" type="button" id="button-addon1">save</button>
+                  <input onChange={(i)=>changeText(i)} type="text" className="form-control" defaultValue={title} placeholder={title} aria-label="save button for title edit" />
                 </div>
                 <p>{message}</p>
               </div>
