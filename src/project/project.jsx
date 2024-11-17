@@ -21,7 +21,7 @@ function ProjectCard({cardObj}){
         <h6 className="card-subtitle mb-2 text-body-secondary">{cardObj.type}</h6>
         <p className="card-text">{cardObj.text}</p>
         <div id="card-footer">
-          <NavLink className='nav-link' to='/Card' onClick={()=>setCurCard({cardObj})}>view card</NavLink>
+          <NavLink className='nav-link' to='/Card' onClick={()=>setCurCard(cardObj)}>view card</NavLink>
         </div>
       </div>
     </div>
@@ -71,8 +71,9 @@ export function Project(props) {
       cProjectList.push(cProject);
       localStorage.setItem("currentProject",JSON.stringify(cProject));
       localStorage.setItem('projects',JSON.stringify(cProjectList));
-      setProject(blankProject);
-      setCardList(blankProject.cardList);
+      localStorage.setItem('currentCard',JSON.stringify(bCard));
+      setProject(cProject);
+      setCardList(cCardList);
     }
   }
 

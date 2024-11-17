@@ -15,7 +15,7 @@ section {
     flex-direction: column;
 }
 
-.return-to-project {
+#return-to-project {
     width:fit-content;
     max-height: 30px;
 }

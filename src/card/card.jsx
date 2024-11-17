@@ -7,30 +7,45 @@ import { CardObj, ProjectObj} from '../project/projectAndCard.js';
 //components on this page: card type, card image, card name, card text (all loaded from database)
 //TODO need a way to load certain card based on what was clicked - talk to TA
 export function Card(props) {
-  let curCard = getCardInfo().cardObj;
+  {/*const blankCard = new CardObj("NEW CARD",`plus-circle.svg`, "---","");*/}
+  let curCard = getCardInfo();
   const [card, setCard] = React.useState(curCard);
-  {/*
-  const [cardType, setType] = React.useState(card.type);
-  const [cardImage, setImage] = React.useState(card.image);
-  const [cardTitle, setTitle] = React.useState(card.title);
-  const [cardText, setText] = React.useState(card.text);
-  */}
 
-  {/*
   useEffect(() => {
-    let cardObj = getCardInfo();
-    console.log(cardObj);
-    setType(cardObj.type);
-    console.log(cardObj.type);
-    setImage(cardObj.image);
-    setTitle(cardObj.title);
-    setText(cardObj.text); 
+    let curCard = getCardInfo();
+    setCard(curCard);
   }, []);
-  */}
+
+
+  function deleteCard() {
+    let projectList = getProjectList();
+    let project = getCurProject()
+    let cProject = { ...project }
+    let cCardList = cProject.cardList.slice()
+    let cProjectList = projectList.slice();
+    for (const proj of projectList) {
+      if (proj.title === cProject.title) {
+        console.log("same");
+        let ind = cProjectList.indexOf(proj);
+        console.log(ind);
+        cProjectList.splice(ind,1);
+      }
+    }
+    let ind = cCardList.indexOf(card);
+    cCardList.splice(ind,1);
+    cProject.cardList = cCardList;
+    cProjectList.push(cProject);
+    localStorage.setItem("currentProject",JSON.stringify(cProject));
+    localStorage.setItem('projects',JSON.stringify(cProjectList));
+    localStorage.setItem('currentCard',JSON.stringify(blankCard));
+    setCard(blankCard);
+  }
+
+
   return (
     <main>
       <div className="all">
-        <button type="submit" className="return-to-project">
+        <button type="submit" id="return-to-project" className="btn btn-outline-primary btn-sm">
             <NavLink className='nav-link' to='/project'>Return to Project</NavLink>
         </button>
         <div className="card-content">
@@ -57,7 +72,28 @@ export function Card(props) {
               <button id="edit-button" type="button" className="btn btn-outline-primary btn-sm">
                 <NavLink className='nav-link' to='/card-edit'>edit</NavLink>
               </button>
-              <button id="delete-button" type="button" className="btn btn-outline-danger btn-sm">delete card</button>
+              <button type="button" className="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                delete card
+              </button>
+
+                <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h1 className="modal-title fs-5" id="exampleModalLabel">delete?</h1>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                      </div>
+                      <div className="modal-body">
+                        Please Note: This action cannot be undone.
+                      </div>
+                      <div className="modal-footer">
+                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal">no, do not delete</button>
+                        <button type="button" className="btn btn-danger" onClick={()=>deleteCard()} data-bs-dismiss="modal">yes, delete card</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
             </div>
           </section>
   
@@ -72,6 +108,18 @@ export function Card(props) {
       </div>
     </main>
   );
+}
+
+function getCurProject(){
+  let curProjectStr = localStorage.getItem('currentProject');
+  let curProj = JSON.parse(curProjectStr);
+  return curProj;
+}
+
+function getProjectList(){
+  let projectListStr = localStorage.getItem('projects');
+  let projectList = JSON.parse(projectListStr);
+  return projectList;
 }
 
 function getCardInfo(){
