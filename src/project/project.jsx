@@ -71,6 +71,28 @@ export function Project(props) {
       cProjectList.push(cProject);
       localStorage.setItem("currentProject",JSON.stringify(cProject));
       localStorage.setItem('projects',JSON.stringify(cProjectList));
+      setProject(blankProject);
+      setCardList(blankProject.cardList);
+    }
+  }
+
+  function deleteProject(){
+    let projectListStr = localStorage.getItem('projects');
+    let cProject = { ...project }
+    if (projectListStr) {
+      let projectList = JSON.parse(projectListStr);
+      let cProjectList = projectList.slice();
+      for (const proj of projectList) {
+        if (proj.title === cProject.title) {
+          console.log("same");
+          let ind = cProjectList.indexOf(proj);
+          console.log(ind);
+          cProjectList.splice(ind,1);
+        }
+      }
+      let blankProject = new ProjectObj("Idea Title",[],[]);
+      localStorage.setItem("currentProject",JSON.stringify(blankProject));
+      localStorage.setItem('projects',JSON.stringify(cProjectList));
     }
   }
 
@@ -118,7 +140,28 @@ export function Project(props) {
       <div id="project-controls">
         <button type="button" className="btn btn-outline-info">download project</button>
         <SharedWith></SharedWith>
-        <button type="button" className="btn btn-outline-danger">delete project</button>
+
+        <button type="button" className="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          delete project
+        </button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">delete project?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+              </div>
+              <div className="modal-body">
+                please note: this action cannot be undone
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">no, do not delete</button>
+                <button type="button" class="btn btn-danger" onClick={()=>deleteProject()} data-bs-dismiss="modal">yes, delete project</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   );
