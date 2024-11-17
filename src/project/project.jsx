@@ -108,7 +108,8 @@ export function Project(props) {
   return (
     <main>
       <section id="project-content">
-          <h2 id="project-title">Dolphins=evil???</h2>
+        <ProjectTitle title={project.title}></ProjectTitle>
+          {/*<h2 id="project-title">{project.title}</h2>*/}
           <div id="project-controls">
               <div className="dropdown">
                   Sort by:
@@ -145,25 +146,98 @@ export function Project(props) {
           delete project
         </button>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">delete project?</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+        <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">delete project?</h1>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
               </div>
               <div className="modal-body">
                 please note: this action cannot be undone
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">no, do not delete</button>
-                <button type="button" class="btn btn-danger" onClick={()=>deleteProject()} data-bs-dismiss="modal">yes, delete project</button>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-primary" data-bs-dismiss="modal">no, do not delete</button>
+                <button type="button" className="btn btn-danger" onClick={()=>deleteProject()} data-bs-dismiss="modal">yes, delete project</button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </main>
+  );
+}
+
+
+function ProjectTitle({title}){
+  const [inputValue,setInputValue] = React.useState({title});
+  const [message,setMessage] = React.useState("");
+
+  const changeText = (i) => {
+    setInputValue(i.target.value);
+  }
+
+  const saveChange = () => {
+    const prList = getProjectList();
+    for (const proj of prList) {
+      if (proj.title === inputValue){
+        if (inputValue !== title){
+          setMessage("title must be distinct from other idea titles");
+          return;
+        }
+      }
+    }
+    saveTitle(inputValue);
+    setMessage("saved! refresh page to see new title");
+  }
+
+  function saveTitle(newTitle){
+    let projectListStr = localStorage.getItem('projects');
+    let project = getCurProject();
+    let cProject = { ...project }
+    if (projectListStr) {
+      let projectList = JSON.parse(projectListStr);
+      let cProjectList = projectList.slice();
+      for (const proj of projectList) {
+        if (proj.title === cProject.title) {
+          console.log("same");
+          let ind = cProjectList.indexOf(proj);
+          console.log(ind);
+          cProjectList.splice(ind,1);
+        }
+      }
+      cProject.title = newTitle;
+      cProjectList.push(cProject);
+      localStorage.setItem("currentProject",JSON.stringify(cProject));
+      localStorage.setItem('projects',JSON.stringify(cProjectList));
+    }
+  }
+
+  return(
+    <h2 id="project-title">
+      {title}
+      <h3>
+        <img src="pencil-square.svg" data-bs-toggle="modal" data-bs-target="#editTitleModal"></img>
+      </h3>
+
+      <div className="modal fade" id="editTitleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="editTitleModal" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">edit title</h1>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+              </div>
+              <div className="modal-body">
+                <div class="input-group mb-3">
+                  <button onClick={()=>saveChange()} class="btn btn-outline-secondary" type="button" id="button-addon1">save</button>
+                  <input onChange={(i)=>changeText(i)} type="text" class="form-control" defaultValue={title} placeholder={title} aria-label="save button for title edit" />
+                </div>
+                <p>{message}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </h2>
   );
 }
 
@@ -255,6 +329,8 @@ function SharedWith(){
   );
 }
 
+
+
 function getSharedList() {
   const projectStr = localStorage.getItem('currentProject');
   if (projectStr) {
@@ -298,6 +374,12 @@ function getCurProject(){
   let curProjectStr = localStorage.getItem('currentProject');
   let curProj = JSON.parse(curProjectStr);
   return curProj;
+}
+
+function getProjectList(){
+  let projectListStr = localStorage.getItem('projects');
+  let projectList = JSON.parse(projectListStr);
+  return projectList;
 }
 
 function getCardList() {
