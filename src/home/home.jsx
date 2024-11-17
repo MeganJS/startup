@@ -17,7 +17,7 @@ export function Home() {
   localStorage.setItem('projects', JSON.stringify(projectList))
   */}
   
-  let blankProject = new ProjectObj("Create New Project",[],[]);
+  let blankProject = new ProjectObj("Idea Title",[],[]);
   const [projects, setProjectList] = React.useState([]);
   const [friends, setFriendList] = React.useState([]);
 
@@ -36,6 +36,23 @@ export function Home() {
     localStorage.setItem('currentProject', JSON.stringify(project));
   }
 
+  function createNewProject(project) {
+    localStorage.setItem('currentProject', JSON.stringify(project));
+    let projectListStr = localStorage.getItem('projects');
+    let cProject = { ...project };
+    if (projectListStr) {
+      let projectList = JSON.parse(projectListStr);
+      let cProjectList = projectList.slice();
+      for (const proj of projectList) {
+        if (proj.title === cProject.title) {
+          cProject.title = cProject.title + '+';
+        }
+      }
+      cProjectList.push(cProject);
+      localStorage.setItem('projects',JSON.stringify(cProjectList));
+    }
+  }
+
   const projectComps = [];
   if (projects.length) {
     for (const project of projects) {
@@ -48,7 +65,10 @@ export function Home() {
   }
   projectComps.push(
     <div id="project">
-        <NavLink className='nav-link' to='/Project' onClick={()=>setCurrentProject(blankProject)}>Create New Project</NavLink>
+        <NavLink className='nav-link' to='/Project' onClick={()=>createNewProject(blankProject)}>
+        <div>new</div>
+        <img src='plus-circle.svg' />
+        </NavLink>
     </div>
   );
 
