@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import "./card.css";
+import { CardObj, ProjectObj} from '../project/projectAndCard.js';
 
 //components on this page: card type, card image, card name, card text (all loaded from database)
 //TODO need a way to load certain card based on what was clicked - talk to TA

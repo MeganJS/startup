@@ -9,6 +9,10 @@ import { CardObj, ProjectObj} from './projectAndCard.js';
 //TODO add delete functionality
 //TODO fix shared with functionality
 function ProjectCard({cardObj}){
+  function setCurCard(card){
+    console.log("frogs");
+    localStorage.setItem('currentCard',JSON.stringify(card));
+  }
   return(
     <div className="card" id="project-card">
       <div className="card-body">
@@ -17,7 +21,7 @@ function ProjectCard({cardObj}){
         <h6 className="card-subtitle mb-2 text-body-secondary">{cardObj.type}</h6>
         <p className="card-text">{cardObj.text}</p>
         <div id="card-footer">
-          <NavLink className='nav-link' to='/Card'>view card</NavLink>
+          <NavLink className='nav-link' to='/Card' onClick={()=>setCurCard({cardObj})}>view card</NavLink>
         </div>
       </div>
     </div>
@@ -27,64 +31,54 @@ function ProjectCard({cardObj}){
 
 export function Project(props) {
   const blankCard = new CardObj("NEW CARD",`plus-circle.svg`, "---","");
-  localStorage.setItem('currentCard',JSON.stringify(blankCard));
-  const [project, setProject] = React.useState(new ProjectObj());
-  const [cards, setCardList] = React.useState([]);
-  const [sharedList, setSharedList] = React.useState([]);
+  {/*localStorage.setItem('currentCard',JSON.stringify(blankCard));*/}
+  let proj = getCurProject();
+  const [project, setProject] = React.useState(proj);
+  const [cards, setCardList] = React.useState(proj.cardList);
   
+  {/*
   useEffect(() => {
     const project = getCurProject();
     const cList = project.cardList;
-    const sList = project.sharedList;
     if (project) {
       setProject(project);
     }
     if (cList) {
       setCardList(cList);
     }
-    if (sList) {
-      setSharedList(sList);
-    }
   }, []);
-
-  function setCurCard(card){
-    localStorage.setItem('currentCard',JSON.stringify(card));
-  }
+  */}
 
   function createNewCard(bCard) {
+    console.log("frogs");
     let projectListStr = localStorage.getItem('projects');
+    let cProject = { ...project }
+    let cCardList = cards.slice()
     if (projectListStr) {
       let projectList = JSON.parse(projectListStr);
-      projectList.filter((p) => p !== project);
-      project.addCard(bCard);
-      projectList.push(project);
-      localStorage.setItem("currentProject",JSON.stringify(project));
-      localStorage.setItem('projects',JSON.stringify(projectList));
+      let cProjectList = projectList.slice();
+      for (const proj of projectList) {
+        if (proj.title === cProject.title) {
+          console.log("same");
+          let ind = cProjectList.indexOf(proj);
+          console.log(ind);
+          cProjectList.splice(ind,1);
+        }
+      }
+      cCardList.push(bCard);
+      cProject.cardList = cCardList;
+      setProject(cProject);
+      cProjectList.push(cProject);
+      localStorage.setItem("currentProject",JSON.stringify(cProject));
+      localStorage.setItem('projects',JSON.stringify(cProjectList));
     }
   }
-
-
 
   const cardComps = [];
   if (cards.length) {
     for (const card of cards) {
       cardComps.push(
-        <ProjectCard cardObj={card} onClick={()=>setCurCard(card)}></ProjectCard>
-      );
-    }
-  }
-  cardComps.push(
-    <ProjectCard cardObj={blankCard} onClick={()=>createNewCard(blankCard)}></ProjectCard>
-  );
-
-  const sharedComps = [];
-  if (sharedList.length) {
-    for (const shared of sharedList) {
-      sharedComps.push(
-        <li className="list-group-item">
-          {shared}
-          <button className="btn btn-outline-secondary btn-sm" type="submit">unshare</button>
-        </li>
+        <ProjectCard cardObj={card}></ProjectCard>
       );
     }
   }
@@ -108,6 +102,17 @@ export function Project(props) {
           </div>
           <section id="project-cards">
             {cardComps}
+            <div className="card" id="project-card">
+              <div className="card-body">
+                <img id = "card-img" alt="smile icon" src={blankCard.image} />
+                <h5 className="card-title">{blankCard.title}</h5>
+                <h6 className="card-subtitle mb-2 text-body-secondary">{blankCard.type}</h6>
+                <p className="card-text">{blankCard.text}</p>
+                <div id="card-footer">
+                  <NavLink className='nav-link' to='/Card' onClick={()=>createNewCard(blankCard)}>create</NavLink>
+                </div>
+              </div>
+            </div>
           </section>
       </section>
       <div id="project-controls">
@@ -204,15 +209,35 @@ function SharedWith(){
 }
 
 function getSharedList() {
-  const sharedList = localStorage.getItem('sharedList');
-  if (sharedList) {
-      return JSON.parse(sharedList);
+  const projectStr = localStorage.getItem('currentProject');
+  if (projectStr) {
+      return JSON.parse(projectStr).sharedList;
   }
   return [];
 }
 
+
 function updateSharedList(sharedList) {
-  localStorage.setItem('sharedList', JSON.stringify(sharedList));
+  let projectListStr = localStorage.getItem('projects');
+  console.log(projectListStr);
+  let project = getCurProject();
+    let projectList = JSON.parse(projectListStr);
+    let newProjList = projectList.slice();
+    for (const proj of newProjList) {
+      console.log(proj.title);
+      console.log(project.title);
+      if (proj.title === project.title) {
+        console.log(true);
+        projectList.filter((p) => p !== proj);
+        const newProjList = projectList.slice();
+        let ind = newProjList.indexOf(proj);
+        newProjList.splice(ind,1);
+      }
+    }
+    project.sharedList = sharedList;
+    projectList.push(project);
+    localStorage.setItem("currentProject",JSON.stringify(project));
+    localStorage.setItem('projects',JSON.stringify(newProjList));
 }
 
 function getFriendList() {

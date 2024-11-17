@@ -44,7 +44,7 @@ class ProjectObj {
     this.sharedList.push(shared);
   }
 
-  removeCard(shared) {
+  removeShared(shared) {
     this.sharedList.filter((s) => s !== shared);
   }
 }
