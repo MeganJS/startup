@@ -49,6 +49,7 @@ section {
     border-radius: 5%;
     border-width:1px;
     margin:5px;
+    min-height: 10px;
 }
 
 #card-data {

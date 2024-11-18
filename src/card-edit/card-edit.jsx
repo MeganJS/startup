@@ -2,24 +2,65 @@ import React from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import "../card/card.css";
 
+
+{/*TODO ask TAs about how to do textbox*/}
+{/*TODO let user choose image*/}
 export function CardEdit() {
-    const [cardType, setType] = React.useState('Card');
-    const [cardImage, setImage] = React.useState('images/Question.png');
-    const [cardTitle, setTitle] = React.useState('Loading...');
-    const [cardText, setText] = React.useState('Loading...');
-    useEffect(() => {
-      let cardObj = getCardInfo();
-      console.log(cardObj);
-      setType(cardObj.cType);
-      setImage(cardObj.cImage);
-      setTitle(cardObj.cTitle);
-      setText(cardObj.cText); 
-    }, []);
+    const card = getCardInfo();
+    if (card.text === "") {
+        card.text = "enter details here";
+    }
+    const [cardType, setType] = React.useState(card.type);
+    const [cardImage, setImage] = React.useState(card.image);
+    const [cardTitle, setTitle] = React.useState(card.title);
+    const [cardText, setText] = React.useState(card.text);
+    const [message,setMessage] = React.useState("");
+
+
+    function changeTitle(i) {
+        setTitle(i.target.value);
+        console.log(cardTitle);
+    }
+    
+    function changeType(newType) {
+        setType(newType);
+        console.log(cardType);
+    }
+
+    function changeText(i) {
+        setText(i.target.innerText);
+        console.log(cardText);
+    }
+
+    function saveInfo() {
+        let projectList = getProjectList();
+        let project = getCurProject();
+        let card = getCardInfo();
+        let cProject = { ...project }
+        let cProjectList = projectList.slice();
+        for (const proj of projectList) {
+            if (proj.title === cProject.title) {
+                for (const pCard of proj.cardList) {
+                    if (pCard.title === card.title) {
+                        pCard.title = cardTitle;
+                        pCard.type = cardType;
+                        pCard.image = cardImage;
+                        pCard.text = cardText;
+                        localStorage.setItem('currentCard',JSON.stringify(pCard));
+                    }
+                }
+              localStorage.setItem("currentProject",JSON.stringify(proj));
+            }
+        }
+        localStorage.setItem('projects',JSON.stringify(cProjectList));
+    }
+
+
   return (
     <main>
         <section id="card-data">
             <button type="submit">
-                <NavLink className='nav-link' to='/card'>save</NavLink>
+                <NavLink className='nav-link' to='/card' onClick={()=>saveInfo()}>save</NavLink>
             </button>
 
             <div className="dropdown">
@@ -28,16 +69,16 @@ export function CardEdit() {
                     {cardType}
                 </button>
                 <ul className="dropdown-menu">
-                    <li><a className="dropdown-item" href="#">Character</a></li>
-                    <li><a className="dropdown-item" href="#">Object</a></li>
-                    <li><a className="dropdown-item" href="#">Setting</a></li>
+                    <li><a className="dropdown-item" href="#" onClick={(i)=>changeType("Character")}>Character</a></li>
+                    <li><a className="dropdown-item" href="#" onClick={(i)=>changeType("Item")}>Item</a></li>
+                    <li><a className="dropdown-item" href="#"onClick={(i)=>changeType("Setting")}>Setting</a></li>
                 </ul>
             </div>   
             <div id="card-image">
                 <img alt="card-image" src={cardImage} />
             </div>
             <div>
-                <input type="text" id="card-name" name="card-name" defaultValue={cardTitle} />
+                <input type="text" id="card-name" name="card-name" defaultValue={cardTitle} onChange={(i)=>changeTitle(i)} />
             </div>
 
 
@@ -78,7 +119,7 @@ export function CardEdit() {
 
         <section>
             <div className="mb-3" id="card-text-edit">
-                <span className="textarea" id="textarea-card-edit" role="textbox" contenteditable>
+                <span className="textarea" id="textarea-card-edit" defaultValue={cardText} role="textbox" onChange={(i)=>changeText(i)} contentEditable>
                     {cardText}
                 </span>
             </div>
@@ -86,3 +127,32 @@ export function CardEdit() {
     </main>
   );
 }
+
+
+function getCurProject(){
+    let curProjectStr = localStorage.getItem('currentProject');
+    let curProj = JSON.parse(curProjectStr);
+    return curProj;
+  }
+  
+  function getProjectList(){
+    let projectListStr = localStorage.getItem('projects');
+    let projectList = JSON.parse(projectListStr);
+    return projectList;
+  }
+
+function getCardInfo(){
+    const cardStr = localStorage.getItem('currentCard');
+    const cardObject = JSON.parse(cardStr);
+  
+    {/*
+    const cardObj = {
+      cType: "Character",
+      cImage: `dolphin.png`,
+      cTitle: "Agent Squeaker",
+      cText: "Agent Squeaker started training very young - as a jazz musician. Now that the music club cabal have swept that career off the deck, she's joined up with the task force bent on taking them down - with the help of some friends... "
+    };
+    return cardObj;
+    */}
+    return cardObject;
+  }
