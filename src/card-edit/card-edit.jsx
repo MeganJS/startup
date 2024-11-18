@@ -37,7 +37,14 @@ export function CardEdit() {
         let project = getCurProject();
         let card = getCardInfo();
         let cProject = { ...project }
-        let cProjectList = projectList.slice();
+        for (const pCard of cProject.cardList) {
+            if (pCard.title === cardTitle) {
+                if (cardTitle !== card.title){
+                    setMessage("card title must be distinct from other cards");
+                }
+            }
+        }
+
         for (const proj of projectList) {
             if (proj.title === cProject.title) {
                 for (const pCard of proj.cardList) {
@@ -52,7 +59,7 @@ export function CardEdit() {
               localStorage.setItem("currentProject",JSON.stringify(proj));
             }
         }
-        localStorage.setItem('projects',JSON.stringify(cProjectList));
+        localStorage.setItem('projects',JSON.stringify(projectList));
     }
 
 
@@ -79,6 +86,7 @@ export function CardEdit() {
             </div>
             <div>
                 <input type="text" id="card-name" name="card-name" defaultValue={cardTitle} onChange={(i)=>changeTitle(i)} />
+                <div>{message}</div>
             </div>
 
 

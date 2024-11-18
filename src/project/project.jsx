@@ -54,25 +54,27 @@ export function Project(props) {
     let projectListStr = localStorage.getItem('projects');
     let cProject = { ...project }
     let cCardList = cards.slice()
+
+    for (const pCard of cProject.cardList) {
+      if (pCard.title === bCard.title){
+        bCard.title = bCard.title + '+';
+      }
+    }
+    cCardList.push(bCard);
+
     if (projectListStr) {
       let projectList = JSON.parse(projectListStr);
-      let cProjectList = projectList.slice();
       for (const proj of projectList) {
         if (proj.title === cProject.title) {
-          console.log("same");
-          let ind = cProjectList.indexOf(proj);
-          console.log(ind);
-          cProjectList.splice(ind,1);
+          proj.cardList = cCardList;
+          localStorage.setItem("currentProject",JSON.stringify(proj));
+          setProject(proj);
         }
       }
-      cCardList.push(bCard);
+
       cProject.cardList = cCardList;
-      setProject(cProject);
-      cProjectList.push(cProject);
-      localStorage.setItem("currentProject",JSON.stringify(cProject));
-      localStorage.setItem('projects',JSON.stringify(cProjectList));
+      localStorage.setItem('projects',JSON.stringify(projectList));
       localStorage.setItem('currentCard',JSON.stringify(bCard));
-      setProject(cProject);
       setCardList(cCardList);
     }
   }
