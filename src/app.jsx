@@ -41,12 +41,6 @@ export default function App() {
                             </NavLink>
                         </li>
                     )}
-                    <li className="nav-item">
-                        <NavLink className='nav-link' to='home'>home</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className='nav-link' to=''>sign out</NavLink>
-                    </li>
                 </ul> 
                 {authState === AuthState.Authenticated && (
                                     <a className="navbar-brand" href="#">
