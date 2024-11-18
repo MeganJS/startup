@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import TextAreaAutosize from 'react-textarea-autosize';
 import "../card/card.css";
 
 
@@ -28,7 +29,7 @@ export function CardEdit() {
     }
 
     function changeText(i) {
-        setText(i.target.innerText);
+        setText(i.target.value);
         console.log(cardText);
     }
 
@@ -66,13 +67,13 @@ export function CardEdit() {
   return (
     <main>
         <section id="card-data">
-            <button type="submit">
-                <NavLink className='nav-link' to='/card' onClick={()=>saveInfo()}>save</NavLink>
+            <button type="submit" className="btn btn-secondary btn-sm">
+                <NavLink className='nav-link' to='/card' onClick={()=>saveInfo()}>save and return</NavLink>
             </button>
 
             <div className="dropdown">
                 Card Type:
-                <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button className="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {cardType}
                 </button>
                 <ul className="dropdown-menu">
@@ -80,7 +81,7 @@ export function CardEdit() {
                     <li><a className="dropdown-item" href="#" onClick={(i)=>changeType("Item")}>Item</a></li>
                     <li><a className="dropdown-item" href="#"onClick={(i)=>changeType("Setting")}>Setting</a></li>
                 </ul>
-            </div>   
+            </div>
             <div id="card-image">
                 <img alt="card-image" src={cardImage} />
             </div>
@@ -127,10 +128,11 @@ export function CardEdit() {
 
         <section>
             <div className="mb-3" id="card-text-edit">
-                <span className="textarea" id="textarea-card-edit" defaultValue={cardText} role="textbox" onChange={(i)=>changeText(i)} contentEditable>
-                    {cardText}
-                </span>
+                <TextAreaAutosize id="textarea-card-edit" minRows={3} maxRows={20} placeholder={cardText} defaultValue={cardText} onChange={(i)=>changeText(i)}></TextAreaAutosize>
             </div>
+            <button type="submit" className="btn btn-primary btn-sm" onClick={()=>saveInfo()}>
+                save and continue
+            </button>
         </section>
     </main>
   );

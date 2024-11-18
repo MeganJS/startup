@@ -40,6 +40,8 @@ section {
 
 #textarea-card-edit {
     height:max-content;
+    width: 100%;
+    max-height: 1 calc(100vh - 150px);
 }
 
 #card-text-edit {
@@ -49,7 +51,6 @@ section {
     border-radius: 5%;
     border-width:1px;
     margin:5px;
-    min-height: 10px;
 }
 
 #card-data {
