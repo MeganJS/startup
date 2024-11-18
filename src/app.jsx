@@ -8,9 +8,14 @@ import { Home } from './home/home';
 import { Project } from './project/project';
 import { Card } from './card/card';
 import { CardEdit } from './card-edit/card-edit';
+import { AuthState } from './login/authState';
 
 
 export default function App() {
+    const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+    const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authState, setAuthState] = React.useState(currentAuthState);
+
     return (
     <BrowserRouter>
     <div className="body">
@@ -22,6 +27,20 @@ export default function App() {
                     </h1>
                 
                   <ul className="nav justify-content-center">
+                  {authState === AuthState.Authenticated && (
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to='home'>
+                                home
+                            </NavLink>
+                        </li>
+                    )}
+                    {authState === AuthState.Authenticated && (
+                        <li className='nav-item'>
+                            <NavLink className='nav-link' to=''>
+                                account
+                            </NavLink>
+                        </li>
+                    )}
                     <li className="nav-item">
                         <NavLink className='nav-link' to='home'>home</NavLink>
                     </li>
@@ -29,10 +48,12 @@ export default function App() {
                         <NavLink className='nav-link' to=''>sign out</NavLink>
                     </li>
                 </ul> 
-                <a className="navbar-brand" href="#">
-                    <img alt="smile icon" src="images/smile icon.png" />
-                    username
-                </a>
+                {authState === AuthState.Authenticated && (
+                                    <a className="navbar-brand" href="#">
+                                    <img alt="smile icon" src="smile icon.png" />
+                                    {userName}
+                                </a>
+                )}
                 </div>
             </nav>
             
@@ -45,7 +66,13 @@ export default function App() {
 
         <main>
             <Routes>
-                <Route path='/' element={<Login />} exact />
+                <Route path='/' element={<Login 
+                    userName={userName}
+                    authState={authState}
+                    onAuthChange={(userName,authState) => {
+                        setAuthState(authState);
+                        setUserName(userName);
+                    }}/>} exact />
                 <Route path='/home' element={<Home />} />
                 <Route path='/project' element={<Project />} />
                 <Route path='/card' element={<Card />} />

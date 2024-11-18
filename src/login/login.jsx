@@ -1,33 +1,26 @@
 import React from 'react';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { Unauthenticated } from './unauthenticated';
+import { Authenticated } from './authenticated';
+import { AuthState } from './authState';
 import "./login.css";
 
-
-export function Login() {
+{/*copied all my login code stuff from simon*/}
+export function Login({userName, authState, onAuthChange}) {
   return (
-    <main>
-            <form>
-                <div className="form-group row">
-                    <div className="col-sm-10">
-                        <label for="inputUsername" className="col-sm-2 col-form-label">Username</label>
-                        <input type="username" className="form-control" id="inputUsername" pattern="\w{1,24}" required />
-                    </div>
-                  </div>
-                
-                <div className="form-group row">
-                  
-                <div className="col-sm-10">
-                    <label for="inputPassword" className="col-sm-2 col-form-label">Password</label>
-                    <input type="password" className="form-control" id="inputPassword" pattern="{8,24}" required />
-                </div>
-                </div>
-                <button type="submit" id="login">
-                    <NavLink className='nav-link' to='/Home'>login</NavLink>
-                </button>
-                <button type="submit" id="create-account">
-                    <NavLink className='nav-link' to='/Home'>create account</NavLink>
-                </button>
-            </form>    
+    <main className='container-fluid text-center'>
+      <div>
+        {authState !== AuthState.Unknown}
+        {authState === AuthState.Authenticated && <Authenticated userName={userName} onLogout={() => onAuthChange(userName, AuthState.Unauthenticated)} />}
+        {authState === AuthState.Unauthenticated && (
+          <Unauthenticated
+            userName={userName}
+            onLogin={(loginUserName) => {
+              onAuthChange(loginUserName, AuthState.Authenticated);
+            }}
+          />
+        )}
+      </div>
     </main>
   );
 }
