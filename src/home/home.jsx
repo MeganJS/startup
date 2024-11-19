@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { CardObj, ProjectObj} from '../project/projectAndCard';
 
 {/*components for projects, friendlist*/}
+{/*TODO clear localstorage for curProject, curCard when navigate back to home*/}
 export function Home() {
   {/*
   const cObj1= new CardObj("Button of DOOM",`button icon.png`, "Item","no one knows where this came from, and no one knows what it does. would you be the first to press it?");
@@ -99,15 +100,23 @@ function FriendList(){
   }
 
   function addToFriendList(){
-    for (const friend of friendList) {
-      if (friend === friendVal) {
-        return;
+    if (friendList.length){
+      for (const friend of friendList) {
+        if (friend === friendVal) {
+          return;
+        }
       }
+      const newFriends = friendList.slice();
+      newFriends.push(friendVal);
+      setFriendList(newFriends);
+      updateFriendList(newFriends);
+    } else {
+      const newFriends = [];
+      newFriends.push(friendVal);
+      setFriendList(newFriends);
+      updateFriendList(newFriends);
     }
-    const newFriends = friendList.slice();
-    newFriends.push(friendVal);
-    setFriendList(newFriends);
-    updateFriendList(newFriends);
+
   }
 
   {/*TODO add modal to prevent unfriending misclicks*/}
@@ -118,7 +127,7 @@ function FriendList(){
     newFriends.splice(ind,1);
     console.log(oldFriend);
     setFriendList(newFriends);
-    updateFriendList(oldFriend);
+    updateFriendList(newFriends);
   }
 
   const friendComps = [];
