@@ -5,9 +5,6 @@ import { useState, useEffect } from 'react';
 import { CardObj, ProjectObj} from './projectAndCard.js';
 
 //TODO need a way to sanitize user input
-//TODO load project cards from storage - use map?
-//TODO add delete functionality
-//TODO fix shared with functionality
 function ProjectCard({cardObj}){
   function setCurCard(card){
     console.log("frogs");
@@ -120,9 +117,9 @@ export function Project(props) {
                     Date of Creation
                   </button>
                   <ul className="dropdown-menu">
-                    <li><a className="dropdown-item" href="#">Card Type</a></li>
-                    <li><a className="dropdown-item" href="#">Date of Creation</a></li>
-                    <li><a className="dropdown-item" href="#">Alphabet Order</a></li>
+                    <li key="Card Type"><a className="dropdown-item" href="#">Card Type</a></li>
+                    <li key="Date"><a className="dropdown-item" href="#">Date of Creation</a></li>
+                    <li key="Alphabet"><a className="dropdown-item" href="#">Alphabet Order</a></li>
                   </ul>
               </div>
           </div>
@@ -149,7 +146,7 @@ export function Project(props) {
           delete project
         </button>
 
-        <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
@@ -223,7 +220,7 @@ function ProjectTitle({title}){
         <img src="pencil-square.svg" data-bs-toggle="modal" data-bs-target="#editTitleModal"></img>
       </h3>
 
-      <div className="modal fade" id="editTitleModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="editTitleModal" aria-hidden="true">
+      <div className="modal fade" id="editTitleModal" data-bs-backdrop="static" tabIndex="-1" aria-labelledby="editTitleModal" aria-hidden="true">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -293,7 +290,7 @@ function SharedWith(){
   if (sharedList.length) {
     for (const shared of sharedList) {
       sharedComps.push(
-        <li className="list-group-item">
+        <li key={shared} className="list-group-item">
           {shared}
           <button className="btn btn-outline-secondary btn-sm" type="submit" onClick={()=>removeShareVal(shared)}>unshare</button>
         </li>
@@ -305,7 +302,7 @@ function SharedWith(){
   if (friendList.length) {
     for (const friend of friendList) {
       friendComps.push(
-        <li><a className="dropdown-item" href="#" onClick={()=>changeShareVal(friend)}>{friend}</a></li>
+        <li key={friend}><a className="dropdown-item" href="#" onClick={()=>changeShareVal(friend)}>{friend}</a></li>
       );
     }
   }
@@ -315,7 +312,7 @@ function SharedWith(){
       <b>Shared with:</b>
       <ul className="list-group">
         {sharedComps}
-        <li className="list-group-item" id="share-with">
+        <li key="Add:" className="list-group-item" id="share-with">
           <p>Add:</p>
           <div className="dropdown">
             <a className="btn btn-dark btn-sm dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

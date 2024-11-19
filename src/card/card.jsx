@@ -4,9 +4,8 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import "./card.css";
 import { CardObj, ProjectObj} from '../project/projectAndCard.js';
 
-//components on this page: card type, card image, card name, card text (all loaded from database)
-//TODO need a way to load certain card based on what was clicked - talk to TA
 export function Card(props) {
+  const blankCard = new CardObj("NEW CARD",`plus-circle.svg`, "---","");
   {/*const blankCard = new CardObj("NEW CARD",`plus-circle.svg`, "---","");*/}
   let curCard = getCardInfo();
   const [card, setCard] = React.useState(curCard);
@@ -22,21 +21,17 @@ export function Card(props) {
     let project = getCurProject()
     let cProject = { ...project }
     let cCardList = cProject.cardList.slice()
-    let cProjectList = projectList.slice();
-    for (const proj of projectList) {
-      if (proj.title === cProject.title) {
-        console.log("same");
-        let ind = cProjectList.indexOf(proj);
-        console.log(ind);
-        cProjectList.splice(ind,1);
-      }
-    }
     let ind = cCardList.indexOf(card);
     cCardList.splice(ind,1);
-    cProject.cardList = cCardList;
-    cProjectList.push(cProject);
-    localStorage.setItem("currentProject",JSON.stringify(cProject));
-    localStorage.setItem('projects',JSON.stringify(cProjectList));
+
+    let cProjectList = projectList.slice();
+    for (const proj of projectList) {
+      if (proj.title === project.title) {
+        proj.cardList = cCardList;
+        localStorage.setItem('projects',JSON.stringify(projectList));
+        localStorage.setItem("currentProject",JSON.stringify(proj));
+      }
+    }
     localStorage.setItem('currentCard',JSON.stringify(blankCard));
     setCard(blankCard);
   }
@@ -76,7 +71,7 @@ export function Card(props) {
                 delete card
               </button>
 
-                <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div className="modal-dialog">
                     <div className="modal-content">
                       <div className="modal-header">

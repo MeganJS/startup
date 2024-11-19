@@ -76,7 +76,7 @@ export function Home() {
   if (friends.length) {
     for (const friend of friends) {
       friendComps.push(
-        <li className="list-group-item">
+        <li key={friend} className="list-group-item">
             <div>{friend}</div>
             <button type="submit"><a href="home.html">disconnect</a></button>
             <button type="submit"><a href="home.html">see shared projects</a></button>
@@ -85,7 +85,7 @@ export function Home() {
     }
   }
   friendComps.push(
-    <li className="list-group-item">
+    <li key="Request:" className="list-group-item">
         <label for="find-connection">Request Connection</label>
         <input type="text" id="find-connection" pattern="\w{1,24}" required/>
         <button type="submit"><a href="home.html">find</a></button>
