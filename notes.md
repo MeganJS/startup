@@ -14,6 +14,8 @@ __this is bold__ and **so is this**
 <sub>subscript</sub><sup>superscript</sup> ~~I want you to be able to read this while pretending that you can't~~
 
 > indenting (handy for quotes!)
+## Notes for React
+This past weekend I learned that you need your images folder to be named 'public' in order to use it. Who knew! Also localStorage is very useful, modals are surprisingly easy with bootstrap. and npm run dev
 
 ## Notes for Sept. 11, 2024:
 Today I learned to always pull from Github when I start working and commit whenever I make large changes, or at the end of a coding session.
