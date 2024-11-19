@@ -46,6 +46,9 @@ export function Home() {
       }
       cProjectList.push(cProject);
       localStorage.setItem('projects',JSON.stringify(cProjectList));
+    } else {
+      let projectList = [project];
+      localStorage.setItem('projects',JSON.stringify(projectList));
     }
   }
 
@@ -176,5 +179,6 @@ function getProjectList() {
     if (prList) {
         return JSON.parse(prList);
     }
+    localStorage.setItem('projects',JSON.stringify([]));
     return [];
 }
