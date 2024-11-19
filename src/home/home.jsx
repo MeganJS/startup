@@ -19,14 +19,9 @@ export function Home() {
   
   let blankProject = new ProjectObj("Idea Title",[],[]);
   const [projects, setProjectList] = React.useState([]);
-  const [friends, setFriendList] = React.useState([]);
 
   useEffect(() => {
     const pList = getProjectList();
-    const frList = getFriendList(); 
-    if (frList) {
-      setFriendList(frList);
-      }
     if (pList) {
       setProjectList(pList);
     }
@@ -72,26 +67,6 @@ export function Home() {
     </div>
   );
 
-  const friendComps = [];
-  if (friends.length) {
-    for (const friend of friends) {
-      friendComps.push(
-        <li key={friend} className="list-group-item">
-            <div>{friend}</div>
-            <button type="submit"><a href="home.html">disconnect</a></button>
-            <button type="submit"><a href="home.html">see shared projects</a></button>
-        </li>
-      );
-    }
-  }
-  friendComps.push(
-    <li key="Request:" className="list-group-item">
-        <label for="find-connection">Request Connection</label>
-        <input type="text" id="find-connection" pattern="\w{1,24}" required/>
-        <button type="submit"><a href="home.html">find</a></button>
-    </li>
-  );
-
   return (
     <main>
         <section id="projects">
@@ -100,12 +75,78 @@ export function Home() {
                 {projectComps}
             </section>
         </section>
-        <section id="connections">
-            <ul className="list-group">
-                {friendComps}
-            </ul>
-        </section>
+        <FriendList></FriendList>
     </main>
+  );
+}
+
+function FriendList(){
+  const frList = getFriendList();
+  const [friendList, setFriendList] = React.useState(frList);
+  const [friendVal, setFriendVal] = React.useState("__________");
+
+  {/*
+  useEffect(() => {
+    const frList = getFriendList();
+    if (frList) {
+      setFriendList(frList);
+    }
+  }, []);
+  */}
+
+  function changeFriendVal(friend){
+    setFriendVal(friend.target.value);
+  }
+
+  function addToFriendList(){
+    for (const friend of friendList) {
+      if (friend === friendVal) {
+        return;
+      }
+    }
+    const newFriends = friendList.slice();
+    newFriends.push(friendVal);
+    setFriendList(newFriends);
+    updateFriendList(newFriends);
+  }
+
+  {/*TODO add modal to prevent unfriending misclicks*/}
+  {/*TODO remove from shared projects as well?*/}
+  function removeFriendVal(oldFriend){
+    const newFriends = friendList.slice();
+    let ind = friendList.indexOf(oldFriend);
+    newFriends.splice(ind,1);
+    console.log(oldFriend);
+    setFriendList(newFriends);
+    updateFriendList(oldFriend);
+  }
+
+  const friendComps = [];
+  if (friendList.length) {
+    for (const friend of friendList) {
+      friendComps.push(
+        <li key={friend} className="list-group-item">
+            <div>{friend}</div>
+            <button className="btn btn-outline-danger btn-sm" type="submit" onClick={()=>removeFriendVal({friend})}>disconnect</button>
+            {/*<button type="submit">see shared projects</button>*/}
+        </li>
+      );
+    }
+  }
+  friendComps.push(
+    <li key="Request:" className="list-group-item">
+        <label for="find-connection">Request Connection</label>
+        <input type="text" id="find-connection" pattern="\w{1,24}" onChange={(i)=>changeFriendVal(i)} required/>
+        <button type="submit" className="btn btn-outline-secondary btn-sm" onClick={()=>addToFriendList()}>find</button>
+    </li>
+  );
+
+  return (
+    <section id="connections">
+      <ul className="list-group">
+          {friendComps}
+      </ul>
+    </section>
   );
 }
 
@@ -115,6 +156,10 @@ function getFriendList() {
         return JSON.parse(frList);
     }
     return [];
+}
+
+function updateFriendList(newFriends) {
+  localStorage.setItem('friendList', JSON.stringify(newFriends));
 }
 
 function getProjectList() {
