@@ -109,7 +109,7 @@ export function Project(props) {
     <main>
       <section id="project-content">
         <ProjectTitle title={project.title}></ProjectTitle>
-          {/*<h2 id="project-title">{project.title}</h2>*/}
+          {/*<h2 id="project-title">{project.title}</h2>
           <div id="project-controls">
               <div className="dropdown">
                   Sort by:
@@ -123,6 +123,7 @@ export function Project(props) {
                   </ul>
               </div>
           </div>
+          */}
           <section id="project-cards">
             {cardComps}
             <div className="card" id="project-card">
@@ -194,22 +195,15 @@ function ProjectTitle({title}){
   function saveTitle(newTitle){
     let projectListStr = localStorage.getItem('projects');
     let project = getCurProject();
-    let cProject = { ...project }
     if (projectListStr) {
       let projectList = JSON.parse(projectListStr);
-      let cProjectList = projectList.slice();
       for (const proj of projectList) {
-        if (proj.title === cProject.title) {
-          console.log("same");
-          let ind = cProjectList.indexOf(proj);
-          console.log(ind);
-          cProjectList.splice(ind,1);
+        if (proj.title === project.title) {
+          proj.title = newTitle;
+          localStorage.setItem("currentProject",JSON.stringify(proj));
+          localStorage.setItem('projects',JSON.stringify(projectList));
         }
       }
-      cProject.title = newTitle;
-      cProjectList.push(cProject);
-      localStorage.setItem("currentProject",JSON.stringify(cProject));
-      localStorage.setItem('projects',JSON.stringify(cProjectList));
     }
   }
 
@@ -340,27 +334,17 @@ function getSharedList() {
 }
 
 
-function updateSharedList(sharedList) {
-    let projectListStr = localStorage.getItem('projects');
+function updateSharedList(newSharedList) {
+    let projectList = getProjectList();
     let project = getCurProject();
-    let cProject = { ...project }
-    if (projectListStr) {
-      let projectList = JSON.parse(projectListStr);
-      let cProjectList = projectList.slice();
-      for (const proj of projectList) {
-        if (proj.title === cProject.title) {
-          console.log("same");
-          let ind = cProjectList.indexOf(proj);
-          console.log(ind);
-          cProjectList.splice(ind,1);
-        }
+    for (const proj of projectList) {
+      if (proj.title === project.title) {
+        proj.sharedList = newSharedList
+        localStorage.setItem("currentProject",JSON.stringify(proj));
+        localStorage.setItem('projects',JSON.stringify(projectList));
       }
-      cProject.sharedList = sharedList;
-      cProjectList.push(cProject);
-      localStorage.setItem("currentProject",JSON.stringify(cProject));
-      localStorage.setItem('projects',JSON.stringify(cProjectList));
     }
-  }
+}
 
 function getFriendList() {
   const frList = localStorage.getItem('friendList');
