@@ -1,5 +1,8 @@
 # startup: idea-thing
 ## Startup Application for CS260: Web Development
+## REACT
+This just in: you can now create projects, delete projects, add cards, edit cards, delete cards, change shared lists and friend lists. You can even log in! This and more due to the wonderful world of React. See [startup.idea-thing.click](https://startup.idea-thing.click/) for further details.
+
 ## CSS
 Now includes an organized header and navigation bar, responsive design on all pages, organization of projects and cards into grids, and more! Friends lists, tags lists, and an input field on the card edit page that grows as you type. See [startup.idea-thing.click](https://startup.idea-thing.click/) for further details.
 
