@@ -15,6 +15,7 @@ export default function App() {
     const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
     const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
     const [authState, setAuthState] = React.useState(currentAuthState);
+    {/*const [profile, setProfile] = React.useState('');*/}
 
     return (
     <BrowserRouter>
@@ -43,10 +44,31 @@ export default function App() {
                     )}
                 </ul> 
                 {authState === AuthState.Authenticated && (
-                                    <a className="navbar-brand" href="#">
-                                    <img alt="smile icon" src="smile icon.png" />
-                                    {userName}
-                                </a>
+                    <div>
+                        <a className="navbar-brand" href="#">
+                            <img alt="smile icon" src="smile icon.png" data-bs-toggle="modal" data-bs-target="#editProfileModal" />
+                            {userName}
+                        </a>
+                        {/*}
+                        <div className="modal fade" id="editProfileModal" data-bs-backdrop="static" tabIndex="-1" aria-labelledby="editTitleModal" aria-hidden="true">
+                            <div className="modal-dialog">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                    <h1 className="modal-title fs-5" id="exampleModalLabel">get new profile image</h1>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                                    </div>
+                                    <div className="modal-body">
+                                        <div className="input-group mb-3">
+                                            Upload a profile picture:
+                                            <input type="file" name="file" accept="image/*" onChange={(i)=>changeProfile(i)} />
+                                            <button onClick={()=>saveProfile()} className="btn btn-outline-secondary" type="button" id="button-addon1">save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        */}
+                    </div>
                 )}
                 </div>
             </nav>
