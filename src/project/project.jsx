@@ -32,6 +32,7 @@ export function Project(props) {
   let proj = getCurProject();
   const [project, setProject] = React.useState(proj);
   const [cards, setCardList] = React.useState(proj.cardList);
+  const [saveMsg, setSaveMsg] = React.useState("");
   
   {/*
   useEffect(() => {
@@ -46,9 +47,10 @@ export function Project(props) {
   }, []);
   */}
 
-  function createNewCard(bCard) {
-    console.log("frogs");
-    let projectListStr = localStorage.getItem('projects');
+  async function createNewCard(bCard) {
+    console.log("new card");
+
+    let projectList = getProjectList();
     let cProject = { ...project }
     let cCardList = cards.slice()
 
@@ -59,8 +61,7 @@ export function Project(props) {
     }
     cCardList.push(bCard);
 
-    if (projectListStr) {
-      let projectList = JSON.parse(projectListStr);
+    if (projectList) {
       for (const proj of projectList) {
         if (proj.title === cProject.title) {
           proj.cardList = cCardList;
@@ -73,10 +74,15 @@ export function Project(props) {
       localStorage.setItem('projects',JSON.stringify(projectList));
       localStorage.setItem('currentCard',JSON.stringify(bCard));
       setCardList(cCardList);
+
+      let saveResult = saveProjectChange(projectList);
+      if (saveResult !== "success"){
+        setSaveMsg(saveResult);
+      }
     }
   }
 
-  function deleteProject(){
+  async function deleteProject(){
     let projectListStr = localStorage.getItem('projects');
     let cProject = { ...project }
     if (projectListStr) {
@@ -93,6 +99,10 @@ export function Project(props) {
       let blankProject = new ProjectObj("Idea Title",[],[]);
       localStorage.setItem("currentProject",JSON.stringify(blankProject));
       localStorage.setItem('projects',JSON.stringify(cProjectList));
+      let saveResult = saveProjectChange(projectList);
+      if (saveResult !== "success"){
+        setSaveMsg(saveResult);
+      }
     }
   }
 
@@ -124,6 +134,7 @@ export function Project(props) {
               </div>
           </div>
           */}
+          <div style={{color:"red"}}>{saveMsg}</div>
           <section id="project-cards">
             {cardComps}
             <div className="card" id="project-card">
@@ -192,7 +203,7 @@ function ProjectTitle({title}){
     setMessage("saved! refresh page to see new title");
   }
 
-  function saveTitle(newTitle){
+  async function saveTitle(newTitle){
     let projectListStr = localStorage.getItem('projects');
     let project = getCurProject();
     if (projectListStr) {
@@ -202,6 +213,10 @@ function ProjectTitle({title}){
           proj.title = newTitle;
           localStorage.setItem("currentProject",JSON.stringify(proj));
           localStorage.setItem('projects',JSON.stringify(projectList));
+          let saveResult = saveProjectChange(projectList);
+          if (saveResult !== "success"){
+            setMessage("Could not save project: " + saveResult);
+          }
         }
       }
     }
@@ -241,6 +256,7 @@ function SharedWith(){
   const [sharedList, setSharedList] = React.useState(sList);
   const [friendList, setFriendList] = React.useState(frList);
   const [shareVal, setShareVal] = React.useState("__________");
+  const [saveMsg, setSaveMsg] = React.useState("");
 
   {/*
   useEffect(() => {
@@ -280,6 +296,22 @@ function SharedWith(){
     updateSharedList(newShare);
   }
 
+  function updateSharedList(newSharedList) {
+    let projectList = getProjectList();
+    let project = getCurProject();
+    for (const proj of projectList) {
+      if (proj.title === project.title) {
+        proj.sharedList = newSharedList
+        localStorage.setItem("currentProject",JSON.stringify(proj));
+        localStorage.setItem('projects',JSON.stringify(projectList));
+        let saveResult = saveProjectChange(projectList);
+        if (saveResult !== "success"){
+          setSaveMsg("Unable to save: " + saveResult);
+        }
+      }
+    }
+  }
+
   const sharedComps = [];
   if (sharedList.length) {
     for (const shared of sharedList) {
@@ -303,6 +335,7 @@ function SharedWith(){
 
   return (
     <section id="shared">
+      {saveMsg}
       <b>Shared with:</b>
       <ul className="list-group">
         {sharedComps}
@@ -323,7 +356,22 @@ function SharedWith(){
   );
 }
 
-
+async function saveProjectChange(newList) {
+  const response = await fetch('/api/projects', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(newList),
+  });
+  if (response?.status === 200) {
+    console.log("successfully saved project change");
+    return "success";
+  } else {
+    const body = await response.json();
+    console.log(body.msg);
+    return body.msg;
+    //setDisplayError(`Error Ocurred: ${body.msg}`);
+  }
+}
 
 function getSharedList() {
   const projectStr = localStorage.getItem('currentProject');
@@ -333,18 +381,6 @@ function getSharedList() {
   return [];
 }
 
-
-function updateSharedList(newSharedList) {
-    let projectList = getProjectList();
-    let project = getCurProject();
-    for (const proj of projectList) {
-      if (proj.title === project.title) {
-        proj.sharedList = newSharedList
-        localStorage.setItem("currentProject",JSON.stringify(proj));
-        localStorage.setItem('projects',JSON.stringify(projectList));
-      }
-    }
-}
 
 function getFriendList() {
   const frList = localStorage.getItem('friendList');
