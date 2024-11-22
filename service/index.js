@@ -14,7 +14,6 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-
 // CreateAuth a new user
 apiRouter.post('/auth/create', async (req, res) => {
   const user = users[req.body.username];
@@ -50,9 +49,57 @@ apiRouter.delete('/auth/logout', (req, res) => {
   res.status(204).end();
 });
 
+
+// Getprojects note: req may need to be _req???
+apiRouter.get('/projects', (req, res) => {
+  const user = Object.values(users).find((u) => u.token === req.body.token);
+  if (user){
+    res.send(user.projects);
+    return;
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
+
+// Getfriends note: req may need to be _req???
+apiRouter.get('/friends', (req, res) => {
+  const user = Object.values(users).find((u) => u.token === req.body.token);
+  if (user){
+    res.send(user.friends);
+    return;
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
+
+
+// SubmitScore
+apiRouter.post('/projects', (req, res) => {
+  const user = Object.values(users).find((u) => u.token === req.body.token);
+  if (user){
+    user.projects = req.body.projects; //tODO test this!!
+    return;
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
+
+// SubmitScore
+apiRouter.post('/friends', (req, res) => {
+  const user = Object.values(users).find((u) => u.token === req.body.token);
+  if (user){
+    user.projects = req.body.friends; //tODO test this!!
+    return;
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
+
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
+
+/*
 app.get('*', (_req, res) => {
   res.send({ msg: 'idea-thing service' });
 });
+*/
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
