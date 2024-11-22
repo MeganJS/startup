@@ -16,6 +16,14 @@ export function Authenticated(props) {
         })
         .finally(() => {
           localStorage.removeItem('userName');
+          let projStr = localStorage.getItem('currentProject');
+          if (projStr) {
+            localStorage.removeItem('currentProject');
+          }
+          let cardStr = localStorage.getItem('currentCard');
+          if (cardStr) {
+            localStorage.removeItem('currentCard');
+          }
           props.onLogout();
         });
     }

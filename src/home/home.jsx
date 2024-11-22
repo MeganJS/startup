@@ -6,7 +6,7 @@ import { CardObj, ProjectObj} from '../project/projectAndCard';
 
 {/*components for projects, friendlist*/}
 {/*TODO clear localstorage for curProject, curCard when navigate back to home*/}
-export function Home() {
+export function Home(props) {
   {/*
   const cObj1= new CardObj("Button of DOOM",`button icon.png`, "Item","no one knows where this came from, and no one knows what it does. would you be the first to press it?");
   const cObj2= new CardObj("Agent Squeaker",`dolphin.png`,"Character","Agent Squeaker started training very young - as a jazz musician. Now that the music club cabal have swept that career off the deck, she's joined up with the task force bent on taking them down - with the help of some friends... ");
@@ -17,38 +17,59 @@ export function Home() {
   let projectList = [dolProject];
   localStorage.setItem('projects', JSON.stringify(projectList))
   */}
-  
+  const [userName, setUserName] = React.useState(props.userName);
   let blankProject = new ProjectObj("Idea Title",[],[]);
   const [projects, setProjectList] = React.useState([]);
 
   useEffect(() => {
-    const pList = getProjectList();
-    if (pList) {
-      setProjectList(pList);
-    }
+    fetch('/api/projects', {
+      method: "GET",
+    })
+      .then((response)=>response.json())
+      .then((projects)=>{
+        setProjectList(projects);
+        console.log(projects);
+      });
+    //const pList = getProjectList();
+    //if (pList) {
+      //setProjectList(pList);
+    //}
   }, []);
 
   function setCurrentProject(project) {
     localStorage.setItem('currentProject', JSON.stringify(project));
   }
 
-  function createNewProject(project) {
+  async function createNewProject(project) {
     localStorage.setItem('currentProject', JSON.stringify(project));
-    let projectListStr = localStorage.getItem('projects');
+    let projectList = projects.slice();
+    //let projectListStr = localStorage.getItem('projects');
     let cProject = { ...project };
-    if (projectListStr) {
-      let projectList = JSON.parse(projectListStr);
-      let cProjectList = projectList.slice();
+    if (projectList) {
+      //let projectList = JSON.parse(projectListStr);
+      //let cProjectList = projectList.slice();
       for (const proj of projectList) {
         if (proj.title === cProject.title) {
           cProject.title = cProject.title + '+';
         }
       }
-      cProjectList.push(cProject);
-      localStorage.setItem('projects',JSON.stringify(cProjectList));
-    } else {
-      let projectList = [project];
+      projectList.push(cProject);
       localStorage.setItem('projects',JSON.stringify(projectList));
+      const toPost = projectList;
+      await fetch('/api/projects', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(toPost),
+      });
+    } else {
+      let newProjectList = [project];
+      localStorage.setItem('projects',JSON.stringify(newProjectList));
+      const toPost = newProjectList;
+      await fetch('/api/projects', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(toPost),
+      });
     }
   }
 
@@ -172,6 +193,7 @@ function getFriendList() {
 
 function updateFriendList(newFriends) {
   localStorage.setItem('friendList', JSON.stringify(newFriends));
+  //A. P. Eerson,Mr. Frogdatterson,Donna Noble
 }
 
 function getProjectList() {

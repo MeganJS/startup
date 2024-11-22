@@ -13,6 +13,7 @@ import { AuthState } from './login/authState';
 
 export default function App() {
     const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+    //TODO is this secure?
     const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
     const [authState, setAuthState] = React.useState(currentAuthState);
     {/*const [profile, setProfile] = React.useState('');*/}
@@ -89,7 +90,7 @@ export default function App() {
                         setAuthState(authState);
                         setUserName(userName);
                     }}/>} exact />
-                <Route path='/home' element={<Home />} />
+                <Route path='/home' element={<Home userName={userName}/>} />
                 <Route path='/project' element={<Project />} />
                 <Route path='/card' element={<Card />} />
                 <Route path='/card-edit' element={<CardEdit />} />

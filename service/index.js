@@ -5,7 +5,7 @@ const uuid = require('uuid');
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 let users = {};
-
+let curUser = {};
 
 app.use(express.json());
 app.use(express.static('public'));
@@ -13,7 +13,7 @@ app.use(express.static('public'));
 // Router for service endpoints
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
-
+//todo: look into cookie
 // CreateAuth a new user
 apiRouter.post('/auth/create', async (req, res) => {
   const user = users[req.body.username];
@@ -22,6 +22,7 @@ apiRouter.post('/auth/create', async (req, res) => {
   } else {
     const user = { username: req.body.username, password: req.body.password, projects: req.body.projects, friends: req.body.friends, token: uuid.v4() };
     users[user.username] = user;
+    curUser=user;
 
     res.send({ token: user.token });
   }
@@ -33,6 +34,7 @@ apiRouter.post('/auth/login', async (req, res) => {
   if (user) {
     if (req.body.password === user.password) {
       user.token = uuid.v4();
+      curUser=user;
       res.send({ token: user.token });
       return;
     }
@@ -45,14 +47,17 @@ apiRouter.delete('/auth/logout', (req, res) => {
   const user = Object.values(users).find((u) => u.token === req.body.token);
   if (user) {
     delete user.token;
+    curUser = {};
   }
   res.status(204).end();
 });
 
 
 // Getprojects note: req may need to be _req???
-apiRouter.get('/projects', (req, res) => {
-  const user = Object.values(users).find((u) => u.token === req.body.token);
+// how to check if user is logged in?
+apiRouter.get('/projects', (_req, res) => {
+  const user = users[curUser.username];
+  //const user = Object.values(users).find((u) => u.token === req.body.token);
   if (user){
     res.send(user.projects);
     return;
@@ -62,7 +67,8 @@ apiRouter.get('/projects', (req, res) => {
 
 // Getfriends note: req may need to be _req???
 apiRouter.get('/friends', (req, res) => {
-  const user = Object.values(users).find((u) => u.token === req.body.token);
+  const user = users[curUser.username];
+  //const user = Object.values(users).find((u) => u.token === req.body.token);
   if (user){
     res.send(user.friends);
     return;
@@ -73,9 +79,11 @@ apiRouter.get('/friends', (req, res) => {
 
 // SubmitScore
 apiRouter.post('/projects', (req, res) => {
-  const user = Object.values(users).find((u) => u.token === req.body.token);
+  const user = users[curUser.username];
+  //const user = Object.values(users).find((u) => u.token === req.body.token);
   if (user){
-    user.projects = req.body.projects; //tODO test this!!
+    user.projects = req.body;
+    curUser.projects = req.body; //tODO test this!!
     return;
   }
   res.status(401).send({ msg: 'Unauthorized' });
@@ -83,9 +91,11 @@ apiRouter.post('/projects', (req, res) => {
 
 // SubmitScore
 apiRouter.post('/friends', (req, res) => {
-  const user = Object.values(users).find((u) => u.token === req.body.token);
+  const user = users[curUser.username];
+  //const user = Object.values(users).find((u) => u.token === req.body.token);
   if (user){
-    user.projects = req.body.friends; //tODO test this!!
+    user.friends = req.body; //tODO test this!!
+    curUser.friends = req.body;
     return;
   }
   res.status(401).send({ msg: 'Unauthorized' });
