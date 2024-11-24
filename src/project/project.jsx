@@ -260,16 +260,33 @@ function SharedWith(){
 
   {/*
   useEffect(() => {
-    const sList = getSharedList();
-    if (sList) {
-      setSharedList(sList);
-    }
-    const frList = getFriendList();
-    if (frList) {
-      setFriendList(frList);
-    }
+    fetch('/api/friends', {
+      method: "GET",
+    })
+      .then((response)=>response.json())
+      .then((friends)=>{
+        setFriendList(friends);
+        console.log(friends);
+        console.log(friendList);
+        //localStorage.setItem('friendList', JSON.stringify(friends));
+      });
   }, []);
-  */}
+    */}
+
+  async function getFriendList() {
+    const response = await fetch('/api/friends', {
+      method: 'GET',
+    });
+    if (response?.status === 200) {
+      const body = await response.json();
+      console.log(body);
+      return body;
+      //localStorage.setItem('userName', userName);
+      //props.onLogin(userName);
+    } else {
+      return [];
+    }
+  }
 
   function changeShareVal(friend){
     setShareVal(friend);
@@ -278,6 +295,9 @@ function SharedWith(){
   function addToSharedList(shareVal){
     for (const shared of sharedList) {
       if (shared === shareVal) {
+        return;
+      }
+      if (shared === "__________") {
         return;
       }
     }
@@ -292,6 +312,7 @@ function SharedWith(){
     let ind = sharedList.indexOf(shareVal);
     newShare.splice(ind,1);
     console.log(newShare);
+    console.log(shareVal, ind);
     setSharedList(newShare);
     updateSharedList(newShare);
   }
@@ -381,14 +402,6 @@ function getSharedList() {
   return [];
 }
 
-
-function getFriendList() {
-  const frList = localStorage.getItem('friendList');
-  if (frList) {
-      return JSON.parse(frList);
-  }
-  return [];
-}
 
 {/* turns out the folder needs to be named public*/}
 function getCurProject(){

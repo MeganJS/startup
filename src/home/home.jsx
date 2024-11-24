@@ -28,7 +28,7 @@ export function Home(props) {
       .then((response)=>response.json())
       .then((projects)=>{
         setProjectList(projects);
-        console.log(projects);
+        //console.log(projects);
       });
       //localStorage.setItem('projects', JSON.stringify(projects));
 
@@ -110,8 +110,7 @@ export function Home(props) {
 }
 
 function FriendList(){
-  const frList = getFriendList();
-  const [friendList, setFriendList] = React.useState(frList);
+  const [friendList, setFriendList] = React.useState([]);
   const [friendVal, setFriendVal] = React.useState("__________");
 
   useEffect(() => {
@@ -122,18 +121,9 @@ function FriendList(){
       .then((friends)=>{
         setFriendList(friends);
         console.log(friends);
+        console.log(friendList);
+        //localStorage.setItem('friendList', JSON.stringify(friends));
       });
-    
-    let friends = localStorage.getItem('friendList',JSON.stringify(friendList));
-    if (friends){
-      return;
-    } else {
-      localStorage.setItem('friendList', JSON.stringify(friendList));
-    }
-    //const pList = getProjectList();
-    //if (pList) {
-      //setProjectList(pList);
-    //}
   }, []);
 
   function changeFriendVal(friend){
@@ -165,7 +155,7 @@ function FriendList(){
     const newFriends = friendList.slice();
     let ind = friendList.indexOf(oldFriend);
     newFriends.splice(ind,1);
-    console.log(oldFriend);
+    //console.log(oldFriend, ind);
     setFriendList(newFriends);
     updateFriendList(newFriends);
   }
@@ -176,7 +166,7 @@ function FriendList(){
       friendComps.push(
         <li key={friend} className="list-group-item">
             <div>{friend}</div>
-            <button className="btn btn-outline-danger btn-sm" type="submit" onClick={()=>removeFriendVal({friend})}>disconnect</button>
+            <button className="btn btn-outline-danger btn-sm" type="submit" onClick={()=>removeFriendVal(friend)}>disconnect</button>
             {/*<button type="submit">see shared projects</button>*/}
         </li>
       );
@@ -199,16 +189,7 @@ function FriendList(){
   );
 }
 
-function getFriendList() {
-    const frList = localStorage.getItem('friendList');
-    if (frList) {
-        return JSON.parse(frList);
-    }
-    return [];
-}
-
 async function updateFriendList(newFriends) {
-  localStorage.setItem('friendList', JSON.stringify(newFriends));
   const response = await fetch('/api/friends', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
