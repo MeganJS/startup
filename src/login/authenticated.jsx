@@ -6,6 +6,9 @@ import Button from 'react-bootstrap/Button';
 
 export function Authenticated(props) {
     const navigate = useNavigate();
+    const [randItem, setRandItem] = React.useState("");
+    const [randTrait, setRandTrait] = React.useState("");
+
 
     function logout() {
       fetch(`/api/auth/logout`, {
@@ -40,6 +43,25 @@ export function Authenticated(props) {
         });
     }
 
+    function dndRollItem(){
+      const url = "https://set.world/api/roll/set";
+      fetch(url)
+        .then((x)=>x.json())
+        .then((response)=>{
+          //pick random type from list?
+            setRandItem(JSON.stringify(response.head.name));
+        });
+    }
+
+    function dndRollTrait(){
+      const url = "https://set.world/api/roll/character";
+      fetch(url)
+        .then((x)=>x.json())
+        .then((response)=>{
+            setRandTrait(JSON.stringify(response));
+        });
+    }
+
     return (
         <div>
           <div className='playerName'>{props.userName}</div>
@@ -49,6 +71,13 @@ export function Authenticated(props) {
           <Button variant='outline-secondary' onClick={() => logout()}>
             logout
           </Button>
+          <div>
+            want some random ideas?
+            <button onClick={() => dndRollItem()}>character equipment</button>
+            <button onClick={() => dndRollTrait()}>character trait</button>
+            {randItem}
+            {randTrait}
+          </div>
     </div>
     );
 }
