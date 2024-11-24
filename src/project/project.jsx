@@ -215,7 +215,7 @@ function ProjectTitle({title}){
           localStorage.setItem('projects',JSON.stringify(projectList));
           let saveResult = saveProjectChange(projectList);
           if (saveResult !== "success"){
-            setMessage("Could not save project: " + saveResult);
+            setMessage(`Could not save project: ${saveResult}`);
           }
         }
       }
@@ -389,6 +389,7 @@ function getFriendList() {
   }
   return [];
 }
+
 {/* turns out the folder needs to be named public*/}
 function getCurProject(){
   let curProjectStr = localStorage.getItem('currentProject');

@@ -16,20 +16,20 @@ export function Card(props) {
   }, []);
 
 
-  function deleteCard() {
+  async function deleteCard() {
     let projectList = getProjectList();
-    let project = getCurProject()
-    let cProject = { ...project }
-    let cCardList = cProject.cardList.slice()
+    let project = getCurProject();
+    let cProject = { ...project };
+    let cCardList = cProject.cardList.slice();
     let ind = cCardList.indexOf(card);
     cCardList.splice(ind,1);
 
-    let cProjectList = projectList.slice();
     for (const proj of projectList) {
       if (proj.title === project.title) {
         proj.cardList = cCardList;
         localStorage.setItem('projects',JSON.stringify(projectList));
         localStorage.setItem("currentProject",JSON.stringify(proj));
+        saveProjectChange(projectList);
       }
     }
     localStorage.setItem('currentCard',JSON.stringify(blankCard));
@@ -103,6 +103,23 @@ export function Card(props) {
       </div>
     </main>
   );
+}
+
+async function saveProjectChange(newList) {
+  const response = await fetch('/api/projects', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(newList),
+  });
+  if (response?.status === 200) {
+    console.log("successfully saved project change");
+    return "success";
+  } else {
+    const body = await response.json();
+    console.log(body.msg);
+    return body.msg;
+    //setDisplayError(`Error Ocurred: ${body.msg}`);
+  }
 }
 
 function getCurProject(){

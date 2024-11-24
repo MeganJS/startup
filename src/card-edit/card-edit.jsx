@@ -33,7 +33,7 @@ export function CardEdit() {
         console.log(cardText);
     }
 
-    function saveInfo() {
+    async function saveInfo() {
         let projectList = getProjectList();
         let project = getCurProject();
         let card = getCardInfo();
@@ -61,6 +61,14 @@ export function CardEdit() {
             }
         }
         localStorage.setItem('projects',JSON.stringify(projectList));
+        let saveRes = await saveProjectChange(projectList);
+        if (saveRes !== "success") {
+            console.log(saveRes);
+            setMessage("Could not save, error: " + saveRes);
+        } else {
+            setMessage("");
+            console.log(saveRes);
+        }
     }
 
 
@@ -138,6 +146,22 @@ export function CardEdit() {
   );
 }
 
+async function saveProjectChange(newList) {
+    const response = await fetch('/api/projects', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(newList),
+    });
+    if (response?.status === 200) {
+      console.log("successfully saved project change");
+      return "success";
+    } else {
+      const body = await response.json();
+      console.log(body.msg);
+      return body.msg;
+      //setDisplayError(`Error Ocurred: ${body.msg}`);
+    }
+  }
 
 function getCurProject(){
     let curProjectStr = localStorage.getItem('currentProject');
