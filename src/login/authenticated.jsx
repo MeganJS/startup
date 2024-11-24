@@ -16,6 +16,18 @@ export function Authenticated(props) {
         })
         .finally(() => {
           localStorage.removeItem('userName');
+          let projListStr = localStorage.getItem('projects');
+          if (projListStr) {
+            localStorage.removeItem('projects');
+          }
+          let friendsStr = localStorage.getItem('friendList');
+          if (friendsStr) {
+            localStorage.removeItem('friendList');
+          }
+          let sharedStr = localStorage.getItem('sharedList');
+          if (sharedStr) {
+            localStorage.removeItem('sharedList');
+          }
           let projStr = localStorage.getItem('currentProject');
           if (projStr) {
             localStorage.removeItem('currentProject');

@@ -30,6 +30,8 @@ export function Home(props) {
         setProjectList(projects);
         console.log(projects);
       });
+      //localStorage.setItem('projects', JSON.stringify(projects));
+
     //const pList = getProjectList();
     //if (pList) {
       //setProjectList(pList);
@@ -38,6 +40,8 @@ export function Home(props) {
 
   function setCurrentProject(project) {
     localStorage.setItem('currentProject', JSON.stringify(project));
+    localStorage.setItem('projects', JSON.stringify(projects));
+
   }
 
   async function createNewProject(project) {

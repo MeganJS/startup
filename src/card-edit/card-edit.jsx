@@ -64,7 +64,7 @@ export function CardEdit() {
         let saveRes = await saveProjectChange(projectList);
         if (saveRes !== "success") {
             console.log(saveRes);
-            setMessage("Could not save, error: " + saveRes);
+            setMessage(`Could not save, error: ${saveRes}`);
         } else {
             setMessage("");
             console.log(saveRes);
