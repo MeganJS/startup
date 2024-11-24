@@ -114,14 +114,27 @@ function FriendList(){
   const [friendList, setFriendList] = React.useState(frList);
   const [friendVal, setFriendVal] = React.useState("__________");
 
-  {/*
   useEffect(() => {
-    const frList = getFriendList();
-    if (frList) {
-      setFriendList(frList);
+    fetch('/api/friends', {
+      method: "GET",
+    })
+      .then((response)=>response.json())
+      .then((friends)=>{
+        setFriendList(friends);
+        console.log(friends);
+      });
+    
+    let friends = localStorage.getItem('friendList',JSON.stringify(friendList));
+    if (friends){
+      return;
+    } else {
+      localStorage.setItem('friendList', JSON.stringify(friendList));
     }
+    //const pList = getProjectList();
+    //if (pList) {
+      //setProjectList(pList);
+    //}
   }, []);
-  */}
 
   function changeFriendVal(friend){
     setFriendVal(friend.target.value);
@@ -144,7 +157,6 @@ function FriendList(){
       setFriendList(newFriends);
       updateFriendList(newFriends);
     }
-
   }
 
   {/*TODO add modal to prevent unfriending misclicks*/}
@@ -195,8 +207,22 @@ function getFriendList() {
     return [];
 }
 
-function updateFriendList(newFriends) {
+async function updateFriendList(newFriends) {
   localStorage.setItem('friendList', JSON.stringify(newFriends));
+  const response = await fetch('/api/friends', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(newFriends),
+  });
+  if (response?.status === 200) {
+    console.log("successfully saved connections change");
+    return "success";
+  } else {
+    const body = await response.json();
+    console.log(body.msg);
+    return body.msg;
+    //setDisplayError(`Error Ocurred: ${body.msg}`);
+  }
   //A. P. Eerson,Mr. Frogdatterson,Donna Noble
 }
 

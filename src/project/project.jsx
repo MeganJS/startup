@@ -99,9 +99,9 @@ export function Project(props) {
       let blankProject = new ProjectObj("Idea Title",[],[]);
       localStorage.setItem("currentProject",JSON.stringify(blankProject));
       localStorage.setItem('projects',JSON.stringify(cProjectList));
-      let saveResult = saveProjectChange(projectList);
+      let saveResult = await saveProjectChange(cProjectList);
       if (saveResult !== "success"){
-        setSaveMsg(saveResult);
+        setSaveMsg(`${saveResult}`);
       }
     }
   }
