@@ -7,7 +7,9 @@ import Button from 'react-bootstrap/Button';
 export function Authenticated(props) {
     const navigate = useNavigate();
     const [randItem, setRandItem] = React.useState("");
+    const [randSkill, setRandSkill] = React.useState("");
     const [randTrait, setRandTrait] = React.useState("");
+
 
 
     function logout() {
@@ -49,7 +51,32 @@ export function Authenticated(props) {
         .then((x)=>x.json())
         .then((response)=>{
           //pick random type from list?
-            setRandItem(JSON.stringify(response.head.name));
+          const {head,tool,offhand,back,hand,finger,feet,legs,neck,shoulders,waist,wrist,chest}=response;
+          const types = [head,tool,offhand,back,hand,finger,feet,legs,neck,shoulders,waist,wrist,chest];
+          const ind = Math.floor(Math.random() * 13);
+          if (types[ind].name){
+            setRandItem(types[ind].name);
+          } else {
+            dndRollItem();
+          }
+          //13 total options
+
+            //setRandItem(response);
+        });
+    }
+
+    function dndRollSkill(){
+      const url = "https://set.world/api/roll/character";
+      fetch(url)
+        .then((x)=>x.json())
+        .then((response)=>{
+            let skills = response.traits.skills;
+            if (skills){
+              const ind = Math.floor(Math.random() * skills.length);
+              setRandSkill(skills[ind].name);
+            } else {
+              dndRollSkill();
+            }
         });
     }
 
@@ -58,7 +85,19 @@ export function Authenticated(props) {
       fetch(url)
         .then((x)=>x.json())
         .then((response)=>{
-            setRandTrait(JSON.stringify(response));
+            let coin = Math.floor(Math.random() * 2);
+            let adv = [];
+            if (coin === 1) {
+              adv = response.traits.advantages;
+            } else {
+              adv = response.traits.disadvantages;
+            }
+            if (adv){
+              const ind = Math.floor(Math.random() * adv.length);
+              setRandTrait(adv[ind].name);
+            } else {
+              dndRollTrait();
+            }
         });
     }
 
@@ -72,11 +111,13 @@ export function Authenticated(props) {
             logout
           </Button>
           <div>
-            want some random ideas?
+            in need of inspiration?
             <button onClick={() => dndRollItem()}>character equipment</button>
+            <button onClick={() => dndRollSkill()}>character skill</button>
             <button onClick={() => dndRollTrait()}>character trait</button>
-            {randItem}
-            {randTrait}
+            <div>{randItem}</div>
+            <div>{randSkill}</div>
+            <div>{randTrait}</div>
           </div>
     </div>
     );
