@@ -10,7 +10,7 @@ We now have endpoints for:
 - Getting a user's friends!
 - Updating a user's projects!
 - Updating a user's friends!
-But wait - there's more...
+#### But wait - there's more...
 Once you log in and navigate to the Account Page, you can get random character ideas, courtesy of the [Fantasy Roleplaying API](https://www.freepublicapis.com/fantasy-role-playing-api). Try it out and see what you find!
 
 ## REACT
