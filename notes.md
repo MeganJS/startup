@@ -14,6 +14,10 @@ __this is bold__ and **so is this**
 <sub>subscript</sub><sup>superscript</sup> ~~I want you to be able to read this while pretending that you can't~~
 
 > indenting (handy for quotes!)
+## Notes for Service
+I have learned: It's surprisingly really really easy to call an api. All you need is the url.
+...I should definitely go back and make that more secure though.
+Also I have learned: make one update projects function that calls the api to save the updated projectlists, and call it whenever the user makes an edit.
 ## Notes for React
 This past weekend I learned that you need your images folder to be named 'public' in order to use it. Who knew! Also localStorage is very useful, modals are surprisingly easy with bootstrap. and npm run dev
 
