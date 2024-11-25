@@ -1,5 +1,18 @@
 # startup: idea-thing
 ## Startup Application for CS260: Web Development
+
+## SERVICE
+We now have endpoints for:
+- Logging in!
+- Logging out!
+- Creating user!
+- Getting a user's projects!
+- Getting a user's friends!
+- Updating a user's projects!
+- Updating a user's friends!
+But wait - there's more...
+Once you log in and navigate to the Account Page, you can get random character ideas, courtesy of the [Fantasy Roleplaying API](https://www.freepublicapis.com/fantasy-role-playing-api). Try it out and see what you find!
+
 ## REACT
 This just in: you can now create projects, delete projects, add cards, edit cards, delete cards, change shared lists and friend lists. You can even log in! This and more due to the wonderful world of React. See [startup.idea-thing.click](https://startup.idea-thing.click/) for further details.
 
