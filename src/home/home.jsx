@@ -122,7 +122,7 @@ function FriendList(){
         setFriendList(friends);
         console.log(friends);
         console.log(friendList);
-        //localStorage.setItem('friendList', JSON.stringify(friends));
+        localStorage.setItem('friendList', JSON.stringify(friends));
       });
   }, []);
 
@@ -197,6 +197,7 @@ async function updateFriendList(newFriends) {
   });
   if (response?.status === 200) {
     console.log("successfully saved connections change");
+    localStorage.setItem('friendList', JSON.stringify(newFriends));
     return "success";
   } else {
     const body = await response.json();

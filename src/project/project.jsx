@@ -7,7 +7,6 @@ import { CardObj, ProjectObj} from './projectAndCard.js';
 //TODO need a way to sanitize user input
 function ProjectCard({cardObj}){
   function setCurCard(card){
-    console.log("frogs");
     localStorage.setItem('currentCard',JSON.stringify(card));
   }
   return(
@@ -92,7 +91,7 @@ export function Project(props) {
         if (proj.title === cProject.title) {
           console.log("same");
           let ind = cProjectList.indexOf(proj);
-          console.log(ind);
+          //console.log(ind);
           cProjectList.splice(ind,1);
         }
       }
@@ -258,20 +257,14 @@ function SharedWith(){
   const [shareVal, setShareVal] = React.useState("__________");
   const [saveMsg, setSaveMsg] = React.useState("");
 
-  {/*
   useEffect(() => {
-    fetch('/api/friends', {
-      method: "GET",
-    })
-      .then((response)=>response.json())
-      .then((friends)=>{
-        setFriendList(friends);
-        console.log(friends);
-        console.log(friendList);
-        //localStorage.setItem('friendList', JSON.stringify(friends));
-      });
+    let frListStr = localStorage.getItem('friendList');
+    if (frListStr){
+      let frList = JSON.parse(frListStr);
+      setFriendList(frList);
+    }
   }, []);
-    */}
+
 
   async function getFriendList() {
     const response = await fetch('/api/friends', {
@@ -279,9 +272,9 @@ function SharedWith(){
     });
     if (response?.status === 200) {
       const body = await response.json();
-      console.log(body);
+      //console.log(body);
+      localStorage.setItem('friendList', JSON.stringify(body));
       return body;
-      //localStorage.setItem('userName', userName);
       //props.onLogin(userName);
     } else {
       return [];
@@ -311,13 +304,13 @@ function SharedWith(){
     const newShare = sharedList.slice();
     let ind = sharedList.indexOf(shareVal);
     newShare.splice(ind,1);
-    console.log(newShare);
-    console.log(shareVal, ind);
+    //console.log(newShare);
+    //console.log(shareVal, ind);
     setSharedList(newShare);
     updateSharedList(newShare);
   }
 
-  function updateSharedList(newSharedList) {
+  async function updateSharedList(newSharedList) {
     let projectList = getProjectList();
     let project = getCurProject();
     for (const proj of projectList) {
@@ -325,10 +318,20 @@ function SharedWith(){
         proj.sharedList = newSharedList
         localStorage.setItem("currentProject",JSON.stringify(proj));
         localStorage.setItem('projects',JSON.stringify(projectList));
-        let saveResult = saveProjectChange(projectList);
-        if (saveResult !== "success"){
-          setSaveMsg("Unable to save: " + saveResult);
+        let saveRes = await saveProjectChange(projectList);
+        if (saveRes !== "success") {
+            console.log(saveRes);
+            setMessage(`Could not save, error: ${saveRes}`);
+        } else {
+            setMessage("");
+            console.log(saveRes);
         }
+
+
+        //let saveResult = saveProjectChange(projectList);
+        //if (saveResult !== "success"){
+        //  setSaveMsg("Unable to save: " + saveResult);
+        //}
       }
     }
   }
