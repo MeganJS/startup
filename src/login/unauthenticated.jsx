@@ -42,7 +42,7 @@ export function Unauthenticated(props) {
                 <div className="form-group row">
                     <div className="col-sm-10">
                         <label for="inputUsername" className="col-sm-2 col-form-label">Username</label>
-                        <input type="text" className="form-control" id="inputUsername" onChange={(e) => setUserName(e.target.value)} pattern="\w{1,24}" required />
+                        <input type="text" className="form-control" id="inputUsername" onChange={(e) => setUserName(e.target.value)} required />
                     </div>
                   </div>
                 
@@ -50,7 +50,7 @@ export function Unauthenticated(props) {
                   
                 <div className="col-sm-10">
                     <label for="inputPassword" className="col-sm-2 col-form-label">Password</label>
-                    <input type="password" className="form-control" id="inputPassword" pattern="{8,24}" onChange={(e) => setPassword(e.target.value)} required />
+                    <input type="password" className="form-control" id="inputPassword" onChange={(e) => setPassword(e.target.value)} required />
                 </div>
                 </div>
                 <Button id="login" variant='outline-primary' onClick={() => loginUser()} disabled={!userName || !password}>

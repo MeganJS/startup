@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const uuid = require('uuid');
+//const uuid = require('uuid');
 const bcrypt = require('bcrypt');
 const DB = require('./database.js');
 const cookieParser = require('cookie-parser');
@@ -27,9 +27,9 @@ apiRouter.post('/auth/create', async (req, res) => {
     res.status(409).send({ msg: 'Existing user' });
   } else {
     const user = await DB.createUser(req.body.username, req.body.password);
-    res.cookie(auth, user.token, {secure:true, httpOnly: true, sameSite: 'strict'});
+    res.cookie(auth, user.token, {secure:true, httpOnly: true, SameSite: 'strict'});
     //res.send({ token: user.token });
-    //res.send({id: user._id}); ???
+    res.send({id: user._id});
   }
 });
 
@@ -39,8 +39,8 @@ apiRouter.post('/auth/login', async (req, res) => {
   if (user) {
     let hashPass = await bcrypt.compare(req.body.password, user.password);
     if (hashPass) {
-      res.cookie(auth, user.token, {secure:true, httpOnly: true, sameSite: 'strict'});
-      //res.send({id: user._id});
+      res.cookie(auth, user.token, {secure:true, httpOnly: true, SameSite: 'strict'});
+      res.send({id: user._id});
 
       //user.token = uuid.v4();
       //curUser=user;

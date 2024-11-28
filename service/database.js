@@ -11,6 +11,7 @@ const userColl = db.collection('user');
 (async function testConn() {
     await client.connect();
     await db.command({ ping: 1 });
+    console.log("connected to database");
 })().catch((ex)=>{
     console.log(`Unable to connect to database with ${url} because ${ex.message}`);
     process.exit(1);
@@ -34,7 +35,6 @@ async function createUser(username, password) {
         friends: []
     };
     await userColl.insertOne(user);
-
     return user;
 }
 
