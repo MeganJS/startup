@@ -4,8 +4,7 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { CardObj, ProjectObj} from '../project/projectAndCard';
 
-{/*components for projects, friendlist*/}
-{/*TODO clear localstorage for curProject, curCard when navigate back to home*/}
+
 export function Home(props) {
   {/*
   const cObj1= new CardObj("Button of DOOM",`button icon.png`, "Item","no one knows where this came from, and no one knows what it does. would you be the first to press it?");
@@ -25,10 +24,11 @@ export function Home(props) {
     fetch('/api/projects', {
       method: "GET",
     })
+      //.then((response)=>console.log(response))
       .then((response)=>response.json())
       .then((projects)=>{
         setProjectList(projects);
-        //console.log(projects);
+        console.log(projects);
       });
       //localStorage.setItem('projects', JSON.stringify(projects));
 
@@ -120,8 +120,8 @@ function FriendList(){
       .then((response)=>response.json())
       .then((friends)=>{
         setFriendList(friends);
-        console.log(friends);
-        console.log(friendList);
+        //console.log(friends);
+        //console.log(friendList);
         localStorage.setItem('friendList', JSON.stringify(friends));
       });
   }, []);
@@ -149,8 +149,8 @@ function FriendList(){
     }
   }
 
-  {/*TODO add modal to prevent unfriending misclicks*/}
-  {/*TODO remove from shared projects as well?*/}
+  //TODO add modal to prevent unfriending misclicks
+  //TODO remove from shared projects as well?
   function removeFriendVal(oldFriend){
     const newFriends = friendList.slice();
     let ind = friendList.indexOf(oldFriend);
@@ -158,6 +158,32 @@ function FriendList(){
     //console.log(oldFriend, ind);
     setFriendList(newFriends);
     updateFriendList(newFriends);
+  }
+
+  async function updateFriendList(newFriends) {
+    await fetch('/api/friends', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(newFriends),
+    });
+    /*
+    const response = await fetch('/api/friends', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(newFriends),
+    });
+    if (response?.status === 200) {
+      console.log("successfully saved connections change");
+      localStorage.setItem('friendList', JSON.stringify(newFriends));
+      return "success";
+    } else {
+      const body = await response.json();
+      console.log(body.msg);
+      return body.msg;
+      //setDisplayError(`Error Ocurred: ${body.msg}`);
+    }
+    //A. P. Eerson,Mr. Frogdatterson,Donna Noble
+    */
   }
 
   const friendComps = [];
@@ -174,7 +200,7 @@ function FriendList(){
   }
   friendComps.push(
     <li key="Request:" className="list-group-item">
-        <label for="find-connection">Request Connection</label>
+        <label>Request Connection</label>
         <input type="text" id="find-connection" pattern="\w{1,24}" onChange={(i)=>changeFriendVal(i)} required/>
         <button type="submit" className="btn btn-outline-secondary btn-sm" onClick={()=>addToFriendList()}>find</button>
     </li>
@@ -187,32 +213,4 @@ function FriendList(){
       </ul>
     </section>
   );
-}
-
-async function updateFriendList(newFriends) {
-  const response = await fetch('/api/friends', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(newFriends),
-  });
-  if (response?.status === 200) {
-    console.log("successfully saved connections change");
-    localStorage.setItem('friendList', JSON.stringify(newFriends));
-    return "success";
-  } else {
-    const body = await response.json();
-    console.log(body.msg);
-    return body.msg;
-    //setDisplayError(`Error Ocurred: ${body.msg}`);
-  }
-  //A. P. Eerson,Mr. Frogdatterson,Donna Noble
-}
-
-function getProjectList() {
-    const prList = localStorage.getItem('projects');
-    if (prList) {
-        return JSON.parse(prList);
-    }
-    localStorage.setItem('projects',JSON.stringify([]));
-    return [];
 }

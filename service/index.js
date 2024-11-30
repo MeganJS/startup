@@ -8,9 +8,6 @@ const cookieParser = require('cookie-parser');
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 const auth = "token";
 
-let users = {};
-let curUser = {};
-
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public'));
@@ -82,59 +79,46 @@ secureRouter.use(async (req, res, next) => {
 // how to check if user is logged in?
 secureRouter.get('/projects', async (req, res) => {
   const authToken = req.cookies[auth];
-  const user = await DB.getUserByToken(authToken);
-  if (user) {
-    res.send(user.projects);
-  } else {
-    res.status(401).send({msg: 'Unauthorized' });
-  }
+  let user = await DB.getUserByToken(authToken);
+  res.send(user.projects);
 });
 
 // Getfriends note: req may need to be _req???
-apiRouter.get('/friends', async (req, res) => {
+secureRouter.get('/friends', async (req, res) => {
   const authToken = req.cookies[auth];
-  const user = await DB.getUserByToken(authToken);
-  if (user) {
-    res.send(user.friends);
-  } else {
-    res.status(401).send({msg: 'Unauthorized' });
-  }
+  let user = await DB.getUserByToken(authToken);
+  //console.log(JSON.stringify(user.friends));
+  //console.log(JSON.stringify(user));
+  //let friends = await DB.getFriends(authToken);
+  //console.log(friends);
+  res.send(user.friends);
 });
 
 
-// SubmitScore
-apiRouter.post('/projects', (req, res) => {
-  const user = users[curUser.username];
+secureRouter.post('/projects', (req, res) => {
+  const authToken = req.cookies[auth];
+  DB.updateProjects(authToken, req.body);
+  //const user = users[curUser.username];
   //const user = Object.values(users).find((u) => u.token === req.body.token);
+  /*
   if (user){
     user.projects = req.body;
     curUser.projects = req.body; //tODO test this!!
     return;
   }
   res.status(401).send({ msg: 'Unauthorized' });
+  */
 });
 
-// SubmitScore
-apiRouter.post('/friends', (req, res) => {
-  const user = users[curUser.username];
-  //const user = Object.values(users).find((u) => u.token === req.body.token);
-  if (user){
-    user.friends = req.body; //tODO test this!!
-    curUser.friends = req.body;
-    return;
-  }
-  res.status(401).send({ msg: 'Unauthorized' });
+secureRouter.post('/friends', (req, res) => {
+  const authToken = req.cookies[auth];
+  DB.updateFriends(authToken, req.body);
 });
 
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-/*
-app.get('*', (_req, res) => {
-  res.send({ msg: 'idea-thing service' });
-});
-*/
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

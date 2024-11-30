@@ -13,7 +13,6 @@ import { AuthState } from './login/authState';
 
 export default function App() {
     const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
-    //TODO is this secure?
     const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
     const [authState, setAuthState] = React.useState(currentAuthState);
     {/*const [profile, setProfile] = React.useState('');*/}

@@ -251,9 +251,9 @@ function ProjectTitle({title}){
 
 function SharedWith(){
   const sList = getSharedList();
-  const frList = getFriendList();
+  //const frList = getFriendList();
   const [sharedList, setSharedList] = React.useState(sList);
-  const [friendList, setFriendList] = React.useState(frList);
+  const [friendList, setFriendList] = React.useState([]);
   const [shareVal, setShareVal] = React.useState("__________");
   const [saveMsg, setSaveMsg] = React.useState("");
 
@@ -265,21 +265,31 @@ function SharedWith(){
     }
   }, []);
 
-
+  /*
   async function getFriendList() {
+    fetch('/api/friends')
+      .then((response) => response.json())
+      .then((friends) => {
+        setFriendList(friends);
+      });
+    
     const response = await fetch('/api/friends', {
       method: 'GET',
     });
     if (response?.status === 200) {
+      console.log(response.body);
+      
       const body = await response.json();
-      //console.log(body);
+      console.log(body);
       localStorage.setItem('friendList', JSON.stringify(body));
       return body;
       //props.onLogin(userName);
     } else {
       return [];
     }
+      
   }
+    */
 
   function changeShareVal(friend){
     setShareVal(friend);

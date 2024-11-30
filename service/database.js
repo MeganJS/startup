@@ -38,8 +38,35 @@ async function createUser(username, password) {
     return user;
 }
 
+function getProjects(token) {
+    const user = userColl.findOne({token: token});
+    return user.projects;
+}
+
+function getFriends(token) {
+    const user = userColl.findOne({token: token});
+    return user.friends;
+}
+
+function updateProjects(token, projectList) {
+    /*
+    const user = userColl.findOne({token: token});
+    user.projects = projectList;
+    userColl.updateOne();
+    */
+    userColl.findOneAndUpdate({token: token}, {$set:{projects: projectList}});
+}
+
+function updateFriends(token, frList) {
+    userColl.findOneAndUpdate({token: token}, {$set:{friends: frList}});
+}
+
 module.exports = {
     getUser,
     getUserByToken,
-    createUser
+    createUser,
+    getProjects,
+    getFriends,
+    updateProjects,
+    updateFriends
 };
