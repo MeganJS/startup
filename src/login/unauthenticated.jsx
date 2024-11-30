@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Button from 'react-bootstrap/Button';
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { MessageDialog } from './messageDialog';
 
 
@@ -21,7 +20,7 @@ export function Unauthenticated(props) {
     async function loginOrCreate(endpoint) {
         const response = await fetch(endpoint, {
           method: 'post',
-          body: JSON.stringify({ username: userName, password: password, projects: [], friends: [] }),
+          body: JSON.stringify({ username: userName, password: password }),
           headers: {
             'Content-type': 'application/json; charset=UTF-8',
           },
@@ -41,7 +40,7 @@ export function Unauthenticated(props) {
           <form>
                 <div className="form-group row">
                     <div className="col-sm-10">
-                        <label for="inputUsername" className="col-sm-2 col-form-label">Username</label>
+                        <label className="col-sm-2 col-form-label">Username</label>
                         <input type="text" className="form-control" id="inputUsername" onChange={(e) => setUserName(e.target.value)} required />
                     </div>
                   </div>
@@ -49,7 +48,7 @@ export function Unauthenticated(props) {
                 <div className="form-group row">
                   
                 <div className="col-sm-10">
-                    <label for="inputPassword" className="col-sm-2 col-form-label">Password</label>
+                    <label className="col-sm-2 col-form-label">Password</label>
                     <input type="password" className="form-control" id="inputPassword" onChange={(e) => setPassword(e.target.value)} required />
                 </div>
                 </div>

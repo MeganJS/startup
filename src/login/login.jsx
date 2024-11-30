@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Unauthenticated } from './unauthenticated';
 import { Authenticated } from './authenticated';
 import { AuthState } from './authState';
@@ -11,7 +10,8 @@ export function Login({userName, authState, onAuthChange}) {
     <main className='container-fluid text-center'>
       <div>
         {authState !== AuthState.Unknown}
-        {authState === AuthState.Authenticated && <Authenticated userName={userName} onLogout={() => onAuthChange(userName, AuthState.Unauthenticated)} />}
+        {authState === AuthState.Authenticated && 
+          (<Authenticated userName={userName} onLogout={() => onAuthChange(userName, AuthState.Unauthenticated)} />)}
         {authState === AuthState.Unauthenticated && (
           <Unauthenticated
             userName={userName}

@@ -48,7 +48,7 @@ function getFriends(token) {
     return user.friends;
 }
 
-function updateProjects(token, projectList) {
+async function updateProjects(token, projectList) {
     /*
     const user = userColl.findOne({token: token});
     user.projects = projectList;
@@ -57,7 +57,7 @@ function updateProjects(token, projectList) {
     userColl.findOneAndUpdate({token: token}, {$set:{projects: projectList}});
 }
 
-function updateFriends(token, frList) {
+async function updateFriends(token, frList) {
     userColl.findOneAndUpdate({token: token}, {$set:{friends: frList}});
 }
 
