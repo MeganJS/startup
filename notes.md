@@ -14,6 +14,8 @@ __this is bold__ and **so is this**
 <sub>subscript</sub><sup>superscript</sup> ~~I want you to be able to read this while pretending that you can't~~
 
 > indenting (handy for quotes!)
+## Notes for Login
+I have learned: try all the solutions, even if you think they don't apply to you. They might be more applicable than they look. Also ask for help! TAs are awesome.
 ## Notes for Service
 I have learned: It's surprisingly really really easy to call an api. All you need is the url.
 ...I should definitely go back and make that better though.
