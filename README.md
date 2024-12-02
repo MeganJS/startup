@@ -1,5 +1,7 @@
 # startup: idea-thing
 ## Startup Application for CS260: Web Development
+## LOGIN
+All of your data is now safely stored in our database, so you don't need to worry about losing it. It will be right there waiting for you when you get back.
 
 ## SERVICE
 We now have endpoints for:
