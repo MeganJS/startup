@@ -205,6 +205,7 @@ function ProjectTitle({title}){
   async function saveTitle(newTitle){
     let projectListStr = localStorage.getItem('projects');
     let project = getCurProject();
+    //let oldTitle = project.Title;
     if (projectListStr) {
       let projectList = JSON.parse(projectListStr);
       for (const proj of projectList) {
@@ -314,8 +315,6 @@ function SharedWith(){
     const newShare = sharedList.slice();
     let ind = sharedList.indexOf(shareVal);
     newShare.splice(ind,1);
-    //console.log(newShare);
-    //console.log(shareVal, ind);
     setSharedList(newShare);
     updateSharedList(newShare);
   }
@@ -388,6 +387,23 @@ function SharedWith(){
       </ul>
     </section>
   );
+}
+
+async function saveProjectTitleChange(oldTitle, newTitle) {
+  const response = await fetch('/api/projects/title', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({oldTitle: oldTitle, newTitle: newTitle}),
+  });
+  if (response?.status === 200) {
+    console.log("successfully saved project change");
+    return "success";
+  } else {
+    const body = await response.json();
+    console.log(body.msg);
+    return body.msg;
+    //setDisplayError(`Error Ocurred: ${body.msg}`);
+  }
 }
 
 async function saveProjectChange(newList) {

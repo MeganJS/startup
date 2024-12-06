@@ -81,6 +81,12 @@ secureRouter.get('/friends', async (req, res) => {
   res.send(user.friends);
 });
 
+secureRouter.get('/friends/reqs', async (req, res) => {
+  const authToken = req.cookies[auth];
+  let user = await DB.getUserByToken(authToken);
+  res.send(user.friendreqs);
+});
+
 
 secureRouter.post('/projects', async (req, res) => {
   const authToken = req.cookies[auth];
@@ -99,11 +105,27 @@ secureRouter.post('/projects', async (req, res) => {
   */
 });
 
+/*
+secureRouter.post('/projects/title', async (req, res) => {
+  const authToken = req.cookies[auth];
+  await DB.updateProjectTitle(authToken, req.body.oldTitle, req.body.newTitle);
+  const projects = await DB.getProjects(authToken);
+  res.send(projects);
+});
+*/
+
 secureRouter.post('/friends', async (req, res) => {
   const authToken = req.cookies[auth];
   await DB.updateFriends(authToken, req.body);
   const friends = await DB.getFriends(authToken);
   res.send(friends);
+});
+
+secureRouter.post('/friends/reqs', async (req, res) => {
+  const authToken = req.cookies[auth];
+  await DB.updateFriendReqs(authToken, req.body);
+  const reqs = await DB.getFriendReqs(authToken);
+  res.send(reqs);
 });
 
 // Default error handler

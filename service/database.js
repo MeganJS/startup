@@ -32,7 +32,8 @@ async function createUser(username, password) {
         password: passHash,
         token: uuid.v4(),
         projects: [],
-        friends: []
+        friends: [],
+        friendreqs: []
     };
     await userColl.insertOne(user);
     return user;
@@ -48,6 +49,11 @@ function getFriends(token) {
     return user.friends;
 }
 
+function getFriendReqs(token) {
+    const user = userColl.findOne({token: token});
+    return user.friendreqs;
+}
+
 async function updateProjects(token, projectList) {
     /*
     const user = userColl.findOne({token: token});
@@ -57,8 +63,32 @@ async function updateProjects(token, projectList) {
     userColl.findOneAndUpdate({token: token}, {$set:{projects: projectList}});
 }
 
+async function updateProjectTitle(token, oldTitle, newTitle) {
+    /*
+    const user = userColl.findOne({token: token});
+    user.projects = projectList;
+    userColl.updateOne();
+    */
+    const user = userColl.findOne({token: token});
+    //user.projects.updateOne({title: oldTitle}, {$set:{title:newTitle}});
+    //IDEA: TODO: store projects separately?
+
+    /*
+    for (const proj of user.projects) {
+        if (proj.title === oldTitle){
+            proj.title = newTitle;
+        }
+    }
+    */
+}
+
 async function updateFriends(token, frList) {
     userColl.findOneAndUpdate({token: token}, {$set:{friends: frList}});
+}
+
+
+async function updateFriendReqs(token, frList) {
+    userColl.findOneAndUpdate({token: token}, {$set:{friendreqs: frList}});
 }
 
 module.exports = {
@@ -67,6 +97,8 @@ module.exports = {
     createUser,
     getProjects,
     getFriends,
+    getFriendReqs,
     updateProjects,
-    updateFriends
+    updateFriends,
+    updateFriendReqs
 };
