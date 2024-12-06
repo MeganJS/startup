@@ -3,8 +3,8 @@ import "./home.css";
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-export default function FriendList(){
-    const [friendList, setFriendList] = React.useState([]);
+export default function FriendList(props){
+    const [friendList, setFriendList] = React.useState(props.frList);
     const [friendVal, setFriendVal] = React.useState("__________");
   
     useEffect(() => {
@@ -23,7 +23,7 @@ export default function FriendList(){
     function changeFriendVal(friend){
       setFriendVal(friend.target.value);
     }
-  
+    /*
     function addToFriendList(){
       if (friendList.length){
         for (const friend of friendList) {
@@ -42,6 +42,7 @@ export default function FriendList(){
         updateFriendList(newFriends);
       }
     }
+    */
   
     //TODO add modal to prevent unfriending misclicks
     //TODO remove from shared projects as well?
@@ -52,6 +53,11 @@ export default function FriendList(){
       //console.log(oldFriend, ind);
       setFriendList(newFriends);
       updateFriendList(newFriends);
+    }
+
+    function sendFriendReq() {
+        console.log("do this thing", friendVal);
+        return;
     }
   
     async function updateFriendList(newFriends) {
@@ -96,7 +102,7 @@ export default function FriendList(){
       <li key="Request:" className="list-group-item">
           <label>Request Connection</label>
           <input type="text" id="find-connection" pattern="\w{1,24}" onChange={(i)=>changeFriendVal(i)} required/>
-          <button type="submit" className="btn btn-outline-secondary btn-sm" onClick={()=>addToFriendList()}>find</button>
+          <button type="submit" className="btn btn-outline-secondary btn-sm" onClick={()=>sendFriendReq()}>find</button>
       </li>
     );
   

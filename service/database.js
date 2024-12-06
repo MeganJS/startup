@@ -33,7 +33,8 @@ async function createUser(username, password) {
         token: uuid.v4(),
         projects: [],
         friends: [],
-        friendreqs: []
+        friendreqs: [],
+        sharedProjList: []
     };
     await userColl.insertOne(user);
     return user;

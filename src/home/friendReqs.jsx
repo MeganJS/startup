@@ -1,8 +1,7 @@
 import React from 'react';
 import "./home.css";
 import { useState, useEffect } from 'react';
-import { getFriendReqs } from '../../service/database';
-import { FriendList } from "./friendList";
+import FriendList from "./friendList";
 
 export default function FriendReqs(){
     const [friendreqs, setFriendReqs] = React.useState([]);

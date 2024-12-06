@@ -3,7 +3,7 @@ import "./home.css";
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { CardObj, ProjectObj} from '../project/projectAndCard';
-import {FriendList} from './friendList';
+import FriendReqs from './friendReqs';
 
 export function Home(props) {
   {/*
@@ -104,7 +104,7 @@ export function Home(props) {
                 {projectComps}
             </section>
         </section>
-        <FriendList></FriendList>
+        <FriendReqs></FriendReqs>
     </main>
   );
 }
