@@ -87,6 +87,12 @@ secureRouter.get('/friends/reqs', async (req, res) => {
   res.send(user.friendreqs);
 });
 
+secureRouter.get('/projects/shared', async (req, res) => {
+  const authToken = req.cookies[auth];
+  let user = await DB.getUserByToken(authToken);
+  res.send(user.sharedProjList);
+});
+
 
 secureRouter.post('/projects', async (req, res) => {
   const authToken = req.cookies[auth];

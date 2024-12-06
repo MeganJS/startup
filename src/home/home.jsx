@@ -4,6 +4,7 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { CardObj, ProjectObj} from '../project/projectAndCard';
 import FriendReqs from './friendReqs';
+import SharedProjects from './sharedProjects';
 
 export function Home(props) {
   {/*
@@ -103,6 +104,7 @@ export function Home(props) {
             <section id="projects-list">
                 {projectComps}
             </section>
+            <SharedProjects></SharedProjects>
         </section>
         <FriendReqs></FriendReqs>
     </main>
