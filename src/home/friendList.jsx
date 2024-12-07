@@ -55,12 +55,23 @@ export default function FriendList(props){
       setFriendList(newFriends);
       //updateFriendList(newFriends);
       console.log(oldFriend, username);
+      auditSharedProjects(oldFriend);
       await fetch('api/friends', {
         method: 'DELETE',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({userToRemove: oldFriend, discUser: username})
       });
-      auditSharedProjects(oldFriend);
+    }
+
+    async function sendFriendReq() {
+        //console.log("do this thing", friendVal);
+        console.log(friendVal, username);
+        await fetch('/api/friends/reqs/send', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({sendTo: friendVal, fromUser: username}),
+          });
+        return;
     }
 
     async function auditSharedProjects(oldFriend) {
@@ -71,8 +82,7 @@ export default function FriendList(props){
         .then((shared)=>{
           //setFriendList(shared);
           const toRemove = [];
-          const sharedList = shared;
-          for (const sh of sharedList) {
+          for (const sh of shared) {
             if (sh.sharedby === oldFriend){
               toRemove.push(sh);
             }
@@ -87,35 +97,15 @@ export default function FriendList(props){
           .then((response)=>response.json())
           .then((projects)=>{
             //setFriendList(shared);
-            const toRemove = [];
             for (const proj of projects) {
               for (const sh of proj.sharedList) {
                 if (sh === oldFriend) {
-                  deleteSharedProject(oldFriend, username, proj.title)
+                  removeShareVal(oldFriend, proj, username, projects.slice());
+                  //deleteSharedProject(oldFriend, username, proj.title)
                 }
               }
             }
           });
-    }
-
-    async function deleteSharedProject(userToRemove, sharedby, title){
-      await fetch('/api/shared', {
-          method: 'DELETE',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({userToRemove: userToRemove, sharedby: sharedby, title: title}),
-      });
-  }    
-
-
-    async function sendFriendReq() {
-        //console.log("do this thing", friendVal);
-        console.log(friendVal, username);
-        await fetch('/api/friends/reqs/send', {
-            method: 'POST',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify({sendTo: friendVal, fromUser: username}),
-          });
-        return;
     }
   
     async function updateFriendList(newFriends) {
@@ -173,3 +163,60 @@ export default function FriendList(props){
     );
   }
   
+
+  async function deleteSharedProject(userToRemove, sharedby, title){
+    await fetch('/api/shared', {
+        method: 'DELETE',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({userToRemove: userToRemove, sharedby: sharedby, title: title}),
+    });
+  }    
+
+
+  function removeShareVal(shareVal, proj, username, projectList){
+    const newShare = proj.sharedList.slice();
+    let ind = proj.sharedList.indexOf(shareVal);
+    newShare.splice(ind,1);
+    updateSharedList(newShare, proj, projectList);
+    deleteSharedProject(shareVal, username, proj.title);
+  }
+
+  async function updateSharedList(newSharedList, proj, projectList) {
+    let project = proj;
+    for (const proj of projectList) {
+      if (proj.title === project.title) {
+        proj.sharedList = newSharedList;
+        localStorage.setItem('projects',JSON.stringify(projectList));
+        let saveRes = await saveProjectChange(projectList);
+        if (saveRes !== "success") {
+            console.log(saveRes);
+            setMessage(`Could not save, error: ${saveRes}`);
+        } else {
+            console.log(saveRes);
+        }
+      }
+    }
+  }
+
+  async function saveProjectChange(newList) {
+    const response = await fetch('/api/projects', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(newList),
+    });
+    if (response?.status === 200) {
+      console.log("successfully saved project change");
+      return "success";
+    } else {
+      const body = await response.json();
+      console.log(body.msg);
+      return body.msg;
+      //setDisplayError(`Error Ocurred: ${body.msg}`);
+    }
+  }
+
+  function getProjectList(){
+    let projectListStr = localStorage.getItem('projects');
+    let projectList = JSON.parse(projectListStr);
+    return projectList;
+  }

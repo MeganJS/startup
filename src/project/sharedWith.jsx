@@ -84,9 +84,9 @@ export default function SharedWith(props){
           let saveRes = await saveProjectChange(projectList);
           if (saveRes !== "success") {
               console.log(saveRes);
-              setMessage(`Could not save, error: ${saveRes}`);
+              setSaveMsg(`Could not save, error: ${saveRes}`);
           } else {
-              setMessage("");
+              setSaveMsg("");
               console.log(saveRes);
           }
           //let saveResult = saveProjectChange(projectList);

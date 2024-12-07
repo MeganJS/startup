@@ -7,7 +7,7 @@ export default function SharedProjects(props) {
   const [projects, setProjectList] = React.useState([]);
 
   useEffect(() => {
-    fetch('/api/projects/shared', {
+    fetch('/api/shared', {
       method: "GET",
     })
       //.then((response)=>console.log(response))
