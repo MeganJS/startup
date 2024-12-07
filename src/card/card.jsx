@@ -6,6 +6,7 @@ import { CardObj, ProjectObj} from '../project/projectAndCard.js';
 
 export function Card(props) {
   const shared = props.shared;
+  const username = props.username;
   const blankCard = new CardObj("NEW CARD",`plus-circle.svg`, "---","");
   {/*const blankCard = new CardObj("NEW CARD",`plus-circle.svg`, "---","");*/}
   let curCard = getCardInfo();
@@ -34,12 +35,29 @@ export function Card(props) {
         localStorage.setItem('projects',JSON.stringify(projectList));
         localStorage.setItem("currentProject",JSON.stringify(proj));
         saveProjectChange(projectList);
+        sendSavedProj(proj.title, proj);
       }
     }
     localStorage.setItem('currentCard',JSON.stringify(blankCard));
     setCard(blankCard);
   }
 
+  async function sendSavedProj(oldTitle, project){
+    const shared = project.sharedList;
+    const shProject = {
+      title: project.title,
+      sharedby: props.username,
+      cardList: project.cardList
+    }
+    for (const sh of shared) {
+      //console.log(sh);
+      await fetch('/api/shared', {
+        method: 'PUT',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({userToUpdate: sh, title: oldTitle, sharedby: username, shProject: shProject}),
+      });
+    }
+  }
 
   return (
     <main>

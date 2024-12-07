@@ -181,11 +181,11 @@ secureRouter.post('/shared', async (req, res) => {
 
 secureRouter.put('/shared', async (req, res) => {
   let user = await DB.getUser(req.body.userToUpdate);
-  console.log(req.body.userToUpdate);
+  //console.log(req.body.userToUpdate);
   if (user) {
-    console.log('b');
+    //console.log('b');
     DB.updateSharedProject(req.body.userToUpdate, req.body.title, req.body.sharedby, req.body.shProject);
-    console.log('c');
+    //console.log('c');
     return;
   }
   res.status(409).send({ msg: 'user does not exist' });

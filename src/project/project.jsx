@@ -217,12 +217,17 @@ function ProjectTitle({title, shared, username}){
 
   async function sendSavedProj(oldTitle, project){
     const shared = project.sharedList;
+    const shProject = {
+      title: project.title,
+      sharedby: props.username,
+      cardList: project.cardList
+    }
     for (const sh of shared) {
       //console.log(sh);
       await fetch('/api/shared', {
         method: 'PUT',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({userToUpdate: sh, title: oldTitle, sharedby: username, shProject: project}),
+        body: JSON.stringify({userToUpdate: sh, title: oldTitle, sharedby: username, shProject: shProject}),
       });
     }
   }

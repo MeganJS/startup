@@ -148,7 +148,7 @@ async function updateSharedProject(username, title, sharedby, shProject) {
     userColl.findOneAndUpdate(
         {username: username, sharedProjList: { $elemMatch: { title: title, sharedby: sharedby }}},
         //{username: username, sharedProjList: title},
-        {$set: {'sharedProjList.$': {title: shProject.title, cardList: shProject.cardList}}},
+        {$set: {'sharedProjList.$': shProject}},
         {upsert:true, returnDocument: 'after'})
     .then(result => {
         console.log("update success", result);

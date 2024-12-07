@@ -6,7 +6,8 @@ import "../card/card.css";
 
 {/*TODO ask TAs about how to do textbox*/}
 {/*TODO let user choose image*/}
-export function CardEdit() {
+export function CardEdit(props) {
+    const username = props.username;
     const card = getCardInfo();
     if (card.text === "") {
         card.text = "enter details here";
@@ -20,17 +21,17 @@ export function CardEdit() {
 
     function changeTitle(i) {
         setTitle(i.target.value);
-        console.log(cardTitle);
+        //(cardTitle);
     }
     
     function changeType(newType) {
         setType(newType);
-        console.log(cardType);
+        //console.log(cardType);
     }
 
     function changeText(i) {
         setText(i.target.value);
-        console.log(cardText);
+        //console.log(cardText);
     }
 
     async function saveInfo() {
@@ -58,6 +59,7 @@ export function CardEdit() {
                     }
                 }
               localStorage.setItem("currentProject",JSON.stringify(proj));
+              sendSavedProj(proj.title, proj);
             }
         }
         localStorage.setItem('projects',JSON.stringify(projectList));
@@ -71,7 +73,22 @@ export function CardEdit() {
         }
     }
 
-
+    async function sendSavedProj(oldTitle, project){
+        const shared = project.sharedList;
+        const shProject = {
+            title: project.title,
+            sharedby: props.username,
+            cardList: project.cardList
+        }
+        for (const sh of shared) {
+          //console.log(sh);
+          await fetch('/api/shared', {
+            method: 'PUT',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({userToUpdate: sh, title: oldTitle, sharedby: username, shProject: shProject}),
+          });
+        }
+    }
   return (
     <main>
         <section id="card-data">
