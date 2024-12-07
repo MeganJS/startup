@@ -102,6 +102,7 @@ export function Project(props) {
           let ind = cProjectList.indexOf(proj);
           //console.log(ind);
           cProjectList.splice(ind,1);
+          sendDeleteProj(proj);
         }
       }
       let blankProject = new ProjectObj("Idea Title",[],[]);
@@ -111,6 +112,18 @@ export function Project(props) {
       if (saveResult !== "success"){
         setSaveMsg(`${saveResult}`);
       }
+    }
+  }
+
+  async function sendDeleteProj(project){
+    const shared = project.sharedList;
+    for (const sh of shared) {
+      //console.log(sh);
+      await fetch('/api/shared', {
+        method: 'DELETE',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({userToRemove: sh, title: project.title, sharedby: props.username}),
+      });
     }
   }
 

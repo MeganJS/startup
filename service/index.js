@@ -192,7 +192,7 @@ secureRouter.put('/shared', async (req, res) => {
 });
 
 secureRouter.delete('/shared', async (req, res) => {
-  DB.removeFriend(req.body.discUser, req.body.userToRemove);
+  //DB.removeFriend(req.body.discUser, req.body.userToRemove);
   let user = await DB.getUser(req.body.userToRemove);
   if (user) {
     DB.removeSharedProject(req.body.userToRemove, req.body.title, req.body.sharedby);
