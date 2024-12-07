@@ -5,6 +5,7 @@ import "./card.css";
 import { CardObj, ProjectObj} from '../project/projectAndCard.js';
 
 export function Card(props) {
+  const shared = props.shared;
   const blankCard = new CardObj("NEW CARD",`plus-circle.svg`, "---","");
   {/*const blankCard = new CardObj("NEW CARD",`plus-circle.svg`, "---","");*/}
   let curCard = getCardInfo();
@@ -17,6 +18,9 @@ export function Card(props) {
 
 
   async function deleteCard() {
+    if (shared){
+      return;
+    }
     let projectList = getProjectList();
     let project = getCurProject();
     let cProject = { ...project };
@@ -63,6 +67,7 @@ export function Card(props) {
                 
             </div>
             */}
+            {shared === false && (
             <div id="card-control-buttons">
               <button id="edit-button" type="button" className="btn btn-outline-primary btn-sm">
                 <NavLink className='nav-link' to='/card-edit'>edit</NavLink>
@@ -90,6 +95,7 @@ export function Card(props) {
                 </div>
 
             </div>
+            )}
           </section>
   
           <section id="card-text">

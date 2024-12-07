@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { CardObj, ProjectObj} from './projectAndCard.js';
 
 //TODO need a way to sanitize user input
-function ProjectCard({cardObj}){
+function ProjectCard({cardObj, shared}){
   function setCurCard(card){
     localStorage.setItem('currentCard',JSON.stringify(card));
   }
@@ -17,7 +17,12 @@ function ProjectCard({cardObj}){
         <h6 className="card-subtitle mb-2 text-body-secondary">{cardObj.type}</h6>
         <p className="card-text">{cardObj.text}</p>
         <div id="card-footer">
-          <NavLink className='nav-link' to='/Card' onClick={()=>setCurCard(cardObj)}>view card</NavLink>
+          {shared === false && (
+            <NavLink className='nav-link' to='/Card' onClick={()=>setCurCard(cardObj)}>view card</NavLink>
+          )}
+          {shared === true && (
+            <NavLink className='nav-link' to='/card-shared' onClick={()=>setCurCard(cardObj)}>view card</NavLink>
+          )}
         </div>
       </div>
     </div>
@@ -186,7 +191,7 @@ export function Project(props) {
 }
 
 
-function ProjectTitle({title}){
+function ProjectTitle({title, shared}){
   const [inputValue,setInputValue] = React.useState({title});
   const [message,setMessage] = React.useState("");
 
@@ -231,27 +236,30 @@ function ProjectTitle({title}){
   return(
     <h2 id="project-title">
       {title}
-      <h3>
-        <img src="pencil-square.svg" data-bs-toggle="modal" data-bs-target="#editTitleModal"></img>
-      </h3>
-
-      <div className="modal fade" id="editTitleModal" data-bs-backdrop="static" tabIndex="-1" aria-labelledby="editTitleModal" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">edit title</h1>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
-              </div>
-              <div className="modal-body">
-                <div className="input-group mb-3">
-                  <button onClick={()=>saveChange()} className="btn btn-outline-secondary" type="button" id="button-addon1">save</button>
-                  <input onChange={(i)=>changeText(i)} type="text" className="form-control" defaultValue={title} placeholder={title} aria-label="save button for title edit" />
+      {shared === false && (
+        <h3>
+          <img src="pencil-square.svg" data-bs-toggle="modal" data-bs-target="#editTitleModal"></img>
+        </h3>
+      )}
+      {shared === false && (
+        <div className="modal fade" id="editTitleModal" data-bs-backdrop="static" tabIndex="-1" aria-labelledby="editTitleModal" aria-hidden="true">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">edit title</h1>
+                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
                 </div>
-                <p>{message}</p>
+                <div className="modal-body">
+                  <div className="input-group mb-3">
+                    <button onClick={()=>saveChange()} className="btn btn-outline-secondary" type="button" id="button-addon1">save</button>
+                    <input onChange={(i)=>changeText(i)} type="text" className="form-control" defaultValue={title} placeholder={title} aria-label="save button for title edit" />
+                  </div>
+                  <p>{message}</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+      )}
     </h2>
   );
 }

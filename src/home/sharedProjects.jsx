@@ -29,7 +29,7 @@ export default function SharedProjects(props) {
     for (const project of projects) {
       projectComps.push(
         <div id="project">
-            <NavLink className='nav-link' to='/Project' onClick={()=>setCurrentProject(project)}>{project.title}</NavLink>
+            <NavLink className='nav-link' to='/project-shared' onClick={()=>setCurrentProject(project)}>{project.title}</NavLink>
         </div>
       );
     }
