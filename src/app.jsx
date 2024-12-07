@@ -88,7 +88,7 @@ export default function App() {
                         setAuthState(authState);
                         setUserName(userName);
                     }}/>} exact />
-                <Route path='/home' element={<Home userName={userName}/>} />
+                <Route path='/home' element={<Home username={userName}/>} />
                 <Route path='/project' element={<Project />} />
                 <Route path='/card' element={<Card />} />
                 <Route path='/card-edit' element={<CardEdit />} />

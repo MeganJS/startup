@@ -95,6 +95,7 @@ secureRouter.get('/projects/shared', async (req, res) => {
 
 
 secureRouter.post('/projects', async (req, res) => {
+  console.log(1);
   const authToken = req.cookies[auth];
   await DB.updateProjects(authToken, req.body);
   const projs = await DB.getProjects(authToken);
@@ -135,11 +136,16 @@ secureRouter.post('/friends/reqs', async (req, res) => {
 });
 
 secureRouter.post('/friends/reqs/send', async (req, res) => {
-  let user = await DB.getUser(req.body.sendto);
+  console.log(0);
+  let user = await DB.getUser(req.body.sendTo);
+  console.log(1);
   if (user) {
-    DB.addFriendReq(req.body.sendto, req.body.fromUser);
+    console.log("in");
+    DB.addFriendReq(req.body.sendTo, req.body.fromUser);
+    console.log(2);
     return;
   }
+  console.log("out");
   res.status(409).send({ msg: 'user does not exist' });
 });
 

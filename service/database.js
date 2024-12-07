@@ -65,22 +65,8 @@ async function updateProjects(token, projectList) {
 }
 
 async function updateProjectTitle(token, oldTitle, newTitle) {
-    /*
-    const user = userColl.findOne({token: token});
-    user.projects = projectList;
-    userColl.updateOne();
-    */
     const user = userColl.findOne({token: token});
     //user.projects.updateOne({title: oldTitle}, {$set:{title:newTitle}});
-    //IDEA: TODO: store projects separately?
-
-    /*
-    for (const proj of user.projects) {
-        if (proj.title === oldTitle){
-            proj.title = newTitle;
-        }
-    }
-    */
 }
 
 async function updateFriends(token, frList) {
@@ -94,19 +80,37 @@ async function updateFriendReqs(token, frList) {
 
 async function addFriend(username, friend) {
     const user = userColl.findOne({username: username});
-    userColl.update({username: username}, {$addToSet: {friends : friend}}); //todo: test this??
+    userColl.findOneAndUpdate({username: username}, {$addToSet: {friends : friend}},{upsert: true})
+    .then(result => {
+        console.log("update success", result);
+    })
+    .catch(err=>{
+        console.error('error:', err);
+    });
     //return user.friends;
 }
 
 async function removeFriend(username, friend) {
     const user = userColl.findOne({username: username});
-    userColl.update({username: username}, {$pull: {friends : friend}}); //todo: test this??
+    userColl.findOneAndUpdate({username: username}, {$pull: {friends : friend}},{upsert:true})
+    .then(result => {
+        console.log("update success", result);
+    })
+    .catch(err=>{
+        console.error('error:', err);
+    });
     //return user.friends;
 }
 
 async function addFriendReq(username, friend) {
-    const user = userColl.findOne({username: username});
-    userColl.update({username: username}, {$addToSet: {friendreqs : friend}}); //todo: test this??
+    //const user = userColl.findOne({username: username});
+    userColl.findOneAndUpdate({username: username}, {$push: {friendreqs : friend}},{upsert:true})
+    .then(result => {
+        console.log("update success", result);
+    })
+    .catch(err=>{
+        console.error('error:', err);
+    });
     //return user.friends;
 }
 

@@ -54,6 +54,7 @@ export default function FriendList(props){
       //console.log(oldFriend, ind);
       setFriendList(newFriends);
       //updateFriendList(newFriends);
+      console.log(oldFriend, username);
       await fetch('api/friends', {
         method: 'DELETE',
         headers: { 'content-type': 'application/json' },
@@ -63,6 +64,7 @@ export default function FriendList(props){
 
     async function sendFriendReq() {
         //console.log("do this thing", friendVal);
+        console.log(friendVal, username);
         await fetch('/api/friends/reqs/send', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },

@@ -17,7 +17,7 @@ export function Home(props) {
   let projectList = [dolProject];
   localStorage.setItem('projects', JSON.stringify(projectList))
   */}
-  const [username, setUserName] = React.useState(props.userName);
+  const [username, setUserName] = React.useState(props.username);
   let blankProject = new ProjectObj("Idea Title",[],[]);
   const [projects, setProjectList] = React.useState([]);
 
