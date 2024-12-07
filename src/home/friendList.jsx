@@ -60,7 +60,52 @@ export default function FriendList(props){
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({userToRemove: oldFriend, discUser: username})
       });
+      auditSharedProjects(oldFriend);
     }
+
+    async function auditSharedProjects(oldFriend) {
+      await fetch('/api/shared', {
+        method: "GET",
+      })
+        .then((response)=>response.json())
+        .then((shared)=>{
+          //setFriendList(shared);
+          const toRemove = [];
+          const sharedList = shared;
+          for (const sh of sharedList) {
+            if (sh.sharedby === oldFriend){
+              toRemove.push(sh);
+            }
+          }
+          for (const r of toRemove) {
+            deleteSharedProject(username,r.sharedby,r.title);
+          }
+        });
+        await fetch('/api/projects', {
+          method: "GET",
+        })
+          .then((response)=>response.json())
+          .then((projects)=>{
+            //setFriendList(shared);
+            const toRemove = [];
+            for (const proj of projects) {
+              for (const sh of proj.sharedList) {
+                if (sh === oldFriend) {
+                  deleteSharedProject(oldFriend, username, proj.title)
+                }
+              }
+            }
+          });
+    }
+
+    async function deleteSharedProject(userToRemove, sharedby, title){
+      await fetch('/api/shared', {
+          method: 'DELETE',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({userToRemove: userToRemove, sharedby: sharedby, title: title}),
+      });
+  }    
+
 
     async function sendFriendReq() {
         //console.log("do this thing", friendVal);

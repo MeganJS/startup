@@ -55,6 +55,11 @@ function getFriendReqs(token) {
     return user.friendreqs;
 }
 
+function getShared(token) {
+    const user = userColl.findOne({token: token});
+    return user.shared;
+}
+
 async function updateProjects(token, projectList) {
     /*
     const user = userColl.findOne({token: token});

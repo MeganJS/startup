@@ -44,9 +44,16 @@ export function Card(props) {
   return (
     <main>
       <div className="all">
+      {shared === false && (
         <button type="submit" id="return-to-project" className="btn btn-outline-primary btn-sm">
             <NavLink className='nav-link' to='/project'>Return to Project</NavLink>
         </button>
+      )}
+      {shared === true && (
+        <button type="submit" id="return-to-project" className="btn btn-outline-primary btn-sm">
+            <NavLink className='nav-link' to='/project-shared'>Return to Project</NavLink>
+        </button>
+      )}
         <div className="card-content">
           <section id="card-data">
             <div id="card-type">
