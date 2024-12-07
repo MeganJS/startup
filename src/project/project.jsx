@@ -27,6 +27,8 @@ function ProjectCard({cardObj}){
 
 export function Project(props) {
   const blankCard = new CardObj("NEW CARD",`plus-circle.svg`, "---","");
+  console.log(props.shared);
+  const shared = props.shared;
   {/*localStorage.setItem('currentCard',JSON.stringify(blankCard));*/}
   let proj = getCurProject();
   const [project, setProject] = React.useState(proj);
@@ -109,7 +111,7 @@ export function Project(props) {
   if (cards.length) {
     for (const card of cards) {
       cardComps.push(
-        <ProjectCard cardObj={card}></ProjectCard>
+        <ProjectCard cardObj={card} shared={shared}></ProjectCard>
       );
     }
   }
@@ -117,7 +119,7 @@ export function Project(props) {
   return (
     <main>
       <section id="project-content">
-        <ProjectTitle title={project.title}></ProjectTitle>
+        <ProjectTitle title={project.title} shared={shared}></ProjectTitle>
           {/*<h2 id="project-title">{project.title}</h2>
           <div id="project-controls">
               <div className="dropdown">
@@ -136,19 +138,22 @@ export function Project(props) {
           <div style={{color:"red"}}>{saveMsg}</div>
           <section id="project-cards">
             {cardComps}
-            <div className="card" id="project-card">
-              <div className="card-body">
-                <img id = "card-img" alt="smile icon" src={blankCard.image} />
-                <h5 className="card-title">{blankCard.title}</h5>
-                <h6 className="card-subtitle mb-2 text-body-secondary">{blankCard.type}</h6>
-                <p className="card-text">{blankCard.text}</p>
-                <div id="card-footer">
-                  <NavLink className='nav-link' to='/Card' onClick={()=>createNewCard(blankCard)}>create</NavLink>
+            {shared === false && (
+              <div className="card" id="project-card">
+                <div className="card-body">
+                  <img id = "card-img" alt="smile icon" src={blankCard.image} />
+                  <h5 className="card-title">{blankCard.title}</h5>
+                  <h6 className="card-subtitle mb-2 text-body-secondary">{blankCard.type}</h6>
+                  <p className="card-text">{blankCard.text}</p>
+                  <div id="card-footer">
+                    <NavLink className='nav-link' to='/Card' onClick={()=>createNewCard(blankCard)}>create</NavLink>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </section>
       </section>
+      {shared === false && (
       <div id="project-controls">
         <button type="button" className="btn btn-outline-info">download project</button>
         <SharedWith></SharedWith>
@@ -175,6 +180,7 @@ export function Project(props) {
           </div>
         </div>
       </div>
+      )}
     </main>
   );
 }

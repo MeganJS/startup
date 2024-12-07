@@ -83,7 +83,7 @@ export function Home(props) {
     for (const project of projects) {
       projectComps.push(
         <div id="project">
-            <NavLink className='nav-link' to='/Project' onClick={()=>setCurrentProject(project)}>{project.title}</NavLink>
+            <NavLink className='nav-link' to='/Project' onClick={()=>setCurrentProject(project)} frogs="adorable">{project.title}</NavLink>
         </div>
       );
     }

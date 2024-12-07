@@ -17,11 +17,6 @@ export default function SharedProjects(props) {
         console.log(projects);
       });
       //localStorage.setItem('projects', JSON.stringify(projects));
-
-    //const pList = getProjectList();
-    //if (pList) {
-      //setProjectList(pList);
-    //}
   }, []);
 
   function setCurrentProject(project) {
