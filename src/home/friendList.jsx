@@ -1,6 +1,5 @@
 import React from 'react';
 import "./home.css";
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 export default function FriendList(props){
@@ -24,26 +23,6 @@ export default function FriendList(props){
     function changeFriendVal(friend){
       setFriendVal(friend.target.value);
     }
-    /*
-    function addToFriendList(){
-      if (friendList.length){
-        for (const friend of friendList) {
-          if (friend === friendVal) {
-            return;
-          }
-        }
-        const newFriends = friendList.slice();
-        newFriends.push(friendVal);
-        setFriendList(newFriends);
-        updateFriendList(newFriends);
-      } else {
-        const newFriends = [];
-        newFriends.push(friendVal);
-        setFriendList(newFriends);
-        updateFriendList(newFriends);
-      }
-    }
-    */
   
     //TODO add modal to prevent unfriending misclicks
     //TODO remove from shared projects as well?

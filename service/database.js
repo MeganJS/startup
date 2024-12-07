@@ -143,6 +143,21 @@ async function removeSharedProject(username, title, sharedby) {
     });
 }
 
+async function updateSharedProject(username, title, sharedby, shProject) {
+    console.log(title,sharedby);
+    userColl.findOneAndUpdate(
+        {username: username, sharedProjList: { $elemMatch: { title: title, sharedby: sharedby }}},
+        //{username: username, sharedProjList: title},
+        {$set: {'sharedProjList.$': {title: shProject.title, cardList: shProject.cardList}}},
+        {upsert:true, returnDocument: 'after'})
+    .then(result => {
+        console.log("update success", result);
+    })
+    .catch(err=>{
+        console.error('error:', err);
+    });
+}
+
 module.exports = {
     getUser,
     getUserByToken,
@@ -157,5 +172,6 @@ module.exports = {
     removeFriend,
     addFriend,
     addSharedProject,
-    removeSharedProject
+    removeSharedProject,
+    updateSharedProject
 };

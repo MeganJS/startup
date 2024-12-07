@@ -35,6 +35,7 @@ export function Project(props) {
   const blankCard = new CardObj("NEW CARD",`plus-circle.svg`, "---","");
   console.log(props.shared);
   const shared = props.shared;
+  const username = props.username;
   {/*localStorage.setItem('currentCard',JSON.stringify(blankCard));*/}
   let proj = getCurProject();
   const [project, setProject] = React.useState(proj);
@@ -117,7 +118,7 @@ export function Project(props) {
   if (cards.length) {
     for (const card of cards) {
       cardComps.push(
-        <ProjectCard cardObj={card} shared={shared}></ProjectCard>
+        <ProjectCard cardObj={card} shared={shared} username={username}></ProjectCard>
       );
     }
   }
@@ -125,7 +126,7 @@ export function Project(props) {
   return (
     <main>
       <section id="project-content">
-        <ProjectTitle title={project.title} shared={shared}></ProjectTitle>
+        <ProjectTitle title={project.title} shared={shared} username={username}></ProjectTitle>
           {/*<h2 id="project-title">{project.title}</h2>
           <div id="project-controls">
               <div className="dropdown">
@@ -192,7 +193,7 @@ export function Project(props) {
 }
 
 
-function ProjectTitle({title, shared}){
+function ProjectTitle({title, shared, username}){
   const [inputValue,setInputValue] = React.useState({title});
   const [message,setMessage] = React.useState("");
 
@@ -214,10 +215,22 @@ function ProjectTitle({title, shared}){
     setMessage("saved! refresh page to see new title");
   }
 
+  async function sendSavedProj(oldTitle, project){
+    const shared = project.sharedList;
+    for (const sh of shared) {
+      //console.log(sh);
+      await fetch('/api/shared', {
+        method: 'PUT',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({userToUpdate: sh, title: oldTitle, sharedby: username, shProject: project}),
+      });
+    }
+  }
+
   async function saveTitle(newTitle){
     let projectListStr = localStorage.getItem('projects');
     let project = getCurProject();
-    //let oldTitle = project.Title;
+    let oldTitle = project.title;
     if (projectListStr) {
       let projectList = JSON.parse(projectListStr);
       for (const proj of projectList) {
@@ -229,6 +242,7 @@ function ProjectTitle({title, shared}){
           if (saveResult !== "success"){
             setMessage(`Could not save project: ${saveResult}`);
           }
+          sendSavedProj(oldTitle, proj);
         }
       }
     }
@@ -297,14 +311,6 @@ async function saveProjectChange(newList) {
     return body.msg;
     //setDisplayError(`Error Ocurred: ${body.msg}`);
   }
-}
-
-function getSharedList() {
-  const projectStr = localStorage.getItem('currentProject');
-  if (projectStr) {
-      return JSON.parse(projectStr).sharedList;
-  }
-  return [];
 }
 
 
