@@ -119,19 +119,49 @@ secureRouter.post('/projects/title', async (req, res) => {
   res.send(projects);
 });
 */
-
+/*
 secureRouter.post('/friends', async (req, res) => {
   const authToken = req.cookies[auth];
   await DB.updateFriends(authToken, req.body);
   const friends = await DB.getFriends(authToken);
   res.send(friends);
 });
-
+*/
 secureRouter.post('/friends/reqs', async (req, res) => {
   const authToken = req.cookies[auth];
   await DB.updateFriendReqs(authToken, req.body);
   const reqs = await DB.getFriendReqs(authToken);
   res.send(reqs);
+});
+
+secureRouter.post('/friends/reqs/send', async (req, res) => {
+  let user = await DB.getUser(req.body.sendto);
+  if (user) {
+    DB.addFriendReq(req.body.sendto, req.body.fromUser);
+    return;
+  }
+  res.status(409).send({ msg: 'user does not exist' });
+});
+
+secureRouter.delete('/friends', async (req, res) => {
+  DB.removeFriend(req.body.discUser, req.body.userToRemove);
+  let user = await DB.getUser(req.body.userToRemove);
+  if (user) {
+    DB.removeFriend(req.body.userToRemove, req.body.discUser);
+  }
+  else {
+    res.status(409).send({ msg: 'user does not exist' });
+  }
+});
+
+secureRouter.post('/friends', async (req, res) => {
+  let user = await DB.getUser(req.body.userToAdd);
+  if (user) {
+    DB.addFriend(req.body.userToAdd, req.body.connUser);
+    DB.addFriend(req.body.connUser, req.body.userToAdd);
+    return;
+  }
+  res.status(409).send({ msg: 'user does not exist' });
 });
 
 // Default error handler

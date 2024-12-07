@@ -92,6 +92,24 @@ async function updateFriendReqs(token, frList) {
     userColl.findOneAndUpdate({token: token}, {$set:{friendreqs: frList}});
 }
 
+async function addFriend(username, friend) {
+    const user = userColl.findOne({username: username});
+    userColl.update({username: username}, {$addToSet: {friends : friend}}); //todo: test this??
+    //return user.friends;
+}
+
+async function removeFriend(username, friend) {
+    const user = userColl.findOne({username: username});
+    userColl.update({username: username}, {$pull: {friends : friend}}); //todo: test this??
+    //return user.friends;
+}
+
+async function addFriendReq(username, friend) {
+    const user = userColl.findOne({username: username});
+    userColl.update({username: username}, {$addToSet: {friendreqs : friend}}); //todo: test this??
+    //return user.friends;
+}
+
 module.exports = {
     getUser,
     getUserByToken,
@@ -101,5 +119,8 @@ module.exports = {
     getFriendReqs,
     updateProjects,
     updateFriends,
-    updateFriendReqs
+    updateFriendReqs,
+    addFriendReq,
+    removeFriend,
+    addFriend
 };

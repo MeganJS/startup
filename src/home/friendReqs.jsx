@@ -3,7 +3,8 @@ import "./home.css";
 import { useState, useEffect } from 'react';
 import FriendList from "./friendList";
 
-export default function FriendReqs(){
+export default function FriendReqs(props){
+    const username=props.username;
     const [friendreqs, setFriendReqs] = React.useState([]);
     const [friendVal, setFriendVal] = React.useState("__________");
     const [friendList, setFriendList] = React.useState([]);
@@ -40,15 +41,25 @@ export default function FriendReqs(){
         const newFriends = friendList.slice();
         newFriends.push(newFriend);
         setFriendList(newFriends);
-        updateFriendList(newFriends);
+        //updateFriendList(newFriends);
+        addFriendtoDB(newFriend);
         removeFriendReq(newFriend);
       } else {
         const newFriends = [];
         newFriends.push(newFriend);
         setFriendList(newFriends);
-        updateFriendList(newFriends);
+        //updateFriendList(newFriends);
+        addFriendtoDB(newFriend);
         removeFriendReq(newFriend);
       }
+    }
+
+    async function addFriendtoDB(newFriend) {
+      await fetch('/api/friends', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({userToAdd: newFriend, connUser: username}),
+      });
     }
   
     //TODO add modal to prevent unfriending misclicks
@@ -69,6 +80,7 @@ export default function FriendReqs(){
         body: JSON.stringify(newFriends),
       });
     }
+
     async function updateFriendReqs(newReqs) {
         await fetch('/api/friends/reqs', {
           method: 'POST',
@@ -101,7 +113,7 @@ export default function FriendReqs(){
   
     return (
       <section id="connections">
-        <FriendList frList={friendList}></FriendList>
+        <FriendList frList={friendList} username={username}></FriendList>
         <ul className="list-group">
             {friendReqComps}
         </ul>

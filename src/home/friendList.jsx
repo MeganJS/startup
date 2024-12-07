@@ -4,6 +4,7 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 export default function FriendList(props){
+    const username=props.username;
     const [friendList, setFriendList] = React.useState(props.frList);
     const [friendVal, setFriendVal] = React.useState("__________");
   
@@ -46,17 +47,27 @@ export default function FriendList(props){
   
     //TODO add modal to prevent unfriending misclicks
     //TODO remove from shared projects as well?
-    function removeFriendVal(oldFriend){
+    async function removeFriendVal(oldFriend){
       const newFriends = friendList.slice();
       let ind = friendList.indexOf(oldFriend);
       newFriends.splice(ind,1);
       //console.log(oldFriend, ind);
       setFriendList(newFriends);
-      updateFriendList(newFriends);
+      //updateFriendList(newFriends);
+      await fetch('api/friends', {
+        method: 'DELETE',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({userToRemove: oldFriend, discUser: username})
+      });
     }
 
-    function sendFriendReq() {
-        console.log("do this thing", friendVal);
+    async function sendFriendReq() {
+        //console.log("do this thing", friendVal);
+        await fetch('/api/friends/reqs/send', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({sendTo: friendVal, fromUser: username}),
+          });
         return;
     }
   

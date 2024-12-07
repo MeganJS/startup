@@ -17,7 +17,7 @@ export function Home(props) {
   let projectList = [dolProject];
   localStorage.setItem('projects', JSON.stringify(projectList))
   */}
-  const [userName, setUserName] = React.useState(props.userName);
+  const [username, setUserName] = React.useState(props.userName);
   let blankProject = new ProjectObj("Idea Title",[],[]);
   const [projects, setProjectList] = React.useState([]);
 
@@ -106,7 +106,7 @@ export function Home(props) {
             </section>
             <SharedProjects></SharedProjects>
         </section>
-        <FriendReqs></FriendReqs>
+        <FriendReqs username={username}></FriendReqs>
     </main>
   );
 }
