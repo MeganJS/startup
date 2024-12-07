@@ -3,6 +3,7 @@ import "./project.css";
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { CardObj, ProjectObj} from './projectAndCard.js';
+import SharedWith from './sharedWith.jsx';
 
 //TODO need a way to sanitize user input
 function ProjectCard({cardObj, shared}){
@@ -263,7 +264,7 @@ function ProjectTitle({title, shared}){
     </h2>
   );
 }
-
+/*
 function SharedWith(){
   const sList = getSharedList();
   //const frList = getFriendList();
@@ -304,7 +305,7 @@ function SharedWith(){
     }
       
   }
-    */
+    
 
   function changeShareVal(friend){
     setShareVal(friend);
@@ -402,7 +403,7 @@ function SharedWith(){
     </section>
   );
 }
-
+*/
 async function saveProjectTitleChange(oldTitle, newTitle) {
   const response = await fetch('/api/projects/title', {
     method: 'POST',

@@ -114,6 +114,30 @@ async function addFriendReq(username, friend) {
     //return user.friends;
 }
 
+async function addSharedProject(username, shProject) {
+    userColl.findOneAndUpdate({username: username}, {$push: {sharedProjList : shProject}},{upsert:true})
+    .then(result => {
+        console.log("update success", result);
+    })
+    .catch(err=>{
+        console.error('error:', err);
+    });
+}
+
+async function removeSharedProject(username, shProject) {
+    userColl.findOneAndUpdate(
+        {username: username}, 
+        {$pull: {sharedProjList : { title: shProject.title, sharedby: shProject.sharedby }}},
+        {upsert:true}
+    )
+    .then(result => {
+        console.log("update success", result);
+    })
+    .catch(err=>{
+        console.error('error:', err);
+    });
+}
+
 module.exports = {
     getUser,
     getUserByToken,
@@ -126,5 +150,7 @@ module.exports = {
     updateFriendReqs,
     addFriendReq,
     removeFriend,
-    addFriend
+    addFriend,
+    addSharedProject,
+    removeSharedProject
 };
