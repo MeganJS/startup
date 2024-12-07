@@ -170,6 +170,26 @@ secureRouter.post('/friends', async (req, res) => {
   res.status(409).send({ msg: 'user does not exist' });
 });
 
+secureRouter.post('/shared', async (req, res) => {
+  let user = await DB.getUser(req.body.userToAdd);
+  if (user) {
+    DB.addSharedProject(req.body.userToAdd, req.body.shProject);
+    return;
+  }
+  res.status(409).send({ msg: 'user does not exist' });
+});
+
+secureRouter.delete('/shared', async (req, res) => {
+  DB.removeFriend(req.body.discUser, req.body.userToRemove);
+  let user = await DB.getUser(req.body.userToRemove);
+  if (user) {
+    DB.removeSharedProject(req.body.userToRemove, req.body.title, req.body.sharedby);
+  }
+  else {
+    res.status(409).send({ msg: 'user does not exist' });
+  }
+});
+
 // Default error handler
 app.use(function (err, req, res, next) {
   res.status(500).send({ type: err.name, message: err.message });

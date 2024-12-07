@@ -2,7 +2,7 @@ import React from 'react';
 import "./project.css";
 import { useState, useEffect } from 'react';
 
-export default function SharedWith(){
+export default function SharedWith(props){
     const sList = getSharedList();
     //const frList = getFriendList();
     const [sharedList, setSharedList] = React.useState(sList);
@@ -61,6 +61,7 @@ export default function SharedWith(){
       newShare.push(shareVal);
       setSharedList(newShare);
       updateSharedList(newShare);
+      sendSharedProject(shareVal);
     }
   
     function removeShareVal(shareVal){
@@ -69,6 +70,7 @@ export default function SharedWith(){
       newShare.splice(ind,1);
       setSharedList(newShare);
       updateSharedList(newShare);
+      deleteSharedProject(shareVal);
     }
   
     async function updateSharedList(newSharedList) {
@@ -76,7 +78,7 @@ export default function SharedWith(){
       let project = getCurProject();
       for (const proj of projectList) {
         if (proj.title === project.title) {
-          proj.sharedList = newSharedList
+          proj.sharedList = newSharedList;
           localStorage.setItem("currentProject",JSON.stringify(proj));
           localStorage.setItem('projects',JSON.stringify(projectList));
           let saveRes = await saveProjectChange(projectList);
@@ -94,6 +96,29 @@ export default function SharedWith(){
         }
       }
     }
+
+    async function sendSharedProject(shareVal){
+        let curProj = getCurProject();
+        const shProject = {
+            title: curProj.title,
+            sharedby: props.username,
+            cardList: curProj.cardList
+        }
+        await fetch('/api/shared', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({userToAdd: shareVal, shProject: shProject}),
+        });
+    }
+
+    async function deleteSharedProject(shareVal){
+        let curProj = getCurProject();
+        await fetch('/api/shared', {
+            method: 'DELETE',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({userToRemove: shareVal, sharedby: props.username, title: curProj.title}),
+        });
+    }    
   
     const sharedComps = [];
     if (sharedList.length) {

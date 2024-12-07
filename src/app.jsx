@@ -89,11 +89,11 @@ export default function App() {
                         setUserName(userName);
                     }}/>} exact />
                 <Route path='/home' element={<Home username={userName}/>} />
-                <Route path='/project' element={<Project shared={false}/>} />
-                <Route path='/project-shared' element={<Project shared={true}/>} />
-                <Route path='/card' element={<Card shared={false}/>} />
-                <Route path='/card-shared' element={<Card shared={true}/>} />
-                <Route path='/card-edit' element={<CardEdit />} />
+                <Route path='/project' element={<Project shared={false} username={userName}/>} />
+                <Route path='/project-shared' element={<Project shared={true} username={userName}/>} />
+                <Route path='/card' element={<Card shared={false} username={userName}/>} />
+                <Route path='/card-shared' element={<Card shared={true} username={userName}/>} />
+                <Route path='/card-edit' element={<CardEdit username={userName} />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
         </main>

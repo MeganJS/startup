@@ -124,10 +124,10 @@ async function addSharedProject(username, shProject) {
     });
 }
 
-async function removeSharedProject(username, shProject) {
+async function removeSharedProject(username, title, sharedby) {
     userColl.findOneAndUpdate(
         {username: username}, 
-        {$pull: {sharedProjList : { title: shProject.title, sharedby: shProject.sharedby }}},
+        {$pull: {sharedProjList : { title: title, sharedby: sharedby }}},
         {upsert:true}
     )
     .then(result => {
