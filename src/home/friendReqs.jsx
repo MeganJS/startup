@@ -1,10 +1,11 @@
 import React from 'react';
 import "./home.css";
 import { useState, useEffect } from 'react';
+import { Event, Notifier } from '../Notifier';
 import FriendList from "./friendList";
 
 export default function FriendReqs(props){
-    const username=props.username;
+    const username = props.username;
     const [friendreqs, setFriendReqs] = React.useState([]);
     const [friendVal, setFriendVal] = React.useState("__________");
     const [friendList, setFriendList] = React.useState([]);
@@ -29,7 +30,19 @@ export default function FriendReqs(props){
               localStorage.setItem('friendList', JSON.stringify(friends));
             });
     }, []);
-
+    /*
+    async function createNewNotifier(){
+      await fetch('/api/userid/mine', {
+          method: 'GET',
+          //body: JSON.stringify({ username: props.username}),
+          //headers: {'Content-type': 'application/json; charset=UTF-8',},
+      }).then((response)=>response.json())
+      .then((userid)=>{
+          console.log(JSON.stringify(userid));
+          return new EventNotifier(JSON.stringify(userid));
+      });
+    }
+      */
   
     function addToFriendList(newFriend){
       if (friendList.length){
@@ -43,6 +56,7 @@ export default function FriendReqs(props){
         setFriendList(newFriends);
         //updateFriendList(newFriends);
         addFriendtoDB(newFriend);
+        sendFriendNotif(newFriend);
         removeFriendReq(newFriend);
       } else {
         const newFriends = [];
@@ -50,7 +64,16 @@ export default function FriendReqs(props){
         setFriendList(newFriends);
         //updateFriendList(newFriends);
         addFriendtoDB(newFriend);
+        sendFriendNotif(newFriend);
         removeFriendReq(newFriend);
+      }
+    }
+
+    function sendFriendNotif(newFriend){
+      if (Notifier){
+        Notifier.broadcastEvent(username, Event.RequestAccept,{},newFriend);
+      } else {
+        console.log("no notifier");
       }
     }
 
@@ -71,14 +94,6 @@ export default function FriendReqs(props){
       //console.log(oldFriend, ind);
       setFriendReqs(newreqs);
       updateFriendReqs(newreqs);
-    }
-  
-    async function updateFriendList(newFriends) {
-      await fetch('/api/friends', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(newFriends),
-      });
     }
 
     async function updateFriendReqs(newReqs) {

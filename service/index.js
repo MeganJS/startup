@@ -91,6 +91,12 @@ secureRouter.get('/friends', async (req, res) => {
   res.send(user.friends);
 });
 
+secureRouter.get('/userid/mine', async (req, res) => {
+  const authToken = req.cookies[auth];
+  let user = await DB.getUserByToken(authToken);
+  res.send({id: user._id});
+});
+
 secureRouter.get('/friends/reqs', async (req, res) => {
   const authToken = req.cookies[auth];
   let user = await DB.getUserByToken(authToken);

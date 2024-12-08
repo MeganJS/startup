@@ -61,5 +61,17 @@ class EventNotifier {
     }
 }
 
-//const EventNotifier = new EventNotifier();
-export { Event, EventNotifier };
+
+const Notifier =  createNewEventNotifier();
+function createNewEventNotifier(){
+    fetch('/api/userid/mine', {
+        method: "GET",
+    })
+    .then((response)=>response.json())
+    .then((userid)=>{
+        console.log(userid);
+        return new EventNotifier(userid);
+    });
+}
+
+export { Event, Notifier };

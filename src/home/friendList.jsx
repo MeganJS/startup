@@ -1,6 +1,8 @@
 import React from 'react';
 import "./home.css";
 import { useState, useEffect } from 'react';
+import { Event, Notifier } from '../Notifier';
+
 
 export default function FriendList(props){
     const username=props.username;
@@ -50,7 +52,16 @@ export default function FriendList(props){
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({sendTo: friendVal, fromUser: username}),
           });
+        sendReqNotif(friendVal);
         return;
+    }
+
+    function sendReqNotif(newFriend){
+      if (Notifier){
+        Notifier.broadcastEvent(username, Event.RequestSend,{},newFriend);
+      } else {
+        console.log("no notifier");
+      }
     }
 
     async function auditSharedProjects(oldFriend) {

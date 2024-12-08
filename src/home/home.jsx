@@ -106,7 +106,7 @@ export function Home(props) {
             </section>
             <SharedProjects></SharedProjects>
         </section>
-        <FriendReqs username={username}></FriendReqs>
+        <FriendReqs username={username} ></FriendReqs>
     </main>
   );
 }

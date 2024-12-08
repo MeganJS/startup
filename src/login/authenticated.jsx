@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
+import AccountNotifs from './accountNotifs';
 
 
 export function Authenticated(props) {
@@ -119,6 +120,7 @@ export function Authenticated(props) {
             <div>{randSkill}</div>
             <div>{randTrait}</div>
           </div>
+          <AccountNotifs username={props.userName} notifier={props.notifier}></AccountNotifs>
     </div>
     );
 }

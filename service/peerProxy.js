@@ -25,7 +25,7 @@ function peerProxy(httpServer) {
         ws.on('message', function message(data) {
             console.log(data);
             const user = data.to;
-            fetch('userid', {
+            fetch('/userid', {
                 method: 'GET',
                 body: JSON.stringify({ username: user}),
                 headers: {
@@ -33,6 +33,7 @@ function peerProxy(httpServer) {
                 },
             }).then((response)=>response.json())
             .then((userid)=>{
+                console.log(userid);
                 connections.forEach((c) => {
                     if (c.id === userid.id) {
                       c.ws.send(data);
