@@ -14,11 +14,12 @@ function peerProxy(httpServer) {
     });
 
     let connections = [];
-    wss.on('connection', (ws)=>{
-        console.log(ws.url);
-        const params = url.parse(ws.url);
-        console.log(params.userid);
+    wss.on('connection', (ws, req)=>{
+        //console.log(req.url);
+        const params = url.parse(req.url,true).query;
+        //console.log(JSON.stringify(params.userid));
         const connection = {id: params.userid, alive: true, ws: ws};
+        //console.log(connection);
         connections.push(connection);
 
         ws.on('message', function message(data) {

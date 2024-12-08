@@ -6,13 +6,13 @@ import { EventNotifier, Event } from '../Notifier';
 import "./login.css";
 
 {/*copied all my login code stuff from simon*/}
-export function Login({userName, authState, onAuthChange}) {
+export function Login({userName, notifier, authState, onAuthChange}) {
   return (
     <main className='container-fluid text-center'>
       <div>
         {authState !== AuthState.Unknown}
         {authState === AuthState.Authenticated && 
-          (<Authenticated userName={userName} onLogout={() => onAuthChange(userName, "", AuthState.Unauthenticated)} />)}
+          (<Authenticated userName={userName} notifier={notifier} onLogout={() => onAuthChange(userName, "", AuthState.Unauthenticated)} />)}
         {authState === AuthState.Unauthenticated && (
           <Unauthenticated
             userName={userName}
