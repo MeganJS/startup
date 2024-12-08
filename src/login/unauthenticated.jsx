@@ -36,7 +36,6 @@ export function Unauthenticated(props) {
           setDisplayError(`Error Ocurred: ${body.msg}`);
         }
     }
-
     
     return (
         <>
