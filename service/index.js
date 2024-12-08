@@ -30,6 +30,15 @@ apiRouter.post('/auth/create', async (req, res) => {
   }
 });
 
+apiRouter.get('/userid', async (req, res) => {
+  let user = await DB.getUser(req.body.username);
+  if (user) {
+    res.send({id: user._id});
+  } else {
+    res.status(409).send({ msg: 'non-existing user' });
+  }
+});
+
 // GetAuth login an existing user
 apiRouter.post('/auth/login', async (req, res) => {
   let user = await DB.getUser(req.body.username);

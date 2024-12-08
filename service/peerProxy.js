@@ -23,10 +23,21 @@ function peerProxy(httpServer) {
         connections.push(connection);
 
         ws.on('message', function message(data) {
-            connections.forEach((c) => {
-              if (c.id !== connection.id) {
-                c.ws.send(data);
-              }
+            console.log(data);
+            const user = data.to;
+            fetch('userid', {
+                method: 'GET',
+                body: JSON.stringify({ username: user}),
+                headers: {
+                  'Content-type': 'application/json; charset=UTF-8',
+                },
+            }).then((response)=>response.json())
+            .then((userid)=>{
+                connections.forEach((c) => {
+                    if (c.id === userid.id) {
+                      c.ws.send(data);
+                    }
+                  });
             });
           });
 
