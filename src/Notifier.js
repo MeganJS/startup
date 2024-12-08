@@ -19,15 +19,15 @@ class EventNotifier {
     events = [];
     handlers = [];
     
-    constructor() {
+    constructor(userID) {
         let port = window.location.port;
         const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-        this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
+        this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws/?userid=${userID}`);
         this.socket.onopen = (event) => {
-            this.receiveEvent(new EventMessage('idea-thing',GameEvent.System, {msg: 'connected'}));
+            this.receiveEvent(new EventMessage('idea-thing', GameEvent.System, {msg: 'connected'}, ""));
         }
         this.socket.onclose = (event) => {
-            this.receiveEvent(new EventMessage('idea-thing', GameEvent.System, {msg: 'disconnected'}));
+            this.receiveEvent(new EventMessage('idea-thing', GameEvent.System, {msg: 'disconnected'}, ""));
         }
         this.socket.onmessage = async (msg) => {
             try {
@@ -61,5 +61,5 @@ class EventNotifier {
     }
 }
 
-const EventNotifier = new EventNotifier();
+//const EventNotifier = new EventNotifier();
 export { Event, EventNotifier };

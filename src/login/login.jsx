@@ -2,6 +2,7 @@ import React from 'react';
 import { Unauthenticated } from './unauthenticated';
 import { Authenticated } from './authenticated';
 import { AuthState } from './authState';
+import { EventNotifier, Event } from '../Notifier';
 import "./login.css";
 
 {/*copied all my login code stuff from simon*/}
@@ -15,8 +16,8 @@ export function Login({userName, authState, onAuthChange}) {
         {authState === AuthState.Unauthenticated && (
           <Unauthenticated
             userName={userName}
-            onLogin={(loginUserName) => {
-              onAuthChange(loginUserName, AuthState.Authenticated);
+            onLogin={(loginUserName, notifier) => {
+              onAuthChange(loginUserName, notifier, AuthState.Authenticated);
             }}
           />
         )}

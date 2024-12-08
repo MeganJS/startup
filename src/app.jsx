@@ -15,6 +15,7 @@ export default function App() {
     const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
     const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
     const [authState, setAuthState] = React.useState(currentAuthState);
+    const [eventNotifier, setNotifier] = React.useState("");
 
     return (
     <BrowserRouter>
@@ -84,11 +85,12 @@ export default function App() {
                 <Route path='/' element={<Login 
                     userName={userName}
                     authState={authState}
-                    onAuthChange={(userName,authState) => {
+                    onAuthChange={(userName, notifier, authState) => {
                         setAuthState(authState);
                         setUserName(userName);
+                        setNotifier(notifier);
                     }}/>} exact />
-                <Route path='/home' element={<Home username={userName}/>} />
+                <Route path='/home' element={<Home username={userName} notifier={eventNotifier}/>} />
                 <Route path='/project' element={<Project shared={false} username={userName}/>} />
                 <Route path='/project-shared' element={<Project shared={true} username={userName}/>} />
                 <Route path='/card' element={<Card shared={false} username={userName}/>} />

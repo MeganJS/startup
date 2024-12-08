@@ -2,6 +2,7 @@ import React from 'react';
 
 import Button from 'react-bootstrap/Button';
 import { MessageDialog } from './messageDialog';
+import { EventNotifier } from '../Notifier';
 
 
 export function Unauthenticated(props) {
@@ -27,7 +28,9 @@ export function Unauthenticated(props) {
         });
         if (response?.status === 200) {
           localStorage.setItem('userName', userName);
-          props.onLogin(userName);
+          const body = await response.json();
+          const notifier = new EventNotifier(body.id);
+          props.onLogin(userName, notifier);
         } else {
           const body = await response.json();
           setDisplayError(`Error Ocurred: ${body.msg}`);
