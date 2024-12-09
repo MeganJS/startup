@@ -58,7 +58,7 @@ export default function FriendList(props){
 
     function sendReqNotif(newFriend){
       if (Notifier){
-        Notifier.broadcastEvent(username, Event.RequestSend,{},newFriend);
+        Notifier.broadcastEvent(username, Event.RequestSend, {}, newFriend);
       } else {
         console.log("no notifier");
       }

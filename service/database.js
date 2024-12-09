@@ -69,10 +69,6 @@ async function updateProjects(token, projectList) {
     userColl.findOneAndUpdate({token: token}, {$set:{projects: projectList}});
 }
 
-async function updateProjectTitle(token, oldTitle, newTitle) {
-    const user = userColl.findOne({token: token});
-    //user.projects.updateOne({title: oldTitle}, {$set:{title:newTitle}});
-}
 
 async function updateFriends(token, frList) {
     userColl.findOneAndUpdate({token: token}, {$set:{friends: frList}});
@@ -87,7 +83,8 @@ async function addFriend(username, friend) {
     const user = userColl.findOne({username: username});
     userColl.findOneAndUpdate({username: username}, {$addToSet: {friends : friend}},{upsert: true})
     .then(result => {
-        console.log("update success", result);
+        //console.log("update success", result);
+        console.log("update success");
     })
     .catch(err=>{
         console.error('error:', err);
@@ -99,7 +96,8 @@ async function removeFriend(username, friend) {
     const user = userColl.findOne({username: username});
     userColl.findOneAndUpdate({username: username}, {$pull: {friends : friend}},{upsert:true})
     .then(result => {
-        console.log("update success", result);
+        //console.log("update success", result);
+        console.log("update success");
     })
     .catch(err=>{
         console.error('error:', err);
@@ -111,7 +109,8 @@ async function addFriendReq(username, friend) {
     //const user = userColl.findOne({username: username});
     userColl.findOneAndUpdate({username: username}, {$push: {friendreqs : friend}},{upsert:true})
     .then(result => {
-        console.log("update success", result);
+        //console.log("update success", result);
+        console.log("update success");
     })
     .catch(err=>{
         console.error('error:', err);
@@ -122,7 +121,8 @@ async function addFriendReq(username, friend) {
 async function addSharedProject(username, shProject) {
     userColl.findOneAndUpdate({username: username}, {$push: {sharedProjList : shProject}},{upsert:true})
     .then(result => {
-        console.log("update success", result);
+        //console.log("update success", result);
+        console.log("update success");
     })
     .catch(err=>{
         console.error('error:', err);
@@ -136,7 +136,8 @@ async function removeSharedProject(username, title, sharedby) {
         {upsert:true}
     )
     .then(result => {
-        console.log("update success", result);
+        //console.log("update success", result);
+        console.log("update success");
     })
     .catch(err=>{
         console.error('error:', err);
@@ -151,7 +152,8 @@ async function updateSharedProject(username, title, sharedby, shProject) {
         //{upsert:true, returnDocument: 'after'})
         {upsert:true})
     .then(result => {
-        console.log("update success", result);
+        //console.log("update success", result);
+        console.log("update success");
     })
     .catch(err=>{
         console.error('error:', err);

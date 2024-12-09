@@ -64,18 +64,41 @@ export default function FriendReqs(props){
         setFriendList(newFriends);
         //updateFriendList(newFriends);
         addFriendtoDB(newFriend);
+        Notifier.broadcastEvent(username, Event.RequestAccept, {}, newFriend);
+
         sendFriendNotif(newFriend);
         removeFriendReq(newFriend);
       }
     }
 
-    function sendFriendNotif(newFriend){
+    async function sendFriendNotif(newFriend){
+      //const id = await getOtherUserID(newFriend);
+      //console.log(id);
       if (Notifier){
-        Notifier.broadcastEvent(username, Event.RequestAccept,{},newFriend);
+        Notifier.broadcastEvent(username, Event.RequestAccept, {}, newFriend);
       } else {
         console.log("no notifier");
       }
     }
+    /*
+    async function getOtherUserID(username){
+      await fetch('/api/userid', {
+          method: 'POST',
+          body: JSON.stringify({ username: username}),
+          headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+          },
+      })
+      .then((response)=>{
+          console.log(response);
+          return response.json();
+      })
+      .then((userid)=>{
+          console.log(userid);
+          return userid;
+      });
+  }
+      */
 
     async function addFriendtoDB(newFriend) {
       await fetch('/api/friends', {

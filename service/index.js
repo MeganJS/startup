@@ -30,15 +30,6 @@ apiRouter.post('/auth/create', async (req, res) => {
   }
 });
 
-apiRouter.get('/userid', async (req, res) => {
-  let user = await DB.getUser(req.body.username);
-  if (user) {
-    res.send({id: user._id});
-  } else {
-    res.status(409).send({ msg: 'non-existing user' });
-  }
-});
-
 // GetAuth login an existing user
 apiRouter.post('/auth/login', async (req, res) => {
   let user = await DB.getUser(req.body.username);
@@ -91,10 +82,27 @@ secureRouter.get('/friends', async (req, res) => {
   res.send(user.friends);
 });
 
-secureRouter.get('/userid/mine', async (req, res) => {
+secureRouter.get('/username', async (req, res) => {
+  const authToken = req.cookies[auth];
+  let user = await DB.getUserByToken(authToken);
+  res.send({username: user.username});
+});
+
+secureRouter.get('/userid', async (req, res) => {
   const authToken = req.cookies[auth];
   let user = await DB.getUserByToken(authToken);
   res.send({id: user._id});
+});
+
+secureRouter.post('/userid', async (req, res) => {
+  console.log(1)
+  let user = await DB.getUser(req.body.username);
+  if (user) {
+    console.log(2,user);
+    res.send({id: user._id});
+  } else {
+    res.status(409).send({ msg: 'non-existing user' });
+  }
 });
 
 secureRouter.get('/friends/reqs', async (req, res) => {
