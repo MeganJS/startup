@@ -11,7 +11,7 @@ class EventMessage {
         this.from = from;
         this.type = type;
         this.value = value;
-        this.to = to
+        this.to = to;
     }
 }
 
@@ -34,6 +34,7 @@ class EventNotifier {
             */
         this.socket.onmessage = async (msg) => {
             try {
+                console.log("msg recieved");
                 const event = JSON.parse(await msg.data.text());
                 this.receiveEvent(event);
             } catch {}

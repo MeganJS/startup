@@ -35,7 +35,7 @@ export default function FriendList(props){
       //console.log(oldFriend, ind);
       setFriendList(newFriends);
       //updateFriendList(newFriends);
-      console.log(oldFriend, username);
+      //console.log(oldFriend, username);
       auditSharedProjects(oldFriend);
       await fetch('api/friends', {
         method: 'DELETE',

@@ -29,7 +29,7 @@ export function Home(props) {
       .then((response)=>response.json())
       .then((projects)=>{
         setProjectList(projects);
-        console.log(projects);
+        //console.log(projects);
       });
       //localStorage.setItem('projects', JSON.stringify(projects));
 

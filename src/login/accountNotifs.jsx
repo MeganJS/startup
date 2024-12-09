@@ -1,14 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Event, Notifier } from '../Notifier';
+import { useState, useEffect } from 'react';
 
 
 
 export default function AccountNotifs(props) {
     //const notifier = createNewNotifier();
-    const [events, setEvent] = React.useState([]);
+    const [events, setEvent] = React.useState(["f"]);
 
-    React.useEffect(()=>{
+    useEffect(()=>{
         if (Notifier){
             Notifier.addHandler(handleEvent);
             return ()=> {

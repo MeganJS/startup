@@ -25,11 +25,13 @@ function peerProxy(httpServer) {
         //console.log(connection);
         connections.push(connection);
 
-        ws.on('message', function message(data) {
+        ws.on('message', async function message(data) {
             //console.log(data);
-            const str = new TextDecoder('utf-8').decode(data);
-            console.log(JSON.parse(str.to));
-            let id = JSON.parse(str.to);
+            //const str = new TextDecoder('utf-8').decode(data);
+            const str = JSON.parse(data.toString());
+            console.log(str.to);
+            console.log(connections);
+            let id = str.to;
             //const user = data.to;
             //let user = DB.getUser(str.to);
             //let id = user._id;
