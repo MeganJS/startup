@@ -22,20 +22,19 @@ function peerProxy(httpServer) {
         //const connection = {id: params.userid, alive: true, ws: ws};
         const connection = {id: params.username, alive: true, ws: ws};
 
-        //console.log(connection);
+        console.log(connection);
         connections.push(connection);
 
-        ws.on('message', async function message(data) {
+        ws.on('message', function message(data) {
             //console.log(data);
             //const str = new TextDecoder('utf-8').decode(data);
             const str = JSON.parse(data.toString());
-            console.log(str.to);
-            console.log(connections);
+            console.log(JSON.stringify(str.to));
+            console.log(JSON.stringify(connections));
             let id = str.to;
             //const user = data.to;
             //let user = DB.getUser(str.to);
             //let id = user._id;
-            //console.log(id);
             connections.forEach((c) => {
                 if (c.id === id) {
                   c.ws.send(data);

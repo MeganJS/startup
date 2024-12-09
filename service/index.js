@@ -75,10 +75,7 @@ secureRouter.get('/projects', async (req, res) => {
 secureRouter.get('/friends', async (req, res) => {
   const authToken = req.cookies[auth];
   let user = await DB.getUserByToken(authToken);
-  //console.log(JSON.stringify(user.friends));
-  //console.log(JSON.stringify(user));
   //let friends = await DB.getFriends(authToken);
-  //console.log(friends);
   res.send(user.friends);
 });
 
@@ -95,10 +92,8 @@ secureRouter.get('/userid', async (req, res) => {
 });
 
 secureRouter.post('/userid', async (req, res) => {
-  console.log(1)
   let user = await DB.getUser(req.body.username);
   if (user) {
-    console.log(2,user);
     res.send({id: user._id});
   } else {
     res.status(409).send({ msg: 'non-existing user' });
@@ -119,7 +114,6 @@ secureRouter.get('/shared', async (req, res) => {
 
 
 secureRouter.post('/projects', async (req, res) => {
-  console.log(1);
   const authToken = req.cookies[auth];
   await DB.updateProjects(authToken, req.body);
   const projs = await DB.getProjects(authToken);
@@ -160,16 +154,11 @@ secureRouter.post('/friends/reqs', async (req, res) => {
 });
 
 secureRouter.post('/friends/reqs/send', async (req, res) => {
-  console.log(0);
   let user = await DB.getUser(req.body.sendTo);
-  console.log(1);
   if (user) {
-    console.log("in");
     DB.addFriendReq(req.body.sendTo, req.body.fromUser);
-    console.log(2);
     return;
   }
-  console.log("out");
   res.status(409).send({ msg: 'user does not exist' });
 });
 
