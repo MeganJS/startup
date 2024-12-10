@@ -23,7 +23,7 @@ function peerProxy(httpServer) {
 
         ws.on('message', function message(data) {
             //const str = JSON.parse(data.toString());
-            console.log(JSON.stringify(str));
+            //console.log(JSON.stringify(str));
 
             connections.forEach((c) => {
                 c.ws.send(data);

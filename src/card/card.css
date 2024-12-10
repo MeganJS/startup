@@ -71,3 +71,8 @@ section {
     display:inline;
 }
 
+@media (max-width: 600px) {
+    .card-content {
+        flex-direction: column;
+    }
+}

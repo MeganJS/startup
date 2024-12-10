@@ -34,7 +34,7 @@ export default function AccountNotifs(props) {
         for (const [i,event] of events.entries()) {
             let notif = 'unknown';
             if (event.type === Event.SharePromptRes) {
-                notif = `${event.from}: ${event.value}`;
+                notif = `${event.from}: ${event.value.response}`;
             }
             /*
             if (event.type === Event.RequestSend){

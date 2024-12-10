@@ -30,8 +30,8 @@ export default function Prompt(props) {
     return (
         <div className="prompt-central">
             <div className="mb-3" id="repsonse-edit">
-                <p id="prompt">Today's Prompt: Walking through the woods alone, you spot an oddly shaped 
-                    lamp on the ground. What happens when you pick it up?</p>
+                <p id="prompt"><b>Today's Prompt: Walking through the woods alone, you spot an oddly shaped 
+                    lamp on the ground. What happens when you pick it up?</b></p>
                 <TextAreaAutosize id="textarea-response-edit" minRows={3} maxRows={10} placeholder={response} defaultValue={response} onChange={(i)=>changeResponse(i)}></TextAreaAutosize>
             </div>
             <button onClick={() => submitResponse()}>share your reponse</button>

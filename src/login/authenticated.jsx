@@ -112,7 +112,8 @@ export function Authenticated(props) {
           <Button variant='outline-secondary' onClick={() => logout()}>
             logout
           </Button>
-          <div>
+
+          <div className="random-ideas">
             in need of inspiration?
             <button onClick={() => dndRollItem()}>character equipment</button>
             <button onClick={() => dndRollSkill()}>character skill</button>
