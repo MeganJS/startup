@@ -17,26 +17,17 @@ function peerProxy(httpServer) {
     let connections = [];
     wss.on('connection', (ws, req)=>{
         //console.log(req.url);
-        const params = url.parse(req.url,true).query;
-        //console.log(JSON.stringify(params.userid));
-        //const connection = {id: params.userid, alive: true, ws: ws};
-        const connection = {id: params.username, alive: true, ws: ws};
-
-        console.log(connection);
+        //const params = url.parse(req.url,true).query;
+        const connection = {id: uuid.v4(), alive: true, ws: ws};
         connections.push(connection);
 
         ws.on('message', function message(data) {
-            //console.log(data);
-            //const str = new TextDecoder('utf-8').decode(data);
             const str = JSON.parse(data.toString());
-            console.log(JSON.stringify(str.to));
-            console.log(JSON.stringify(connections));
-            let id = str.to;
-            //const user = data.to;
-            //let user = DB.getUser(str.to);
-            //let id = user._id;
+            console.log(JSON.stringify(str));
+            let id = str;
+
             connections.forEach((c) => {
-                if (c.id === id) {
+                if (c.id !== id) {
                   c.ws.send(data);
                 }
               });

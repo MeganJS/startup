@@ -120,7 +120,7 @@ export function Authenticated(props) {
             <div>{randSkill}</div>
             <div>{randTrait}</div>
           </div>
-          <AccountNotifs username={props.userName} notifier={props.notifier}></AccountNotifs>
+          <AccountNotifs username={props.userName}></AccountNotifs>
     </div>
     );
 }

@@ -79,12 +79,7 @@ secureRouter.get('/friends', async (req, res) => {
   res.send(user.friends);
 });
 
-secureRouter.get('/username', async (req, res) => {
-  const authToken = req.cookies[auth];
-  let user = await DB.getUserByToken(authToken);
-  res.send({username: user.username});
-});
-
+/*
 secureRouter.get('/userid', async (req, res) => {
   const authToken = req.cookies[auth];
   let user = await DB.getUserByToken(authToken);
@@ -99,6 +94,7 @@ secureRouter.post('/userid', async (req, res) => {
     res.status(409).send({ msg: 'non-existing user' });
   }
 });
+*/
 
 secureRouter.get('/friends/reqs', async (req, res) => {
   const authToken = req.cookies[auth];

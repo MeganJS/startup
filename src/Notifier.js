@@ -3,7 +3,9 @@ const Event = {
     RequestSend: 'requestSend',
     RequestAccept: 'requestAccept',
     ProjectShare: 'projectShare',
-    ProjectUpdate: 'projectUpdate'
+    ProjectUpdate: 'projectUpdate',
+    SharePrompt: 'sharePrompt',
+    SharePromptRes: 'sharePromptRes'
 }
 
 class EventMessage {
@@ -11,7 +13,6 @@ class EventMessage {
         this.from = from;
         this.type = type;
         this.value = value;
-        this.to = to;
     }
 }
 
@@ -19,11 +20,11 @@ class EventNotifier {
     events = [];
     handlers = [];
     
-    constructor(username) {
+    constructor() {
         let port = window.location.port;
         const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
         //this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws?userid=${userid}`);
-        this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws?username=${username}`);
+        this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
         /*
         this.socket.onopen = (event) => {
             this.receiveEvent(new EventMessage('idea-thing', Event.System, {msg: 'connected'}, ""));
@@ -41,11 +42,11 @@ class EventNotifier {
         };
     }
 
-    broadcastEvent(from, type, value, to){
+    broadcastEvent(from, type, value){
         //console.log(to);
         //const id = getOtherUserID(to);
         //console.log(id);
-        const event = new EventMessage(from, type, value, to);
+        const event = new EventMessage(from, type, value);
         console.log(type);
         this.socket.send(JSON.stringify(event));
     }
@@ -70,46 +71,6 @@ class EventNotifier {
 }
 
 
-const Notifier =  new EventNotifier(getUserName());
-function getUserName(){
-    fetch('/api/username', {
-        method: "GET",
-    })
-    .then((response)=>response.json())
-    .then((username)=>{
-        console.log(username);
-        return username;
-    });
-}
-/*
-function getUserID(){
-    fetch('/api/userid', {
-        method: "GET",
-    })
-    .then((response)=>response.json())
-    .then((userid)=>{
-        console.log(userid);
-        return userid;
-    });
-}
-    */
-/*
-async function getOtherUserID(username){
-    await fetch('/api/userid', {
-        method: 'POST',
-        body: JSON.stringify({ username: username}),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-    })
-    .then((response)=>{
-        console.log(response);
-        return response.json();
-    })
-    .then((userid)=>{
-        console.log(userid);
-        return userid;
-    });
-}
-*/
+const Notifier =  new EventNotifier();
+
 export { Event, Notifier };

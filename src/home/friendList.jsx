@@ -1,7 +1,6 @@
 import React from 'react';
 import "./home.css";
 import { useState, useEffect } from 'react';
-import { Event, Notifier } from '../Notifier';
 
 
 export default function FriendList(props){
@@ -16,8 +15,6 @@ export default function FriendList(props){
         .then((response)=>response.json())
         .then((friends)=>{
           setFriendList(friends);
-          //console.log(friends);
-          //console.log(friendList);
           localStorage.setItem('friendList', JSON.stringify(friends));
         });
     }, []);
@@ -27,7 +24,6 @@ export default function FriendList(props){
     }
   
     //TODO add modal to prevent unfriending misclicks
-    //TODO remove from shared projects as well?
     async function removeFriendVal(oldFriend){
       const newFriends = friendList.slice();
       let ind = friendList.indexOf(oldFriend);
@@ -52,10 +48,10 @@ export default function FriendList(props){
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({sendTo: friendVal, fromUser: username}),
           });
-        sendReqNotif(friendVal);
+        //sendReqNotif(friendVal);
         return;
     }
-
+/*
     function sendReqNotif(newFriend){
       if (Notifier){
         Notifier.broadcastEvent(username, Event.RequestSend, {}, newFriend);
@@ -63,6 +59,7 @@ export default function FriendList(props){
         console.log("no notifier");
       }
     }
+      */
 
     async function auditSharedProjects(oldFriend) {
       await fetch('/api/shared', {
