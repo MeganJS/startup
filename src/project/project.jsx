@@ -175,7 +175,9 @@ export function Project(props) {
       </section>
       {shared === false && (
       <div id="project-controls">
+        {/*
         <button type="button" className="btn btn-outline-info">download project</button>
+        */}
         <SharedWith username={props.username}></SharedWith>
 
         <button type="button" className="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -295,23 +297,6 @@ function ProjectTitle({title, shared, username}){
       )}
     </h2>
   );
-}
-
-async function saveProjectTitleChange(oldTitle, newTitle) {
-  const response = await fetch('/api/projects/title', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({oldTitle: oldTitle, newTitle: newTitle}),
-  });
-  if (response?.status === 200) {
-    console.log("successfully saved project change");
-    return "success";
-  } else {
-    const body = await response.json();
-    console.log(body.msg);
-    return body.msg;
-    //setDisplayError(`Error Ocurred: ${body.msg}`);
-  }
 }
 
 async function saveProjectChange(newList) {
