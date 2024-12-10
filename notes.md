@@ -14,6 +14,8 @@ __this is bold__ and **so is this**
 <sub>subscript</sub><sup>superscript</sup> ~~I want you to be able to read this while pretending that you can't~~
 
 > indenting (handy for quotes!)
+## Notes for Websocket
+I have learned: take the easy path if it means you'll get it done. Sometimes you'll find some really cool ideas along the way!
 ## Notes for Login
 I have learned: try all the solutions, even if you think they don't apply to you. They might be more applicable than they look. Also ask for help! TAs are awesome.
 ## Notes for Service
