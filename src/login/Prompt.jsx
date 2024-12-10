@@ -1,20 +1,12 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Event, Notifier } from '../Notifier';
 import { useState, useEffect } from 'react';
+import TextAreaAutosize from 'react-textarea-autosize';
 
-export default function Prompts(props) {
+
+export default function Prompt(props) {
     const username = props.username;
     const [response, setResponse] = React.useState("");
-
-    useEffect(()=>{
-        if (Notifier){
-            Notifier.addHandler(handleEvent);
-            return ()=> {
-                Notifier.removeHandler(handleEvent);
-            };
-        }
-    });
 
     function changeResponse(i) {
         setResponse(i.target.value);
@@ -38,6 +30,8 @@ export default function Prompts(props) {
     return (
         <div className="prompt-central">
             <div className="mb-3" id="repsonse-edit">
+                <p id="prompt">Today's Prompt: Walking through the woods alone, you spot an oddly shaped 
+                    lamp on the ground. What happens when you pick it up?</p>
                 <TextAreaAutosize id="textarea-response-edit" minRows={3} maxRows={10} placeholder={response} defaultValue={response} onChange={(i)=>changeResponse(i)}></TextAreaAutosize>
             </div>
             <button onClick={() => submitResponse()}>share your reponse</button>

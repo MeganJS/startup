@@ -1,0 +1,6 @@
+.prompt-and-response {
+    flex: 1 calc(100vh - 150px);
+    display: flex;
+    flex-direction:row;
+    justify-content: space-evenly;
+}

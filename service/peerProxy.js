@@ -22,14 +22,11 @@ function peerProxy(httpServer) {
         connections.push(connection);
 
         ws.on('message', function message(data) {
-            const str = JSON.parse(data.toString());
+            //const str = JSON.parse(data.toString());
             console.log(JSON.stringify(str));
-            let id = str;
 
             connections.forEach((c) => {
-                if (c.id !== id) {
-                  c.ws.send(data);
-                }
+                c.ws.send(data);
               });
           });
               // Remove the closed connection so we don't try to forward anymore

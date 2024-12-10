@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 import AccountNotifs from './accountNotifs';
-
+import Prompt from './Prompt';
+import "./account.css";
 
 export function Authenticated(props) {
     const navigate = useNavigate();
