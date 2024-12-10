@@ -1,5 +1,8 @@
 # startup: idea-thing
 ## Startup Application for CS260: Web Development
+## WEBSOCKET
+To facilitate creativity and connection between users, we have enabled the prompt feature. Located on your accounts page you will find a prompt to answer, and upon answering it, you may submit your response to be seen by all users. You can also see the responses of other users in real time with a simple push of a button. Happy ideating!
+
 ## LOGIN
 All of your data is now safely stored in our database, so you don't need to worry about losing it. It will be right there waiting for you when you get back.
 
