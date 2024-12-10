@@ -21,7 +21,7 @@ export function Authenticated(props) {
           // Logout failed. Assuming offline
         })
         .finally(() => {
-          localStorage.removeItem('userName');
+          localStorage.removeItem('username');
           let projListStr = localStorage.getItem('projects');
           if (projListStr) {
             localStorage.removeItem('projects');
@@ -104,7 +104,7 @@ export function Authenticated(props) {
 
     return (
         <div>
-          <div className='playerName'>{props.userName}</div>
+          <div className='playerName'>{props.username}</div>
           <Button variant='outline-primary' onClick={() => navigate('/home')}>
             home
           </Button>
@@ -120,7 +120,10 @@ export function Authenticated(props) {
             <div>{randSkill}</div>
             <div>{randTrait}</div>
           </div>
-          <AccountNotifs username={props.userName}></AccountNotifs>
+          <div className="prompt-and-response">
+            <Prompt username={props.username}></Prompt>
+            <AccountNotifs username={props.username}></AccountNotifs>
+          </div>
     </div>
     );
 }

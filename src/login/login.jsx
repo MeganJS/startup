@@ -6,16 +6,16 @@ import { AuthState } from './authState';
 import "./login.css";
 
 {/*copied all my login code stuff from simon*/}
-export function Login({userName, authState, onAuthChange}) {
+export function Login({username, authState, onAuthChange}) {
   return (
     <main className='container-fluid text-center'>
       <div>
         {authState !== AuthState.Unknown}
         {authState === AuthState.Authenticated && 
-          (<Authenticated userName={userName} onLogout={() => onAuthChange(userName, AuthState.Unauthenticated)} />)}
+          (<Authenticated username={username} onLogout={() => onAuthChange(username, AuthState.Unauthenticated)} />)}
         {authState === AuthState.Unauthenticated && (
           <Unauthenticated
-            userName={userName}
+            username={username}
             onLogin={(loginUserName) => {
               onAuthChange(loginUserName, AuthState.Authenticated);
             }}

@@ -12,8 +12,8 @@ import { AuthState } from './login/authState';
 
 
 export default function App() {
-    const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
-    const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [username, setUserName] = React.useState(localStorage.getItem('username') || '');
+    const currentAuthState = username ? AuthState.Authenticated : AuthState.Unauthenticated;
     const [authState, setAuthState] = React.useState(currentAuthState);
     //const [eventNotifier, setNotifier] = React.useState("");
 
@@ -47,7 +47,7 @@ export default function App() {
                     <div>
                         <a className="navbar-brand" href="#">
                             <img alt="smile icon" src="smile icon.png" data-bs-toggle="modal" data-bs-target="#editProfileModal" />
-                            {userName}
+                            {username}
                         </a>
                         {/*}
                         <div className="modal fade" id="editProfileModal" data-bs-backdrop="static" tabIndex="-1" aria-labelledby="editTitleModal" aria-hidden="true">
@@ -83,20 +83,20 @@ export default function App() {
         <main>
             <Routes>
                 <Route path='/' element={<Login 
-                    userName={userName}
+                    username={username}
                     authState={authState}
                     //notifier={eventNotifier}
-                    onAuthChange={(userName, authState) => {
+                    onAuthChange={(username, authState) => {
                         setAuthState(authState);
-                        setUserName(userName);
+                        setUserName(username);
                         //setNotifier(notifier);
                     }}/>} exact />
-                <Route path='/home' element={<Home username={userName}/>} />
-                <Route path='/project' element={<Project shared={false} username={userName}/>} />
-                <Route path='/project-shared' element={<Project shared={true} username={userName}/>} />
-                <Route path='/card' element={<Card shared={false} username={userName}/>} />
-                <Route path='/card-shared' element={<Card shared={true} username={userName}/>} />
-                <Route path='/card-edit' element={<CardEdit username={userName} />} />
+                <Route path='/home' element={<Home username={username}/>} />
+                <Route path='/project' element={<Project shared={false} username={username}/>} />
+                <Route path='/project-shared' element={<Project shared={true} username={username}/>} />
+                <Route path='/card' element={<Card shared={false} username={username}/>} />
+                <Route path='/card-shared' element={<Card shared={true} username={username}/>} />
+                <Route path='/card-edit' element={<CardEdit username={username} />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
         </main>

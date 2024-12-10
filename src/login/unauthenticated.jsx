@@ -6,7 +6,7 @@ import { MessageDialog } from './messageDialog';
 
 
 export function Unauthenticated(props) {
-    const [userName, setUserName] = React.useState(props.userName);
+    const [username, setUserName] = React.useState(props.username);
     const [password, setPassword] = React.useState('');
     const [displayError, setDisplayError] = React.useState(null);
 
@@ -21,17 +21,17 @@ export function Unauthenticated(props) {
     async function loginOrCreate(endpoint) {
         const response = await fetch(endpoint, {
           method: 'post',
-          body: JSON.stringify({ username: userName, password: password }),
+          body: JSON.stringify({ username: username, password: password }),
           headers: {
             'Content-type': 'application/json; charset=UTF-8',
           },
         });
         if (response?.status === 200) {
-          localStorage.setItem('userName', userName);
+          localStorage.setItem('username', username);
           const body = await response.json();
           //const notifier = new EventNotifier(body.id);
           //props.onLogin(userName, notifier);
-          props.onLogin(userName);
+          props.onLogin(username);
         } else {
           const body = await response.json();
           setDisplayError(`Error Ocurred: ${body.msg}`);
@@ -55,10 +55,10 @@ export function Unauthenticated(props) {
                     <input type="password" className="form-control" id="inputPassword" onChange={(e) => setPassword(e.target.value)} required />
                 </div>
                 </div>
-                <Button id="login" variant='outline-primary' onClick={() => loginUser()} disabled={!userName || !password}>
+                <Button id="login" variant='outline-primary' onClick={() => loginUser()} disabled={!username || !password}>
                     Login
                 </Button>
-                <Button id="create-account" variant='outline-secondary' onClick={() => createUser()} disabled={!userName || !password}>
+                <Button id="create-account" variant='outline-secondary' onClick={() => createUser()} disabled={!username || !password}>
                     Create
                 </Button>
             </form> 
