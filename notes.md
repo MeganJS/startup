@@ -154,9 +154,7 @@ Midterm Questions
   - http-only: can't be accessed by JavaScript; in their words, "can only be accessed when it reaches the server". helps against cross-site aka XSS attacks
   - same-site: only sends cookies to requests coming from this site. protects against forgeries coming from other sites ("cross-site forgeries")
 - Assuming the following Express middleware, what would be the console.log output for an HTTP GET request with a URL path of /api/document?
-
 - Given the following Express service code: What does the following front end JavaScript that performs a fetch return?
-
 - Given the following MongoDB query, select all of the matching documents {name:Mark}
 
 - How should user passwords be stored?
@@ -164,22 +162,24 @@ Midterm Questions
 - Assuming the following node.js websocket code in the back end, and the following front end websocket code, what will the front end log to the console?
 
 - What is the websocket protocol intended to provide?
-
+  - connection between users??
+  - enabling a peer-to-peer connnection (ie both client and server send and receive messages, rather than the client having to constantly ping the server)
+  - server acts as go-between for different users
+  - websocket upgrades initial http connection
 - What do the following acronyms stand for? JSX, JS, AWS, NPM, NVM
   - JS: JavaScript
   - JSX: JavaScript XML; lets us use HTML and JavaScript in same file; used to make React Components
   - AWS: Amazon Web Services
   - NPM: Node Package Manager; used to install packages, run scripts?
   - NVM: Node Version Manager
-
 - Assuming an HTML document with a body element. What text content will the following React component generate?  The react component will use parameters.
 
 - Given a set of React components that include each other, what will be generated
 
 - What does a React component with React.useState do?
-
+  - lets you update and rerender that component using the "set" function declared when you set up the useState
 - What are React Hooks used for?
-  
+  - keeping track of information, rerendering components when data changes, getting contextual info from parents, etc.
 - What does the State Hook/Context Hook/Ref Hook/Effect Hook/Performance Hook do? https://react.dev/reference/react/hooks
   - Hook - (useState, useReducer) used to keep track of specific information, like user input
   - Context Hook - (useContext) gets information from distant parent without using props
@@ -191,10 +191,10 @@ Midterm Questions
 - What does the package.json file do?
   - takes care of "package dependencies and script commands". also has metadata like name, default JS file, etc.
 - What does the fetch function do?
-
+  - JavaScript function that makes and HTTP request and receives a response. default method is GET
 - What does node.js do?
   - "deploys JavaScript outside of a browser" - ie on the serverside, so you can use it to manage backend and frontend.
 - What does pm2 do?
-
+  - process manager 2; lets you easily stop and start your service and register it as a daemon (which runs even after a computer shutdown).
 - What does Vite do?
   - Is a Command Line Interface. Bundles code, hosts it?
